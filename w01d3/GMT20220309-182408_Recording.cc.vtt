@@ -1,0 +1,2129 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:07.000
+I think here's a review. what we're going to get up to today is hold on, Let me make sure we're recording.
+
+00:00:07.000 --> 00:00:15.000
+We go welcome to week. One day 3 of light house labs boot camp.
+
+00:00:15.000 --> 00:00:31.000
+Today. we're going to talk about objects in javascript, and if you're not super comfortable with objects now, you certainly will be very, very soon, because we're gonna use them a lot all over the place so
+
+00:00:31.000 --> 00:00:43.000
+we're going to review primitive types first so that we can get into all the different types that a variable can be. Excuse me, then.
+
+00:00:43.000 --> 00:00:50.000
+We're gonna deal with objects. Why, objects why are we using objects?
+
+00:00:50.000 --> 00:00:54.000
+How do we use objects? What are some of the pitfalls?
+
+00:00:54.000 --> 00:01:15.000
+What are some of the advantages. Then we'll talk about passing primitives and objects into functions as if such a thing were important in programming. It's almost the entirety of programming is that way, and we'll talk
+
+00:01:15.000 --> 00:01:25.000
+about functions inside of objects, and we'll also talk about iterating over the parts of an object.
+
+00:01:25.000 --> 00:01:50.000
+So we've obviously got a lot to cover let's dig in. I've got a bit of code here that i'd like to show you and my first step is going to be to comment it out most of it a lot of
+
+00:01:50.000 --> 00:02:04.000
+today's example values and variables excuse me was inspired by yesterday's international women's day. and so some people say that 800 and was the first computer programmer.
+
+00:02:04.000 --> 00:02:16.000
+A love lace. I want to build an app today where we facilitate computer voting right?
+
+00:02:16.000 --> 00:02:29.000
+The modern world is one where votes matter votes are important we'd like to build a system ultimately where votes are trustable.
+
+00:02:29.000 --> 00:02:38.000
+We'll see how far we get with that today. first things First, I'm gonna set up some variables.
+
+00:02:38.000 --> 00:02:57.000
+In fact, Here's a voter that i'd like to record some information about in my program that voter will be at a Lovelace, and so I set up some variables by the way, i'm not saying that the way, that
+
+00:02:57.000 --> 00:03:02.000
+i'm writing it today in today's class is how you would do it in real life.
+
+00:03:02.000 --> 00:03:07.000
+A lot about what's going to go on here is meant to teach stuff right?
+
+00:03:07.000 --> 00:03:13.000
+Not Here's the best way to do something okay kind of giving away the punchline here.
+
+00:03:13.000 --> 00:03:18.000
+But I thought i'd throw that out there early on in this lecture.
+
+00:03:18.000 --> 00:03:26.000
+So here's voter one's name and i'm starting to give numbers to my voters voter one here's voter.
+
+00:03:26.000 --> 00:03:36.000
+One's name, Ada lovelace voter one name that's a variable hey?
+
+00:03:36.000 --> 00:03:46.000
+Lovelace that's a string that's during this is a string literal.
+
+00:03:46.000 --> 00:03:57.000
+The string. literal is getting stored inside this variable as you likely know, there's 2 ways that you can define.
+
+00:03:57.000 --> 00:04:13.000
+A variable one is to say, let the other one is to say, const variables that are defined with let can be changed, can have their values changed Const: Not so much.
+
+00:04:13.000 --> 00:04:17.000
+Once you say that the value of something is constant you're not allowed to change it.
+
+00:04:17.000 --> 00:04:29.000
+The second line shows a different kind of primitive value that's getting attached to this particular voter.
+
+00:04:29.000 --> 00:04:39.000
+Voter one did vote already. you can see from the name that it's something that we, Mike, like to set to be true or false.
+
+00:04:39.000 --> 00:04:45.000
+Did they vote yes or no? So for a yes or no kind of answer.
+
+00:04:45.000 --> 00:05:04.000
+A boolean value would be appropriate and then finally i've got another variable here voter one age where the value here is 36, an integer.
+
+00:05:04.000 --> 00:05:14.000
+So so far i've got a string and a boolean and integer.
+
+00:05:14.000 --> 00:05:23.000
+Let's talk about these values and Let's talk about what those values are like in Javascript.
+
+00:05:23.000 --> 00:05:52.000
+So the list of primitive types in Javascript is this Boolean, null, undefined number, big int string and symbol 7 of them, and they each come in handy different purposes, right numbers for numbers
+
+00:05:52.000 --> 00:05:56.000
+Boolean for true and false strings for letters.
+
+00:05:56.000 --> 00:06:04.000
+Numbers Alpha numerics in a collection as a value like a name.
+
+00:06:04.000 --> 00:06:22.000
+Big int compared to number that's an interesting one there's actually a maximum size of an integer that you can have.
+
+00:06:22.000 --> 00:06:44.000
+And if you want to store any number that's larger than that maximum size, then you need to switch over to big int, and there's some interesting differences between these 2 which will talk about a little bit later.
+
+00:06:44.000 --> 00:06:56.000
+So for now let's press on with our Voter application and bring in voter number 2.
+
+00:06:56.000 --> 00:07:09.000
+So here is my computer program right where i'm storing more and more information about my voters.
+
+00:07:09.000 --> 00:07:14.000
+I've got voter two's name again with a string
+
+00:07:14.000 --> 00:07:24.000
+Notice how the string this cut time is wrapped and back ticks instead of single quote marks.
+
+00:07:24.000 --> 00:07:35.000
+But as we'll see it's still a string are people familiar with why, you might use backticks instead of single quotes.
+
+00:07:35.000 --> 00:07:43.000
+Yeah, anyone want to chime in on that object literature a template?
+
+00:07:43.000 --> 00:08:03.000
+Literal. Oh, yeah, yeah, yeah. Very good. Oh, by the way thank you for for chiming in It's super important every opportunity that you get to use the language to actually speak the words coming out of your mouth.
+
+00:08:03.000 --> 00:08:13.000
+That's gold. right? Please take advantage of every opportunity to do that, because speaking the words is a really great way to get new concepts lodged in your head right?
+
+00:08:13.000 --> 00:08:16.000
+It carves pathways in your mind that only speaking can do.
+
+00:08:16.000 --> 00:08:26.000
+Yep, What about this line? 8. Anybody see an issue with this?
+
+00:08:26.000 --> 00:08:33.000
+I mean Margaret Hamilton nasa's first software engineer wrote the software for the lunar landing.
+
+00:08:33.000 --> 00:08:53.000
+Amazing piece of work definitely worth looking into. by the way what's the type of this expression on the right-hand side for line 8. I would subtract 1,936 from 8 and 17 so it would be
+
+00:08:53.000 --> 00:09:03.000
+a value. Very sorry number my number. Yeah, number it kind of looks a little like It's trying to be a date string. but obviously it's not.
+
+00:09:03.000 --> 00:09:09.000
+I agree with everything you said, except that 8 and 17 are subtracted from 1,936, and not the other way around.
+
+00:09:09.000 --> 00:09:18.000
+But absolutely there's an issue here, right we're gonna do much better to surround this by quotes instead.
+
+00:09:18.000 --> 00:09:28.000
+There Now it's a date string say this is the age that Ada Lovelace was when she died.
+
+00:09:28.000 --> 00:09:45.000
+So I suppose it's constant This is the date of birth of Margaret Hamilton, which is a constant, you know things to be careful of with your variables right?
+
+00:09:45.000 --> 00:09:58.000
+We want to be super precise, as much of the time as we can be okay Here's another person, I mean norther those of you who are into mathematical physics will be a fan of hers.
+
+00:09:58.000 --> 00:10:08.000
+She invented, created, discovered. However, you think of it, perhaps the single most important theorem in mathematical physics.
+
+00:10:08.000 --> 00:10:25.000
+Date of birth. i've set the date of birth here to be null, and I've also assigned Sorry I've declared this variable let voter 3 did vote, but didn't provide a value I did not
+
+00:10:25.000 --> 00:10:32.000
+initialize the value we're going to see what value It has coming up soon, and what the type of that value is.
+
+00:10:32.000 --> 00:10:42.000
+It's one of these primitives it turns out here's some more variables for our application that we're writing about voting number of voters.
+
+00:10:42.000 --> 00:10:49.000
+There's an integer here's an actual number of actual votes.
+
+00:10:49.000 --> 00:10:55.000
+We're going to set that one to not a number to see what type that is.
+
+00:10:55.000 --> 00:11:02.000
+Then also here's that big int type. remember when I was talking about the primitive big Int when it gets larger than a certain limit.
+
+00:11:02.000 --> 00:11:09.000
+This number is near that limit by the way notice there's a little n at the end of it.
+
+00:11:09.000 --> 00:11:20.000
+That sets this up to be a bigiant and there's no theoretical limit to the size of a big end.
+
+00:11:20.000 --> 00:11:27.000
+It's set actually the the upper limit on a big int is actually set by how much storage you could store in your memory.
+
+00:11:27.000 --> 00:11:49.000
+So there it goes and then, we've actually covered all the primitives here, except for one type called a symbol, which i'll throw in for good measure, you know, since we're voting since we're writing a voting
+
+00:11:49.000 --> 00:11:59.000
+app. Let's just say that the hacker group anonymous was involved somehow, right, because they're trying to bring justice to the world.
+
+00:11:59.000 --> 00:12:04.000
+Anonymous was here that'll be the text value of the symbol.
+
+00:12:04.000 --> 00:12:13.000
+This variable S. Y. M. is going to have a primitive type of symbol, which is different from a string, but very similar.
+
+00:12:13.000 --> 00:12:26.000
+We don't. we tend not to use symbols so much, but they are there as a thing in the language. And so we're teaching them just for completeness.
+
+00:12:26.000 --> 00:12:39.000
+Basically. okay. So, having put together all these variables in their values we're making some steps towards writing our voter application, right?
+
+00:12:39.000 --> 00:12:44.000
+We've got some information about particular voters we've got some numbers stored, you know.
+
+00:12:44.000 --> 00:13:03.000
+We can start to do some programming around it the types let's go after the types of each of these things to see those primitives to see the kind of primitive values that they are.
+
+00:13:03.000 --> 00:13:16.000
+So what I did was for all of these variables I made some console logs, since we're early on in the process, i'd like to show you how I do console logs, and i'd like you to
+
+00:13:16.000 --> 00:13:23.000
+adopt this tool, this trick. when you're doing a console log.
+
+00:13:23.000 --> 00:13:30.000
+It's gonna help if you do it following way let's say i'm interested in the this variable here right?
+
+00:13:30.000 --> 00:13:50.000
+Some people will do console, dot log and then they'll put in the variable name oops like. So so that's fine, except that when you run your program and it prints this console log out after a while your
+
+00:13:50.000 --> 00:14:05.000
+terminal is going to be full of all sorts of output and you won't be able to tell what this one is kind of a forest for the trees kind of a problem a signal to noise issue right needle in a
+
+00:14:05.000 --> 00:14:25.000
+haystack problem. How do I find the text that i'm trying to debug my with so it's far better always include what I call a label on the taught?
+
+00:14:25.000 --> 00:14:34.000
+Sorry this is not working quite right. Copy paste There, now I have a string comma, and then the exact same thing.
+
+00:14:34.000 --> 00:14:42.000
+This is the variable name in the clear this is a string that's going to be a label for that thing like that.
+
+00:14:42.000 --> 00:14:58.000
+And so if I save that code and then that's it i'm going to flip over real quick to the terminal, here is my set of code.
+
+00:14:58.000 --> 00:15:08.000
+Here's Mike code like this mostly commented out i've got code that sets these values like I was showing you in the editor.
+
+00:15:08.000 --> 00:15:16.000
+And then i've got this console log so if I run it. Now this is what I see voter 3 did vote.
+
+00:15:16.000 --> 00:15:22.000
+That's the label here's the value happens to be undefined.
+
+00:15:22.000 --> 00:15:33.000
+Okay, let's go back in and check a look check and take a look at Why, that's the case right Voter 3 did vote.
+
+00:15:33.000 --> 00:15:47.000
+This string is the string that i'm seeing here in my console log makes it very plain that I'm talking about that value here which is coming from that right?
+
+00:15:47.000 --> 00:15:52.000
+Okay, so please always put labels on your console logs.
+
+00:15:52.000 --> 00:15:54.000
+It's going to help with your debugging as you do it.
+
+00:15:54.000 --> 00:16:06.000
+One more very serious problem with this code that i'm here to encourage you to also do the way that I do.
+
+00:16:06.000 --> 00:16:17.000
+It is to put a semicolon on the end of this line right as you may know, there's kind of a war going on within the Javascript community where half the people are.
+
+00:16:17.000 --> 00:16:24.000
+Like, Yeah, you got to always use semicolons and half the people are like, No, don't ever use semicolons.
+
+00:16:24.000 --> 00:16:39.000
+It's silly and then there's a third half of the people who are like used some of them some of the times, and some of them some other of the times, right So I am firmly on team semicolon I would love it to recruit all
+
+00:16:39.000 --> 00:16:50.000
+of you onto that team right there's reasons why i'm on Team Semicolon, and I would love to get into that later, because it's a bit of a long discussion.
+
+00:16:50.000 --> 00:16:59.000
+But for now join team, send me calling yeah i'm i'm, hoping to to recruit you all to the team.
+
+00:16:59.000 --> 00:17:09.000
+So. Yeah, it's like if ever I see a line like this it like it's it makes my eyes bleed.
+
+00:17:09.000 --> 00:17:30.000
+It's terrible right and I hope to pass that on like a like an allergy to you as well i'm seeing some some stuff in the chat sayida says I couldn't understand when we use big int where we
+
+00:17:30.000 --> 00:17:39.000
+can use big int big ends is whenever you need to be working with numbers that are looking than about the one here.
+
+00:17:39.000 --> 00:17:45.000
+Right. So that's a pretty large number if you need to use numbers that are larger than that, and you need to use big end.
+
+00:17:45.000 --> 00:17:53.000
+Eugene, says you using semicolons as good practice for using some other C style languages like Java or C sharp.
+
+00:17:53.000 --> 00:18:05.000
+Yes, absolutely also using semicolons, is good because it can distinguish what you're writing in this from other languages that don't use semicolons right?
+
+00:18:05.000 --> 00:18:12.000
+Lucas asks, Does the N. at the end of the big number define a big int variable?
+
+00:18:12.000 --> 00:18:18.000
+Yes, it defines a big int value when you have the n here at the end.
+
+00:18:18.000 --> 00:18:23.000
+It says this token: here is a big end opposed to just being an integer.
+
+00:18:23.000 --> 00:18:32.000
+Cool. all right. This is good right we're working with a lot of values.
+
+00:18:32.000 --> 00:18:49.000
+We are putting those values into variables. and next up I would like to show what the type is for every one of those variables.
+
+00:18:49.000 --> 00:18:57.000
+And so I went ahead, and I made a bunch of console logs that conform to this thing that I like of having the label in front of the value.
+
+00:18:57.000 --> 00:19:07.000
+And so now i'm just going to go back and rerun this code, and it's going to show all the values and their types as well.
+
+00:19:07.000 --> 00:19:17.000
+So the type of voter one name here is the voter one name value that console log spit out for us, and here's its type string.
+
+00:19:17.000 --> 00:19:29.000
+Here's the motor one did vote true that's its value, and that type is the Boolean. Now in the code.
+
+00:19:29.000 --> 00:19:37.000
+You can see. we said that it was the value true we did not wrap this in quotes.
+
+00:19:37.000 --> 00:19:45.000
+If we'd wrapped it. in quotes it would have been a string that held Tr ue right. that's different from a boolean, Lucas.
+
+00:19:45.000 --> 00:20:03.000
+Yes, it is just a regular ant to the end so long as it's below that upper limit very good voter.
+
+00:20:03.000 --> 00:20:12.000
+One age is 36 it's a number that's the type of the primitive.
+
+00:20:12.000 --> 00:20:23.000
+Here's a string hamilton common Margaret another Boolean false, this one's a string.
+
+00:20:23.000 --> 00:20:27.000
+Now, finally, like type of voter, 2 data birth, we wrapped it in quotes.
+
+00:20:27.000 --> 00:20:38.000
+So we ended up with a string, right if I go back and I take that string, take the quotes away from this like so and rerun this.
+
+00:20:38.000 --> 00:20:49.000
+Then. yeah, voter, 2 date of birth turned into a number right That's the 1,936 minus the 8 and the minus the 17.
+
+00:20:49.000 --> 00:21:02.000
+Put that back in a string because that's what it should be. and let me know whether that's a string. Okay, here's an interesting one.
+
+00:21:02.000 --> 00:21:11.000
+Voter. 3 did vote undefined is the value undefined, is also the type.
+
+00:21:11.000 --> 00:21:18.000
+One of our summit. One of our 7 primitive types is undefined, Right?
+
+00:21:18.000 --> 00:21:23.000
+So voter 3 did vote. let's go look at that one vote or 3 to vote.
+
+00:21:23.000 --> 00:21:33.000
+Yeah, this is the one where we didn't actually give it any value That's why we ended up with undefined it's declared.
+
+00:21:33.000 --> 00:21:48.000
+It's not defined and then we've got the number of voters is a but you got about 4,000,000 people in our voting population right?
+
+00:21:48.000 --> 00:21:59.000
+We're giving that out as a number interesting that not a number as a value.
+
+00:21:59.000 --> 00:22:16.000
+The type of that value. Not a number is number go figure kind of a weird thing about Javascript that not a number would be classified as a number kind of weird.
+
+00:22:16.000 --> 00:22:33.000
+Here's our bigot 907. 1 9. 9 2, 5, 4, 7, 4, 0, 9, 9. one notice There's no n on this here in terms of the value being printed out.
+
+00:22:33.000 --> 00:22:41.000
+But it is of type big int as opposed to number.
+
+00:22:41.000 --> 00:22:50.000
+Why number of actual votes here has an N on the end of it like that. right?
+
+00:22:50.000 --> 00:22:54.000
+So this was how we fed the value into the variable.
+
+00:22:54.000 --> 00:23:01.000
+But by the time we were doing type of to get the value out we got this instead.
+
+00:23:01.000 --> 00:23:14.000
+I will come back to null. And the object type of Sim is type symbol.
+
+00:23:14.000 --> 00:23:32.000
+This is Sim. the variable name right here the value isn't being shown the type of Sim is such and such it comes up as symbol. right?
+
+00:23:32.000 --> 00:23:47.000
+That's what javascript says is the type of that primitive cool, Actually, let's get the let's get the symbol itself out.
+
+00:23:47.000 --> 00:23:58.000
+This one was problematic. When I was to building this because you can't convert symbol to a string.
+
+00:23:58.000 --> 00:24:03.000
+So let's just see if I do that again one last time here.
+
+00:24:03.000 --> 00:24:08.000
+There we go. This is what comes out of the sim symbol.
+
+00:24:08.000 --> 00:24:13.000
+When console log logs in it actually writes out symbol.
+
+00:24:13.000 --> 00:24:20.000
+Anonymous was here as the text representation of the value of that symbol.
+
+00:24:20.000 --> 00:24:30.000
+Ky. asked interesting question. is undefined.
+
+00:24:30.000 --> 00:24:35.000
+The only value that has a the type undefined.
+
+00:24:35.000 --> 00:24:43.000
+I think so. I can't think of any other value that has that type so interesting.
+
+00:24:43.000 --> 00:24:51.000
+I I could you know i'm open to being corrected on that point, though.
+
+00:24:51.000 --> 00:24:56.000
+So I think it's a fascinating rabbit hole to go diving down into.
+
+00:24:56.000 --> 00:25:05.000
+Okay, So we've reviewed the primitive types we've done a pretty thorough job of it actually
+
+00:25:05.000 --> 00:25:20.000
+And so here we are with our job. print out all of the voters names and send the and send the list to Vladimir.
+
+00:25:20.000 --> 00:25:25.000
+Okay, this is what we have to do. We have to grab all of our motors names and then send them off.
+
+00:25:25.000 --> 00:25:32.000
+All right, you know, in a in a system where we've had you know 4,000,000 voters.
+
+00:25:32.000 --> 00:25:38.000
+But you know this, many votes we're yeah our code is maybe a bit problematic, right.
+
+00:25:38.000 --> 00:25:46.000
+But with this task in hand, print out all the voters names.
+
+00:25:46.000 --> 00:25:59.000
+So in most computer programming, this would be a classic spot for a loop where I would loop over some data structure, right?
+
+00:25:59.000 --> 00:26:06.000
+But so far I haven't been working with objects i've only been working with primitives.
+
+00:26:06.000 --> 00:26:18.000
+So to get all of these names out I need to go back. Okay, here's one of my names. I need to make a console log on to a log voter.
+
+00:26:18.000 --> 00:26:39.000
+One name console log voter to name i've got 3 voters, 1, 2, 3, copy paste and what was order?
+
+00:26:39.000 --> 00:26:47.000
+3 name here? Right? Okay, raise your hand. Are you? Is this boring?
+
+00:26:47.000 --> 00:26:54.000
+Are you bored? This is silly, right? This is not how computer programming is supposed to go for real right?
+
+00:26:54.000 --> 00:27:00.000
+Okay, hold on here here's a nice trick have you seen this command D.
+
+00:27:00.000 --> 00:27:08.000
+3 times over. Now, I have 3 cursors. yeah, and 3 copy paste buffers.
+
+00:27:08.000 --> 00:27:14.000
+This is cool, too. I can highlight a word, Copy it.
+
+00:27:14.000 --> 00:27:20.000
+Move to the left, put in my label. Thank you very much, and paste it.
+
+00:27:20.000 --> 00:27:23.000
+Each cursor has their own paste buffer.
+
+00:27:23.000 --> 00:27:30.000
+Okay, save it. Escape Key. Give me back my one cursor.
+
+00:27:30.000 --> 00:27:36.000
+Right. Finally, I can run my code, and I get my names of my programmers.
+
+00:27:36.000 --> 00:27:45.000
+Sorry my voters, not programmers, voters out and getting there.
+
+00:27:45.000 --> 00:27:53.000
+But you know this is not code that's well structured well architected, or any of that.
+
+00:27:53.000 --> 00:27:59.000
+Of course, the point is, we want to use objects instead.
+
+00:27:59.000 --> 00:28:20.000
+Objects are a kind of a data structure that allows us to gather things into one place where those objects are going to have properties that I can leverage, that I can make loops to go over them and make much better code
+
+00:28:20.000 --> 00:28:37.000
+right using those kinds of data structures, so instead we're going to build up a set of tools that's going to allow us to write code that works for many voters, even though it's only a small snippet of code and
+
+00:28:37.000 --> 00:28:54.000
+I won't Have to do this kind of business that's the whole point with objects in fact. let's take a quick pause for questions. Lucas asks, How do you know when a value needs to be declared
+
+00:28:54.000 --> 00:29:02.000
+as bigant or not it's you're gonna have to Guess ahead of time.
+
+00:29:02.000 --> 00:29:09.000
+Whether or not the value of that is going to be higher than the highest value that an integer could store.
+
+00:29:09.000 --> 00:29:18.000
+You have to guess ahead of time right now. that number is so huge that it's extremely rare that you'll ever work with big int again, right?
+
+00:29:18.000 --> 00:29:26.000
+Just be aware that that's a thing yeah you have to guess ahead of time as to whether you're in a cross.
+
+00:29:26.000 --> 00:29:35.000
+So there's a story that that we like to tell when you get to learning about databases about the view count on a Youtube video right?
+
+00:29:35.000 --> 00:29:43.000
+It used to be that when they wrote Youtube in the first place, they thought, Okay, we're never gonna have more than 2,000,000,000 views on a video.
+
+00:29:43.000 --> 00:29:53.000
+Then gang them. style comes along and the view count goes up over to 2,000,000,000 right on a planet of 7,000,000,000 people.
+
+00:29:53.000 --> 00:30:06.000
+2,000,000,000 views on that video. you know. I think that i'm, not sure what the new record holder is now, but it's obviously with a view count higher than 2,000,000,000 I would forgive the original programmers for not imagining a
+
+00:30:06.000 --> 00:30:11.000
+day when the view counts on a Youtube video we're gonna be above 2,000,000,000, right?
+
+00:30:11.000 --> 00:30:19.000
+They fixed it after the fact. It was okay. some examples of symbols.
+
+00:30:19.000 --> 00:30:24.000
+Ricky asks, What are some examples of needing to use symbols?
+
+00:30:24.000 --> 00:30:50.000
+Symbols are, for when you want to be certain that the value of this thing is unique, Symbols are very, very rarely used, because there's actually another sneaky, tricky way of doing precisely that same thing the way, that
+
+00:30:50.000 --> 00:30:59.000
+I would do this, and the way that this is done in many other languages is to just go ahead and make a string like, and then put it in all caps.
+
+00:30:59.000 --> 00:31:05.000
+In fact, I was just doing this the other day. in fact.
+
+00:31:05.000 --> 00:31:14.000
+I could say player status idle if i'm writing a game.
+
+00:31:14.000 --> 00:31:25.000
+I can just do that and call that that value and So there I have a string that I can use certain contexts.
+
+00:31:25.000 --> 00:31:34.000
+So here's another one idle and then say active one like this.
+
+00:31:34.000 --> 00:31:59.000
+So later on, in my code, can do stuff like if player status equals idle like.
+
+00:31:59.000 --> 00:32:18.000
+So then do such and such else. player status equals now assigning it, and I might go player status active like. so right.
+
+00:32:18.000 --> 00:32:37.000
+And this one might be you know. Do something. whatever so this would be some sample code where i'm relying on these values being correct, this makes the compiler check those values are the ones that I meant right, If there's a miss
+
+00:32:37.000 --> 00:32:50.000
+if you misspell this, then this is going to throw an error at you, so it's defensive to use this trick.
+
+00:32:50.000 --> 00:33:00.000
+It makes sure that you get the value right like if I was using as my player status right? I could potentially make this error.
+
+00:33:00.000 --> 00:33:09.000
+That's going to be valid code or this could also be valid code.
+
+00:33:09.000 --> 00:33:27.000
+But the type won't be right right so far better to use something like this right? that's actually what symbols are for It's like doing that.
+
+00:33:27.000 --> 00:33:36.000
+But the fact that you can just do this with variable names instead means that it's pretty rare to actually see symbols in use.
+
+00:33:36.000 --> 00:33:41.000
+So I don't want to belabor that point to too much more.
+
+00:33:41.000 --> 00:33:46.000
+If that makes any sense, you know in this and other languages you'll often see it done This way.
+
+00:33:46.000 --> 00:34:07.000
+What I really hope, though, is that i've made you completely bored of this kind of a piece of code for writing out all the names of all of our voters right like this is ridiculous.
+
+00:34:07.000 --> 00:34:17.000
+Imagine I need to do formula voters writing. this code is going to get old in a hurry, and you know I have issues.
+
+00:34:17.000 --> 00:34:22.000
+There are issues. There are bugs in this code just waiting to appear someday. right voter.
+
+00:34:22.000 --> 00:34:34.000
+One's name was first name, then last name voter 2 name was last name comma first name when is that gonna bite me in the ass?
+
+00:34:34.000 --> 00:34:45.000
+Right? who does so? Yeah, not good, not good. This is fine for teaching what primitives are about the also not good down here, right?
+
+00:34:45.000 --> 00:34:58.000
+Fine. it's time to move toward doing things the right way which is to use objects.
+
+00:34:58.000 --> 00:35:05.000
+And so let's write some okay, let's make some objects
+
+00:35:05.000 --> 00:35:19.000
+Well, first of all here's an object there from this moment forward.
+
+00:35:19.000 --> 00:35:30.000
+I want you all to trigger on the fact, that i've got curly braces in a value, and for your mind to go.
+
+00:35:30.000 --> 00:35:35.000
+Oh, that's an object right curly races that's the signal.
+
+00:35:35.000 --> 00:35:52.000
+Yep i've got an object here got a live one Here's a different one where i've got square brackets instead.
+
+00:35:52.000 --> 00:36:02.000
+This is an object. This is an I was gonna give it away fine.
+
+00:36:02.000 --> 00:36:12.000
+I'll tell you. All right. this is an array thank you Thank you for unmuting there excellent right square brackets, array Curly Braces object.
+
+00:36:12.000 --> 00:36:25.000
+Yeah, all right. We'll get back to a raise later. but for now this is a lecture about objects.
+
+00:36:25.000 --> 00:36:55.000
+This object can have properties. For example, last name lovelace first name Ada Nicole.
+
+00:36:58.000 --> 00:37:09.000
+You've got a question. Go ahead! Oh, the pushing the spacebar thing.
+
+00:37:09.000 --> 00:37:18.000
+You actually have to hold the space bar down? Okay, is a property the last name, or is it sorry?
+
+00:37:18.000 --> 00:37:23.000
+In the first case, is property the key, or is property the key and the value?
+
+00:37:23.000 --> 00:37:30.000
+This is the property. This is the value of that property. Okay, thank you.
+
+00:37:30.000 --> 00:37:39.000
+Yep. Good! this first name is a different property. This is the value of that different property, etc.
+
+00:37:39.000 --> 00:37:44.000
+Yep thank you for clarifying by the way don't take notes.
+
+00:37:44.000 --> 00:37:52.000
+It's better to have you hanging on my every word yeah that's my style.
+
+00:37:52.000 --> 00:38:01.000
+I'm kind of a you know self-centered love to talk about myself kind of person, and what I really want is for you to hang on my every word.
+
+00:38:01.000 --> 00:38:16.000
+And if a thing goes by that you don't understand chime in and start a conversation about it, but I will make one exception for the kind of notes that I think that you should take, and that is 100 a glossary
+
+00:38:16.000 --> 00:38:32.000
+vocabulary words so much about learning coding, that it is an app, a game of taking abstract concepts and making them concrete.
+
+00:38:32.000 --> 00:38:56.000
+There are vocabulary words flying around like crazy during learning how to code right, especially for the first time. Say, And so if a word goes flying by like in this case, property, please jump in and get me to make sure that we get a
+
+00:38:56.000 --> 00:39:08.000
+fleshed out definition of this of these words Write down the words that you don't know after class after class craft.
+
+00:39:08.000 --> 00:39:15.000
+A good definition of that word for yourself. Use those words in sentences with each other with me.
+
+00:39:15.000 --> 00:39:20.000
+Try to get that. Your use of the words refined right?
+
+00:39:20.000 --> 00:39:28.000
+There is, there was never any more important single tip how to rapidly learn coding.
+
+00:39:28.000 --> 00:39:38.000
+It's that make your own dictionary your definitions for these words will get more and more sophisticated over time, especially rapidly.
+
+00:39:38.000 --> 00:39:44.000
+In the first 3 weeks of boot campers up. Yeah.
+
+00:39:44.000 --> 00:39:53.000
+I see a few more questions is the property a string it's a property, but it has.
+
+00:39:53.000 --> 00:40:07.000
+How do I say this without tripping over my own vocabulary Property and its value is a name Value pair.
+
+00:40:07.000 --> 00:40:14.000
+There are so many examples of name value pairs in programming right?
+
+00:40:14.000 --> 00:40:21.000
+Even variables actually right here's a variable that variable is a named value.
+
+00:40:21.000 --> 00:40:29.000
+Same with properties inside of an object there's the name there's the value.
+
+00:40:29.000 --> 00:40:36.000
+The name is formed from a string right but it's not a string.
+
+00:40:36.000 --> 00:40:43.000
+Primitive would call it a token in the language right.
+
+00:40:43.000 --> 00:40:54.000
+This expression. This token is understood by this parser by understanding the syntax of the language.
+
+00:40:54.000 --> 00:41:02.000
+Yeah, that's a string right but it's not a string primitive that it's not a value right?
+
+00:41:02.000 --> 00:41:11.000
+It's a token. in the language that's getting parsed through the syntax of javascript to be understood as a property.
+
+00:41:11.000 --> 00:41:18.000
+Yeah. But yeah, it's a string there go back and play that part of the video again and try to understand that sentence.
+
+00:41:18.000 --> 00:41:22.000
+I was trying to be super precise about the use of all of those words right?
+
+00:41:22.000 --> 00:41:37.000
+That'll be good practice for later on eugene asks isn't a string essentially an array of characters.
+
+00:41:37.000 --> 00:41:42.000
+It is in other languages. It is in c in javascript.
+
+00:41:42.000 --> 00:41:58.000
+It's a primitive. Certainly there are methods that allow you to use them like that, though you know, like string positions and search and replace, and all those things you can.
+
+00:41:58.000 --> 00:42:10.000
+Yeah, can you iterate over a string a i'll get back to you on that i'm getting confused by my understanding of other languages at the moment?
+
+00:42:10.000 --> 00:42:16.000
+Good. But thank you for the for the questions they're they're good and solid questions.
+
+00:42:16.000 --> 00:42:22.000
+Yeah, you guys are doing really well, Great. So we made an object.
+
+00:42:22.000 --> 00:42:27.000
+Yeah, here's voter one as an object they have last name they have first name.
+
+00:42:27.000 --> 00:42:33.000
+They have date of birth. Voter did vote whoops, not that of birth.
+
+00:42:33.000 --> 00:42:41.000
+There we go. what was the property did vote and let's set it to be false.
+
+00:42:41.000 --> 00:42:50.000
+What are the things that we have up here? Age versus data birth?
+
+00:42:50.000 --> 00:42:58.000
+I think we should be storing the day to birth. right pretty clear, because a year from now we don't want this thing to be out of date, or to have corrupt information in it.
+
+00:42:58.000 --> 00:43:02.000
+This sucked to choose age as the variable for voter.
+
+00:43:02.000 --> 00:43:14.000
+One right it should have been date of birth, maybe death date would be an important thing to keep about voters as well, and maybe it's going to be set to be null or undefined, or unknown.
+
+00:43:14.000 --> 00:43:20.000
+Or you know, who knows is different values. But we can get super precise with how our data is structured.
+
+00:43:20.000 --> 00:43:34.000
+Right. Okay, fine that's voter one we could do this again with voter.
+
+00:43:34.000 --> 00:44:04.000
+2 like. so except this time it was camelton margaret date of birth, August the seventeenth, 1936 like so and so on.
+
+00:44:14.000 --> 00:44:22.000
+Let's just let's finish this off we've got 3 voters so far right.
+
+00:44:22.000 --> 00:44:33.000
+Let's do another one voter 3 now, my copying and pasting is working out pretty well here, because I get the same properties each time.
+
+00:44:33.000 --> 00:44:39.000
+That's kind of cool. So Voter, 3 what do we know about voter 3.
+
+00:44:39.000 --> 00:44:44.000
+Oh, Emmy, no other right. I encourage you to learn about her.
+
+00:44:44.000 --> 00:44:56.000
+If you have not heard of her. Amazing! No other, Emmy, no other.
+
+00:44:56.000 --> 00:45:10.000
+When was Emmy or not recorded yet let's leave it as an empty string?
+
+00:45:10.000 --> 00:45:28.000
+It is a string, after all. did vote false fine save so to achieve our task of writing out the names and sending the list of voters to Vladimir.
+
+00:45:28.000 --> 00:45:43.000
+We're going to go console dot log voter one dot last name.
+
+00:45:43.000 --> 00:46:02.000
+And yeah, let's do this as the backtick string right template literal with interpolation to be precise about the language.
+
+00:46:02.000 --> 00:46:16.000
+There is the last name, comma first name, and in fact, I need to spell this slightly differently.
+
+00:46:16.000 --> 00:46:20.000
+Better to use the suggestions from the editor. I think last name.
+
+00:46:20.000 --> 00:46:32.000
+Use the tab key there, that's for voter one over 2 or 3.
+
+00:46:32.000 --> 00:46:50.000
+So here, voter one this and this 2 save one cursor, Please save.
+
+00:46:50.000 --> 00:47:05.000
+Thank you. and then 3, yeah, so we're a little bit better off because our data is more like one voter object is similar to another voter object.
+
+00:47:05.000 --> 00:47:15.000
+So we're doing a bit better but we're still not quite there yet, with this app here's save there's our voters.
+
+00:47:15.000 --> 00:47:22.000
+Let's just run it and see what we get some consistency at least right.
+
+00:47:22.000 --> 00:47:30.000
+Last name first name last name first first name we've got our list spit out, and we're ready to send that to Vladimir.
+
+00:47:30.000 --> 00:47:46.000
+And yet this could still be better right i'm sure you'll agree that we would like to be setting up our voters in a slightly different way.
+
+00:47:46.000 --> 00:48:07.000
+That's going to improve this code to be even way, better Still, the main issue here is that if I have 4,000,000 voters I need to write out lines and write out variables every time create new objects for every one of them as
+
+00:48:07.000 --> 00:48:23.000
+I go right, I'm getting a bit a little bit better with the syntax, but I it's time to start making this system better by making it so that I can loop over all of my objects in one simple straight up
+
+00:48:23.000 --> 00:48:44.000
+line of code. So instead of doing it, precisely this way let's make an array, and i'm going to start this out as a constant array.
+
+00:48:44.000 --> 00:48:56.000
+Let's call it list of voters and i'm gonna it's gonna start life out as an array like this.
+
+00:48:56.000 --> 00:49:26.000
+And now voter one is instead going to be list of voters, voter, 2 is going to be list of voters.
+
+00:49:28.000 --> 00:49:39.000
+One voter 3 is gonna be list of voteers, too, like that.
+
+00:49:39.000 --> 00:49:59.000
+And so, instead of this monstrosity here we get to do something a little different this time we're going to go 4.
+
+00:49:59.000 --> 00:50:10.000
+We're going to do this a few ways today, actually but the first way we'll go is this I equal 0.
+
+00:50:10.000 --> 00:50:30.000
+We're going to make a loop for ii less than list of voters dot length ii plus plus console log.
+
+00:50:30.000 --> 00:50:49.000
+Now we'll put on a label here in back ticks actually voter in square brackets interpolate.
+
+00:50:49.000 --> 00:50:58.000
+I. I like that comma list of voters, square brackets.
+
+00:50:58.000 --> 00:51:23.000
+Ii like. so and so let's run this that's actually writing out the entire voter every time notice that the label that I put on it was dynamic, and had this interpolated value of ii in it by the
+
+00:51:23.000 --> 00:51:28.000
+way we're gonna come back and review the syntax of what I've just done.
+
+00:51:28.000 --> 00:51:32.000
+So don't worry about that part want to show what's possible.
+
+00:51:32.000 --> 00:51:48.000
+Here I'm. looping over each of the array elements I have is and array of objects, and because I'm working with an array of objects.
+
+00:51:48.000 --> 00:51:57.000
+Now my loop I didn't need to write out each of their names individually, with console logs and an individual variables.
+
+00:51:57.000 --> 00:52:12.000
+This was trash. Terrible architecture. you now, if I happen to figure out a way to get my 4,000,000 names into my array, This is exactly the code.
+
+00:52:12.000 --> 00:52:17.000
+Just a three-line loop it's going to print out all 4,000,000 names.
+
+00:52:17.000 --> 00:52:28.000
+So much better to be working with Nra of objects than it is to be working with individual variables all the time.
+
+00:52:28.000 --> 00:52:41.000
+Right. It allows you to make your code scalable right and that's the reason why we're using objects and arrays of objects.
+
+00:52:41.000 --> 00:52:48.000
+So in this console log my job was actually to print out the name.
+
+00:52:48.000 --> 00:52:54.000
+I had some syntax up here where I had the name written out.
+
+00:52:54.000 --> 00:53:02.000
+I'm gonna borrow that syntax and so it'll be like that.
+
+00:53:02.000 --> 00:53:18.000
+But now I want list of voters the object itself here and here. we're going to get into the details of how this syntax all holds together after the break.
+
+00:53:18.000 --> 00:53:23.000
+I just want to show you. show it to you in action right now.
+
+00:53:23.000 --> 00:53:32.000
+In fact, let me comment out all of these type of things from the Primitives section above like this.
+
+00:53:32.000 --> 00:53:43.000
+And in fact, we can even now comment out all of the original objects that were we were using to test all that stuff, we just don't need it anymore.
+
+00:53:43.000 --> 00:54:07.000
+Right Now we've got an array set up we're feeding objects into that array, and then finally a 3 line loop that shows thus all the names coming out of that array and that set a code here
+
+00:54:07.000 --> 00:54:19.000
+would be the exact same code if my list of of voters was 3 people long or 4,000,000 people long, still the same code, still the same quality output from it like that.
+
+00:54:19.000 --> 00:54:24.000
+Okay, I can kind of tell that you're like all about to fall over asleep.
+
+00:54:24.000 --> 00:54:29.000
+So it's time for a 10 min break pretty clearly let's take that real break.
+
+00:54:29.000 --> 00:54:42.000
+Let's coffee or non-bred non sorry coffee or not put it into the chat which we prefer today.
+
+00:54:42.000 --> 00:54:47.000
+Today is a Wednesday. I feel like Mondays are coffee days.
+
+00:54:47.000 --> 00:54:51.000
+Yeah. see that first 3 votes? None. not not a number.
+
+00:54:51.000 --> 00:54:59.000
+So this is a video, thanks to Francis, one of the other instructors.
+
+00:54:59.000 --> 00:55:04.000
+And yeah, take a real break dance around your room whatever turn your camera off.
+
+00:55:04.000 --> 00:55:11.000
+If you're gonna be dancing I don't know it's up to you and come back when the clock strikes 0.
+
+00:55:11.000 --> 00:55:41.000
+Yeah. see you all soon take a real break a E: All right.
+
+01:04:41.000 --> 01:05:05.000
+Welcome back. How is your break where'd you get up to Anything fun?
+
+01:05:05.000 --> 01:05:10.000
+No, I just went for a little walk. hates yogurt.
+
+01:05:10.000 --> 01:05:15.000
+Yeah walking is good gets the blood cells going yogurt's good same thing.
+
+01:05:15.000 --> 01:05:18.000
+A little walk to the fridge and the washroom.
+
+01:05:18.000 --> 01:05:24.000
+Yeah. okay, very pandemic thing to do. Take a deep breath of fresh air outside and touch some actual grass.
+
+01:05:24.000 --> 01:05:39.000
+Oh, very, very nice, very nice. good. So I want to get back to some things technology related.
+
+01:05:39.000 --> 01:05:48.000
+Yeah, we've reviewed the primitive types we are in the middle of object review.
+
+01:05:48.000 --> 01:06:06.000
+We will talk about passing primitives and objects to functions. We'll talk about functions that are defined inside of objects, and we'll also talk about iterating over things I Do know that I went through some syntax stuff
+
+01:06:06.000 --> 01:06:11.000
+in here, little quickly, and so I want to unfold that.
+
+01:06:11.000 --> 01:06:17.000
+Peel it back bit by bit, so that you 2 can write code as cool as this.
+
+01:06:17.000 --> 01:06:32.000
+Yeah, So Let's say we're going to console log, something simple out of one of these objects here's console log.
+
+01:06:32.000 --> 01:06:37.000
+I'm going to put a label on this thing monkey Fuzz!
+
+01:06:37.000 --> 01:06:40.000
+That's my string that I use whenever I want to say, like Nally was here.
+
+01:06:40.000 --> 01:06:47.000
+I put that there because it's like clear that that string is never going to appear anywhere else right? And so I know.
+
+01:06:47.000 --> 01:06:49.000
+Oh, yeah, there's my debugging phrase that's come up.
+
+01:06:49.000 --> 01:06:56.000
+I would encourage you to each pick your own debugging phrase that's something similar and weird that we will never see anywhere else.
+
+01:06:56.000 --> 01:07:07.000
+And so i'm gonna put some syntax here. that shows how to get at stuff inside objects. for example.
+
+01:07:07.000 --> 01:07:21.000
+I have my list of voters to object here I could console Log the whole object, so i'll save that, go back to my terminal run.
+
+01:07:21.000 --> 01:07:27.000
+It Here it is. This is a text representation of the whole object right?
+
+01:07:27.000 --> 01:07:42.000
+No surprise that it's opening with curly braces because that's the symbol for objects here are the properties last name, first name, date of birth, and each of their values.
+
+01:07:42.000 --> 01:07:47.000
+The values can be primitives like the 7 that we saw before.
+
+01:07:47.000 --> 01:07:53.000
+Or we can actually put objects in here or functions we'll see all of that kind.
+
+01:07:53.000 --> 01:07:59.000
+How each of these values could be any of those things so back to this console log.
+
+01:07:59.000 --> 01:08:07.000
+There's actually a couple of techniques forgetting information out of an object.
+
+01:08:07.000 --> 01:08:25.000
+One of them is with the dot dot notation and as soon as I do that. Notice that my editor knows the properties of this object, and it's ready to suggest them to me right let's go for last name so here I
+
+01:08:25.000 --> 01:08:38.000
+have an object. dot property name could call this dot notation let's go back and run it. Sure enough.
+
+01:08:38.000 --> 01:08:50.000
+I'm getting the last name out of that particular object no other next to that particular label.
+
+01:08:50.000 --> 01:08:59.000
+In fact, to make this a little less confusing i'm going to comment out the loop and just get that one console log out.
+
+01:08:59.000 --> 01:09:09.000
+Okay, no other like. So this is dot notation that's one way of extracting information out of an object.
+
+01:09:09.000 --> 01:09:19.000
+The dot itself is a bit of a dead giveaway that the thing on the left of it is itself an object.
+
+01:09:19.000 --> 01:09:32.000
+Here's a thing that I do all the time and i'd like you guys to do it all the time, too.
+
+01:09:32.000 --> 01:09:48.000
+It's a game, I called. What is this and it goes like this? You go into your editor, you highlight a thing, and then, when that thing is highlighted you ask yourself the question, What is this?
+
+01:09:48.000 --> 01:10:00.000
+And it turns out that throughout the course of the boot camp your answer to that question is gonna get more and more sophisticated as time goes on right.
+
+01:10:00.000 --> 01:10:05.000
+Even after graduating from Boot camp. Your answer to the question, What is this?
+
+01:10:05.000 --> 01:10:10.000
+Is gonna improve and improve you're gonna add on things to what what is this?
+
+01:10:10.000 --> 01:10:16.000
+But it's in it an essential question what is this right and and it matters a lot.
+
+01:10:16.000 --> 01:10:28.000
+The exact thing that you've highlighted for example if I highlight only the token list of voters right?
+
+01:10:28.000 --> 01:10:34.000
+The answer to what is this for that thing that's an array right.
+
+01:10:34.000 --> 01:10:42.000
+You can see that up here list of voters was defined as an array. here.
+
+01:10:42.000 --> 01:10:44.000
+It was empty. It was before we added stuff to it.
+
+01:10:44.000 --> 01:11:03.000
+But list of voters was an array still isn't array That's because I haven't also included the square brackets in the 2 in what I highlighted let's do that instead i'm gonna
+
+01:11:03.000 --> 01:11:11.000
+put my cursor here. i'm gonna select all the way over to the end of the Purple square bracket.
+
+01:11:11.000 --> 01:11:20.000
+Now I ask the question again, What is this? So the expression under there is list of voters with 2 in square brackets.
+
+01:11:20.000 --> 01:11:27.000
+Okay, that means it's the third element of the list of voters array.
+
+01:11:27.000 --> 01:11:33.000
+Well, what is the third element of the list of voters?
+
+01:11:33.000 --> 01:11:42.000
+Array turns out, it's an object you can see so right here, how it was defined in the first place, actually right.
+
+01:11:42.000 --> 01:11:47.000
+So with this thing entirely highlighted, I would say the best answer to the question, What is this?
+
+01:11:47.000 --> 01:11:54.000
+Is the it's an object now the syntax kind of gave it away.
+
+01:11:54.000 --> 01:12:00.000
+Actually because there's a dot there, and this is syntactically correct code that runs and runs as expected.
+
+01:12:00.000 --> 01:12:25.000
+That Dot is telling me. Oh, this thing on the left hand side of the dot that's an object i'm using dot notation to get a property out of an object. The name of the property i'm going after is last name who among
+
+01:12:25.000 --> 01:12:39.000
+you has noticed that for all this time with writing console logs over here that we're using dot notation.
+
+01:12:39.000 --> 01:12:51.000
+So I have a question for you. What is this and object?
+
+01:12:51.000 --> 01:13:03.000
+I could hear you all thinking that right it's an object let's console login because we can't consult.
+
+01:13:03.000 --> 01:13:08.000
+This is very meta. Now all of a sudden right here's. my label Always put a label on your console logs.
+
+01:13:08.000 --> 01:13:21.000
+I'm gonna make a song. of that someday console, console, save, okay, let's just console log, console It's an object.
+
+01:13:21.000 --> 01:13:39.000
+Let's see what we get haha super interesting node hacked the vote dot js console that's our label, right?
+
+01:13:39.000 --> 01:13:45.000
+Maybe I should have put monkey fuzz on it to be just certain that that was a label right?
+
+01:13:45.000 --> 01:13:53.000
+The text representation of the Console is here it comes it's an object like we knew that right it's an object.
+
+01:13:53.000 --> 01:14:11.000
+Who's name is console here, is the open and curly brace associated with an object and all of its properties console log, console, worn, console.
+
+01:14:11.000 --> 01:14:15.000
+Clear. I wonder what console cleared does let's do it.
+
+01:14:15.000 --> 01:14:24.000
+We found out that our console has a function called clear on it. Let's run the thing. Can we counterlog this.
+
+01:14:24.000 --> 01:14:32.000
+Let's do console dot clear at the end of our code.
+
+01:14:32.000 --> 01:14:50.000
+Now when I run it the whole long like that. Now, when I run the code, it console logged the console, and then it cleared the terminal pretty cool, and we found that out because we could console a log
+
+01:14:50.000 --> 01:14:55.000
+the console itself. We figured out that it was an object and said, Oh, that's interesting.
+
+01:14:55.000 --> 01:15:05.000
+Let's go find out what that is the cool string dot length.
+
+01:15:05.000 --> 01:15:09.000
+Yeah, you have your answer right. it's treating the string as though it were an object.
+
+01:15:09.000 --> 01:15:22.000
+So there's something funky going on under the hood There isn't there nicely done grace all right.
+
+01:15:22.000 --> 01:15:32.000
+This is dot notation, something that you do need to be aware of, and how it all holds together, and how it all works.
+
+01:15:32.000 --> 01:15:40.000
+But I want to show you another noation that you can use to take values out of an object.
+
+01:15:40.000 --> 01:15:45.000
+So the label on this one's going to be monkey fuzz one. the label on this one is going to be monkey. Pho!
+
+01:15:45.000 --> 01:16:15.000
+2 instead of using dot notation on my object i'm gonna use square bracket notation instead square bracket notation also works, but hold my beer and watch this square bracket notation now instead of just typing
+
+01:16:18.000 --> 01:16:30.000
+the name of the property after the dot. Now I have to include it as a string literal inside my square brackets, you'll see why this is a good idea in a minute.
+
+01:16:30.000 --> 01:16:35.000
+This is extra typing right here. I just typed dot last name here.
+
+01:16:35.000 --> 01:16:44.000
+I had to type open, square bracket, open single quote last name closed square, all most single bracket close square bracket.
+
+01:16:44.000 --> 01:16:49.000
+I'm sure I said that incorrectly don't roll the tape.
+
+01:16:49.000 --> 01:16:58.000
+Okay, there's more typing here but this is gonna be good for certain circumstances, and i'll show you what I mean by that. in a second.
+
+01:16:58.000 --> 01:17:02.000
+First of all, we should confirm that it works right so we'll run it.
+
+01:17:02.000 --> 01:17:08.000
+Yeah, they both give the same value here's monkey fuzz one. here's monkey phos 2 These are indeed our console logs.
+
+01:17:08.000 --> 01:17:19.000
+The values that are coming out of the same in both cases These are different syntaxes for getting the same result right.
+
+01:17:19.000 --> 01:17:25.000
+Let's say I play the what is this game and I hover over that entire thing.
+
+01:17:25.000 --> 01:17:32.000
+Remember how he was saying that your answers would become more and more sophisticated as time goes on.
+
+01:17:32.000 --> 01:18:02.000
+So watch this what is this Wow, that's a string okay here's another answer to what is this this is the value of a property on an object which is inside an array so that's the kind of game i'd like you to be
+
+01:18:03.000 --> 01:18:21.000
+playing with. What is this? is to turn your answers to the question, What is this to be more and more sophisticated, more and more detailed as time goes on right Now, this notation is actually pretty cool.
+
+01:18:21.000 --> 01:18:42.000
+The fact that I have to put a string literal in here, because there are cases when, instead of putting an actual string literal here, I might like instead to put a variable.
+
+01:18:42.000 --> 01:18:58.000
+And so, for example, if I go const proper name equals last name can take this and put the variable there instead.
+
+01:18:58.000 --> 01:19:12.000
+Now this isn't particularly fancy okay here's 3 this is the way that monkey fuzz 2 was working originally like that.
+
+01:19:12.000 --> 01:19:40.000
+But notice now here's how javascript the programming language and most other programming languages work that thing inside the square brackets online 84 that's a string literal it's an expression that
+
+01:19:40.000 --> 01:19:46.000
+evaluates to that string value online 85.
+
+01:19:46.000 --> 01:20:00.000
+This is a variable name, but it is also an expression and it will evaluate to the value of that variable.
+
+01:20:00.000 --> 01:20:06.000
+It's just as simple as that That's what happens for all variables all over Javascript all the time.
+
+01:20:06.000 --> 01:20:15.000
+If you see a variable name somewhere, and it's in an expression that variable is going to get replaced by its value there.
+
+01:20:15.000 --> 01:20:22.000
+And so you can see exactly What's going on between how it's just the language.
+
+01:20:22.000 --> 01:20:24.000
+Javascript, that makes 85, and 84.
+
+01:20:24.000 --> 01:20:37.000
+The same thing. So if ever there's a case where you've got property name that's stored in a variable.
+
+01:20:37.000 --> 01:20:43.000
+You can use the square brackets notation to still get the value out of your object.
+
+01:20:43.000 --> 01:21:03.000
+It's, in fact, you could theoretically always use square bracket notation, and you would naturally do one or the other as needed, and you wouldn't think twice about it right.
+
+01:21:03.000 --> 01:21:11.000
+But it's important to also know the dot notation directly where you're just typing the property name directly here.
+
+01:21:11.000 --> 01:21:18.000
+Well, because there's less typing and you're gonna see it all over the place.
+
+01:21:18.000 --> 01:21:24.000
+So just learn both. they'll both work Nicole got a question.
+
+01:21:24.000 --> 01:21:30.000
+Go ahead. yeah, so could you use i'm gonna try and use my words correctly.
+
+01:21:30.000 --> 01:21:37.000
+Yes, please. Could you use the variable name? property name? Yes, an adult notation to No.
+
+01:21:37.000 --> 01:21:46.000
+Okay not allowed like. So, for example, if I put this that's that you've asked the essential question, here. right?
+
+01:21:46.000 --> 01:21:50.000
+How does dot notation work? I must use the property name here.
+
+01:21:50.000 --> 01:22:05.000
+We could try doing this. We'll call it monkey fuzz gonna error instead of last name.
+
+01:22:05.000 --> 01:22:14.000
+We'll put property name like that and then run it it didn't error.
+
+01:22:14.000 --> 01:22:20.000
+It's undefined sorry I thought I was gonna say that there was no such property.
+
+01:22:20.000 --> 01:22:24.000
+But it's returning back undefined because there's no value at that property.
+
+01:22:24.000 --> 01:22:42.000
+Nothing to see here or see no evil would be better. Yeah, for a voting application.
+
+01:22:42.000 --> 01:22:55.000
+Okay, Tony, go ahead. Yeah. So we would use dot versus square bracket notations.
+
+01:22:55.000 --> 01:23:04.000
+Given a certain circumstance. They're not both like you know once better than the other is just under certain parameters. Okay, cool.
+
+01:23:04.000 --> 01:23:12.000
+Thank you absolutely. I mean, this is, if you like, typing less. and this one is sorry.
+
+01:23:12.000 --> 01:23:16.000
+This one's not valid i'm going to delete this because it's like it's not even there. right.
+
+01:23:16.000 --> 01:23:20.000
+It was a good question, but last name is the name of the property dot last name.
+
+01:23:20.000 --> 01:23:27.000
+It's pretty straightforward property name as a variable right.
+
+01:23:27.000 --> 01:23:33.000
+There are going to be circumstances when this comes up and Now you'll know that you can use a variable name here. Why?
+
+01:23:33.000 --> 01:23:48.000
+Because it just evaluates to its value right which is what's happening with this with the single quotes inside the square brackets, Nicole, you still have a question, or is that left over hand up no Okay, cool very
+
+01:23:48.000 --> 01:23:54.000
+good, so that's the distinction with objects and their syntaxes.
+
+01:23:54.000 --> 01:24:04.000
+I think we're good for that for now, let's do some work where we're passing primitives and objects to functions.
+
+01:24:04.000 --> 01:24:15.000
+Next. This is this happens all the time. whoops or like back to hack about.
+
+01:24:15.000 --> 01:24:27.000
+Okay, let's make a function in fact let's make a function called full name right?
+
+01:24:27.000 --> 01:24:50.000
+Can kind of imagine where we're going. with this this full name is going to take a voter object as a parameter, and the function is going to return a string.
+
+01:24:50.000 --> 01:24:57.000
+Let's do it this way with the templates with the interpolation right?
+
+01:24:57.000 --> 01:25:18.000
+We will have voter object, dot first name. Since this is being interpolated, I should wrap it with its dollar sign and curly brace like so, and then a space.
+
+01:25:18.000 --> 01:25:48.000
+And then this last name with the capitalization. correct so this is an example of function that takes in an object and returns the full name first named space last name, in fact, 4 h.
+
+01:25:52.000 --> 01:26:02.000
+Loop. Okay, let's get rid of this this is now served our purposes.
+
+01:26:02.000 --> 01:26:12.000
+Let's put the loop in after the function has been defined, and then change our loop.
+
+01:26:12.000 --> 01:26:25.000
+So that instead of doing this every time, let's rely on the function to give us what we want to full name.
+
+01:26:25.000 --> 01:26:43.000
+And now we need to pass in argument to this function which is the particular object that we're working with, which is going to be list of voters, and then in square brackets, because that's an array I need the Index.
+
+01:26:43.000 --> 01:26:51.000
+Each time through the loop. But now, when I play the what is this game right?
+
+01:26:51.000 --> 01:27:17.000
+I can highlight this piece here and that's an expression it's a function execution, and i'm passing in value as a parameter into that function which value the voter object inside this loop and pasting that
+
+01:27:17.000 --> 01:27:24.000
+object into this function. That function is taking that value, giving me a name in this format.
+
+01:27:24.000 --> 01:27:34.000
+The return value of that function comes back here, and this expression evaluates to the return value of the function.
+
+01:27:34.000 --> 01:27:43.000
+Invocation. it's as if this text got replaced with a value right?
+
+01:27:43.000 --> 01:27:57.000
+So let's run that see how that goes so I'm getting Ada Lovelace Margaret Hamilton and me No other right all formatted the way I wanted to because that function did the formatting for
+
+01:27:57.000 --> 01:28:01.000
+me right if I went back and decided. These are awesome people.
+
+01:28:01.000 --> 01:28:06.000
+They need to have it. 2 exclamation points, 3 even beside their name.
+
+01:28:06.000 --> 01:28:09.000
+I made one change, I go back and rerun it again.
+
+01:28:09.000 --> 01:28:12.000
+And now they all have exclamation points next to their name.
+
+01:28:12.000 --> 01:28:19.000
+So awesome? Grace asks, Is there anything special about?
+
+01:28:19.000 --> 01:28:25.000
+Ii. for the index variable, instead of using I Aha!
+
+01:28:25.000 --> 01:28:35.000
+You caught me. This is a wily old veteran trick for old people like me who do this because it's defensive programming.
+
+01:28:35.000 --> 01:28:44.000
+I'll take a real quick aside on this so I could have written the loop this way with I instead.
+
+01:28:44.000 --> 01:29:02.000
+And so if I do this rename symbol I actually Let's do. J: Okay, I just turned all those double eyes into J's back in the battle days when we didn't have awesome code editors like Vs code I would have
+
+01:29:02.000 --> 01:29:07.000
+this variable name, as J. say, sprinkle throughout my loop and throughout my code.
+
+01:29:07.000 --> 01:29:19.000
+What if I wanted to rename that variable i'd be tempted to do a global search and replace in my editor? right?
+
+01:29:19.000 --> 01:29:30.000
+But then all of my letter j's would get nuked and replaced with whatever the name was on my variable so renaming variables is a sport.
+
+01:29:30.000 --> 01:29:39.000
+It's a thing that I encourage you to get into you want to keep renaming your variables until they're better and better, and your code is more and more self-documenting.
+
+01:29:39.000 --> 01:29:54.000
+Right. So if You're really into renaming your variables like I am, then you would appreciate if your only tool was a search and replace to have a Ii instead of just a single letter because this is going to be like more reliably
+
+01:29:54.000 --> 01:30:02.000
+easily search and replaceable right but in some ways this trick isn't so needed anymore.
+
+01:30:02.000 --> 01:30:08.000
+Because nowadays I can just like right click on the J and go rename symbol.
+
+01:30:08.000 --> 01:30:20.000
+And now I can be like, Oh, yeah monkey fuzz there, and it only it changed the J's to Ms. But if there were other jays inside there, it wouldn't do the it wouldn't do the switch out yeah
+
+01:30:20.000 --> 01:30:24.000
+so good? question, Grace, sorry for the long-winded answer.
+
+01:30:24.000 --> 01:30:38.000
+Ian, go ahead. Yeah, I was just curious when you had the second function, or it's right second for loop with I and you Right-click.
+
+01:30:38.000 --> 01:30:42.000
+It, said Rename. It only picks the ones in that for loop, and not the other ones.
+
+01:30:42.000 --> 01:30:49.000
+Did you do something special for that? Oh, so rename symbol is the option that i'm choosing from within Vs code. right?
+
+01:30:49.000 --> 01:30:53.000
+This Ii is only defined in this scope, not this one right?
+
+01:30:53.000 --> 01:31:00.000
+So watch this and watch this. If I rename Simba, local local scope got it.
+
+01:31:00.000 --> 01:31:05.000
+Iij. it only did these ones, and not these these ones right.
+
+01:31:05.000 --> 01:31:16.000
+And so the this, this rename symbol is sensitive to that scoping it's like the coolest search ever. Yeah, Yeah, I love that again.
+
+01:31:16.000 --> 01:31:28.000
+I mentioned that renaming variables is like one of my favorite pastimes to make it better, better, better, better right to make the code more self dodging, more understandable for me.
+
+01:31:28.000 --> 01:31:35.000
+You know, love, It would encourage you to do that as you get better at naming variables.
+
+01:31:35.000 --> 01:31:42.000
+Okay, Very good. We have just managed to pass an object into a function.
+
+01:31:42.000 --> 01:32:03.000
+But here's the thing objects are passed by reference primitives are passed by value, and the distinctions the distinction between is important, and so I want to touch on that.
+
+01:32:03.000 --> 01:32:18.000
+Now, so let's make some more code let's make a function that takes a parameter.
+
+01:32:18.000 --> 01:32:27.000
+This function is going to be called the modifier, just to like.
+
+01:32:27.000 --> 01:32:34.000
+Throw you off the scent a bit. modifier i'm going to modify a thing.
+
+01:32:34.000 --> 01:32:47.000
+Yeah, i'm going to pass in an argument to this thing and then, i'm going to modify it, which thing am I gonna modify same good name for a parameter, i'm sure you'll agree so let's
+
+01:32:47.000 --> 01:33:00.000
+modify the thing thing equals thing plus and what will we put let's attach a string to it 44.
+
+01:33:00.000 --> 01:33:20.000
+Then i'm going to console log as one does spelling monkey fuzz correctly is very important.
+
+01:33:20.000 --> 01:33:37.000
+Okay, monkey, fuzz So in the middle of this function we're going to get the modified thing. Now let's console log.
+
+01:33:37.000 --> 01:33:45.000
+Actually let's let's get a value and i'll use let just to make it interesting.
+
+01:33:45.000 --> 01:34:02.000
+Let widget equal sailboat so there it is i've got a variable called Widget, and it's a sailboat That's the value it's a primitive string in widget
+
+01:34:02.000 --> 01:34:32.000
+here's a function next up console log widget before like so console log widget after like so sandwiched in between these 2 things, i'm gonna go modifier and modifier takes a
+
+01:34:40.000 --> 01:34:46.000
+parameter. let's pass in widget right remember modifier.
+
+01:34:46.000 --> 01:34:57.000
+It modifies things right so let's take bets I don't know what the over under on this i'll be the bookie.
+
+01:34:57.000 --> 01:35:04.000
+What is gonna written on the console log widget before pretty clear.
+
+01:35:04.000 --> 01:35:15.000
+It's gonna come out Sailbo yeah the modifier is going to take in widget modify it?
+
+01:35:15.000 --> 01:35:23.000
+Supposedly. Then we're going to get console log widget after, and it's going to give us the value of Widget.
+
+01:35:23.000 --> 01:35:32.000
+We have 2 broad possibilities here, hey? That Widget will come out after as sailboat, or it will come out as sailboat 44.
+
+01:35:32.000 --> 01:35:39.000
+Matt, very brave, stuck his neck out, decided what the value is going to be.
+
+01:35:39.000 --> 01:35:48.000
+Other people want to join in. and now i'm receiving private messages from those who are less brave, also fine.
+
+01:35:48.000 --> 01:35:57.000
+Still book 44, everybody's in disabled 44 look at that vote lots of sale, but 44 is fine.
+
+01:35:57.000 --> 01:36:08.000
+I'm gonna comment out this stuff. So we have a nice clean code.
+
+01:36:08.000 --> 01:36:24.000
+Okay, Oops, make sure that it's saved very good Eugene says it depends on whether or not thing is modified globally or locally, within the function way to head your bets.
+
+01:36:24.000 --> 01:36:27.000
+Eugene, I'm looking for what which you think is actually happening here.
+
+01:36:27.000 --> 01:36:32.000
+But very good, right. Lots of sophisticated words used in that description.
+
+01:36:32.000 --> 01:36:37.000
+Very true. Here we go, widget after sailboat.
+
+01:36:37.000 --> 01:37:06.000
+What the monkey fuzz happened here? The answer is that primitives our past into functions by value.
+
+01:37:06.000 --> 01:37:15.000
+That means that thing took on the value of Widget.
+
+01:37:15.000 --> 01:37:31.000
+It made a new copy of the value that came in. It was not passed in as a reference to the original value in a variable somewhere in memory.
+
+01:37:31.000 --> 01:37:40.000
+Instead, it was passed in by value. that is, the value of Widget was given to thing.
+
+01:37:40.000 --> 01:37:47.000
+Sing has the value of Widget. but thing is not Widget itself.
+
+01:37:47.000 --> 01:37:57.000
+Thing is a copy of Widget. Primitives are passed by value.
+
+01:37:57.000 --> 01:38:10.000
+Okay, So this modifier that I I admit it.
+
+01:38:10.000 --> 01:38:15.000
+I named this function to throw you off the scent of what was actually going to happen here.
+
+01:38:15.000 --> 01:38:31.000
+Okay, I think a better name for this thing would be a pender, because it's just depending a string to a thing.
+
+01:38:31.000 --> 01:38:38.000
+You know i'm gonna save this this way i'm gonna full screen.
+
+01:38:38.000 --> 01:38:43.000
+The editor and i'm gonna bring up the terminal so we can see it side by side.
+
+01:38:43.000 --> 01:38:54.000
+Yeah, it's better widget before sailboat Pender is now the name of this function.
+
+01:38:54.000 --> 01:39:00.000
+It takes in the value of that primitive selbo.
+
+01:39:00.000 --> 01:39:09.000
+The value of that primitive gets passed on to thing thing is now a variable of its own that has the value.
+
+01:39:09.000 --> 01:39:17.000
+Sailboat thing equals thing plus 44 thing is now sailboat 44, not Widget.
+
+01:39:17.000 --> 01:39:46.000
+That's what passed by value. is all about let's do the same thing, sorta, except this time we're going to have Widget 2, and this time we do is going to be an object that object is going to have a
+
+01:39:46.000 --> 01:39:59.000
+property called property, with a value of try moran instead of double defining the appender.
+
+01:39:59.000 --> 01:40:08.000
+Now We're gonna have modifier for real it's going to be called modifier, and this is going to take in object.
+
+01:40:08.000 --> 01:40:30.000
+I'm calling it object you'll see that I actually will pass in and object this time, instead of doing that, we'll change the label on the console log.
+
+01:40:30.000 --> 01:40:51.000
+And now this time i'm going to say object dot property there's dot notation for you right object property equals kayak like so.
+
+01:40:51.000 --> 01:41:06.000
+And now we've got widget 2 before widget 2 after, and instead of calling a pender, we're gonna call modifier.
+
+01:41:06.000 --> 01:41:18.000
+Now, largely speaking, these are very, very similar, pass by value.
+
+01:41:18.000 --> 01:41:37.000
+This one is passed by reference there's absolutely nothing that you can tell about the syntax that tells you it's going to behave differently here.
+
+01:41:37.000 --> 01:41:49.000
+I have console or before Widget console log before after, and it does the function in the middle, and then widget after, and it shows Widget again down.
+
+01:41:49.000 --> 01:41:57.000
+Here I have whoops should be widget 2 in these cases because i'm dealing with a different widget right, so, and let's console long.
+
+01:41:57.000 --> 01:42:03.000
+Let's pass in widget 2 who got it caught that bug. Okay, Widget.
+
+01:42:03.000 --> 01:42:17.000
+2 is analogous to this, except that this was a primitive, and this is an object here's our function this time called modifier.
+
+01:42:17.000 --> 01:42:22.000
+It takes in an object, it only act. I only know that it taken an object.
+
+01:42:22.000 --> 01:42:38.000
+When I pass an object in. By the way, then Modifier actually goes about and has this line of code running object Dot property equals Kayak.
+
+01:42:38.000 --> 01:42:48.000
+Now then, here we have monkey fuzz of an object outcomes the object as console log that's gonna happen in the middle on line.
+
+01:42:48.000 --> 01:42:55.000
+122 is gonna do that. Then finally with widget 2 after we're gonna see Widget 2 again.
+
+01:42:55.000 --> 01:43:04.000
+Okay, over and under on this, given all of the major hints in inflection and intonation that I've been using in the sentences here.
+
+01:43:04.000 --> 01:43:12.000
+What is this gonna do this time for output? Where are we going to get at Key in particular, on the very last line?
+
+01:43:12.000 --> 01:43:29.000
+Widget 2 after. let's see it yep right so this time widget 2 before trimer it in the middle of the function.
+
+01:43:29.000 --> 01:43:36.000
+After I do the modification of the object, the property, a value kayak inside the object.
+
+01:43:36.000 --> 01:43:51.000
+But then, after this functions finished, and again we're console logging Widget, 2, the property is now Kayak, not trimer in the property, has been modified by the function.
+
+01:43:51.000 --> 01:44:01.000
+Why? Because when you pass an object into a function like this it doesn't pass it in by value.
+
+01:44:01.000 --> 01:44:13.000
+That is object does not take on a copy of widget 2 Instead, it's passed by reference.
+
+01:44:13.000 --> 01:44:35.000
+This object, when I call this function, makes the object parameter, be a reference that points to the original object in memory, it's like an alias, if you will object, became an alias to the widget to object and so this
+
+01:44:35.000 --> 01:44:44.000
+line object- property being set to Kayak modifies via this alias the original memory storage.
+
+01:44:44.000 --> 01:44:49.000
+I realize that can be a little bit confusing at first.
+
+01:44:49.000 --> 01:45:00.000
+Here's another kind of interesting thing I just want to layer in here at the last second on this topic.
+
+01:45:00.000 --> 01:45:17.000
+I'm gonna change. this from let to const and the code is going to run and not complain, even though I said that Widget 2 was a constant What kind of hocus focus is this?
+
+01:45:17.000 --> 01:45:30.000
+Yeah, the object is constant, but the properties within it are not that's what's going on here.
+
+01:45:30.000 --> 01:45:47.000
+Excellent. All right. We have one more important topic, 2 more important topics.
+
+01:45:47.000 --> 01:45:55.000
+Sorry functions inside objects and iterating over objects.
+
+01:45:55.000 --> 01:46:03.000
+Ian, go ahead. Yes, to a question when you change it, to call and to see objects.
+
+01:46:03.000 --> 01:46:11.000
+Is constant for the properties that are not does that kind of just boil down to like You can't rename the objects, or can you?
+
+01:46:11.000 --> 01:46:29.000
+You can add stuff to it. but you can't take away from it, or or what it is is. hmm i'm going to encourage you. you know what i'll do i'll answer that question after the class is over and i'm going
+
+01:46:29.000 --> 01:46:37.000
+to use a tool called python tutor, which can make a little graphical representation of how this code unfolds.
+
+01:46:37.000 --> 01:46:39.000
+Quick show hands. Who has seen Python tutor?
+
+01:46:39.000 --> 01:46:45.000
+Does this come up yet? Not yet. Okay, this is awesome you're gonna love Python tutor.
+
+01:46:45.000 --> 01:46:54.000
+It's. It makes a little graphical, representation of how the code runs, and it's going to be the best answer to this question that I could possibly give is to like, hey?
+
+01:46:54.000 --> 01:47:03.000
+Let's watch this thing be animated by that piece of code good.
+
+01:47:03.000 --> 01:47:22.000
+So we are on about functions inside objects right so if i'm working with Code and i'm building up some objects like I was back here.
+
+01:47:22.000 --> 01:47:37.000
+Say, turns out that you can actually add an object valued property.
+
+01:47:37.000 --> 01:47:47.000
+2 sorry a function valued property to an object here. I have 3 cursors, 3 objects.
+
+01:47:47.000 --> 01:47:58.000
+I'm gonna add another thing let's call it full name actually full name, Colon.
+
+01:47:58.000 --> 01:48:25.000
+This is going to be a function. That function is going to Take no parameters, but it's going to return a string, and in each case this full name, property is going to be function valued. and inside this function.
+
+01:48:25.000 --> 01:48:35.000
+We need to refer to the object itself, so for example using string interpolation.
+
+01:48:35.000 --> 01:49:05.000
+I'm going to say this dot first name and then after that bit of interpolation a space and then again i'm going to use this dot last name like So now this may or may not work because of the way that
+
+01:49:09.000 --> 01:49:21.000
+i've defined. these 3 functions let's just test and see. So now, rather than using this function definition here, I'm gonna get rid of it.
+
+01:49:21.000 --> 01:49:30.000
+But I am going to bring my loop back and so in each case.
+
+01:49:30.000 --> 01:49:48.000
+This is my object. i'm gonna call full name the function that object Now the function has been defined on the object itself.
+
+01:49:48.000 --> 01:49:55.000
+Right. i'm kind of making a big deal out of this by slowing my words down and being super careful.
+
+01:49:55.000 --> 01:50:14.000
+But ever since you guys have been using console log and ever since you guys realized that console was an object. you kind of knew that you can have a function that's defined on an object it's the same thing we're
+
+01:50:14.000 --> 01:50:23.000
+just making our own right. We have functions called full name defined on every one of these objects.
+
+01:50:23.000 --> 01:50:37.000
+Now. so we're able to call that function full name on the object. So let's see if this works I am a little bit curious about this token.
+
+01:50:37.000 --> 01:50:42.000
+This that's kind of the important part that i'm showing you right now.
+
+01:50:42.000 --> 01:50:52.000
+It's that inside this function definition we want to be able to use the word this to refer to this particular instance of the object.
+
+01:50:52.000 --> 01:51:03.000
+So save let's rerun it I think think i'd like to be rid of all the pass by value passed by reference stuff.
+
+01:51:03.000 --> 01:51:09.000
+So let's comment this stuff out you can check that out later.
+
+01:51:09.000 --> 01:51:16.000
+So there are my 3 objects each with the function defined property on it.
+
+01:51:16.000 --> 01:51:36.000
+And now i'm going to run the loop as well rerun the code. and sure enough, the this token is referring to in each case it's referring to its own value for the last name property and the first thing property I can prove it by
+
+01:51:36.000 --> 01:51:41.000
+putting in one and only one exclamation point and rerunning it.
+
+01:51:41.000 --> 01:51:49.000
+This was the one that was defined on the last one, but neither of the other 2 right.
+
+01:51:49.000 --> 01:51:56.000
+And so for this final object, its function full name is defined with having an exclamation point on the end of it.
+
+01:51:56.000 --> 01:52:13.000
+Any questions about what you saw there. This is where functions are themselves values, and the function definition is getting assigned to a property within an object.
+
+01:52:13.000 --> 01:52:21.000
+Here's the syntax about How you call a function that's on an object like that.
+
+01:52:21.000 --> 01:52:41.000
+Very good, and then finally iterating over an object. iterating over all of the properties of an object.
+
+01:52:41.000 --> 01:52:48.000
+Let's do that. i'll come back to chris Minis question in a minute.
+
+01:52:48.000 --> 01:53:02.000
+Let's Iterate over the properties of an object right Now you've seen where I was showing before how you can make super awesome cool code.
+
+01:53:02.000 --> 01:53:15.000
+That's like a loop over an array next up i'd like to loop over object, and so in Javascript.
+
+01:53:15.000 --> 01:53:30.000
+We have now in es 6 4 key in and let's pick one of our objects.
+
+01:53:30.000 --> 01:53:41.000
+How about list of voters I don't know 2 just to stick with Emmy right here's one of our objects.
+
+01:53:41.000 --> 01:53:50.000
+We're going to loop over the keys in that object there's the key name.
+
+01:53:50.000 --> 01:53:58.000
+So inside this loop could console Log. The key name, for example, like this, always put a label on your console logs.
+
+01:53:58.000 --> 01:54:12.000
+Key name is Colon Comma Key like so and so we'll run this again, check it out.
+
+01:54:12.000 --> 01:54:19.000
+Key name is last name first name, date of birth did vote and the final one full name.
+
+01:54:19.000 --> 01:54:27.000
+There's a key for that grace perhaps, you had to have had asked that question earlier as well.
+
+01:54:27.000 --> 01:54:32.000
+Sorry for not getting to it. Then what's the difference between a property and a key.
+
+01:54:32.000 --> 01:54:38.000
+There's none. There are 2 words for the same thing key I would say, is more general.
+
+01:54:38.000 --> 01:54:50.000
+I suppose. when i'm dealing with an array the keys, there are 0 1, 2 like that when I'm dealing with an object.
+
+01:54:50.000 --> 01:55:01.000
+The keys are strings and they're called properties cool Yeah, thank you for the clarifying question.
+
+01:55:01.000 --> 01:55:11.000
+Yeah, check it out. Now, I have a variable name that contains the property name in it.
+
+01:55:11.000 --> 01:55:19.000
+Does this strike any bells with people square bracket notation right?
+
+01:55:19.000 --> 01:55:32.000
+Let's say, for example, I want to go after the value in some object that i'm iterating over right the value is what syntax am I going to use here?
+
+01:55:32.000 --> 01:55:39.000
+Well, the object that i'm dealing with is this one so there's my object now.
+
+01:55:39.000 --> 01:55:50.000
+I want to get the value at this particular key at this particular property.
+
+01:55:50.000 --> 01:56:06.000
+I i'm not going to say dot key that's not the name of the property bracket, but I could do square brackets with key and notice.
+
+01:56:06.000 --> 01:56:11.000
+I'm not wrapping this in single quotes I would put single quotes around it.
+
+01:56:11.000 --> 01:56:31.000
+If that was exactly the name of the property key no here key is a variable, and as javascript parses this thing it's going to replace that variable with the value inside that variable and so we can
+
+01:56:31.000 --> 01:56:44.000
+run this thing again. Key name is last name. Value is no other key. Name is first name.
+
+01:56:44.000 --> 01:56:52.000
+Value is me, etc. Key name is, did vote. Value is false all right.
+
+01:56:52.000 --> 01:57:09.000
+How cool is this code. it's super abstract I didn't even know the key names on this object didn't know the names of the properties. and yet I was able to write code to fish them all out wicked.
+
+01:57:09.000 --> 01:57:16.000
+And we end the lecture on schedule. Calvin has a question.
+
+01:57:16.000 --> 01:57:27.000
+Go ahead. So is key a special word and in this case it's just a variable watch.
+
+01:57:27.000 --> 01:57:33.000
+This. This is a hold my beer and watch this moment i'm gonna right click on the word key and change it to property.
+
+01:57:33.000 --> 01:57:43.000
+It's just a variable. This is like a loop right it's like the I I from above here Now I just change them all to the word property instead.
+
+01:57:43.000 --> 01:57:57.000
+This is going to behave the same way. Okay, class is officially over.
+
+01:57:57.000 --> 01:58:10.000
+I will get to that question using python tutor to visualize what it is to be constant let with an object.
+
+01:58:10.000 --> 01:58:18.000
+But if you're keen, to go because you want to go compassing, or whatever, then you know click like and subscribe hold my beer and watch this.
+
+01:58:18.000 --> 01:58:23.000
+See you all soon. This will wrap the lecture up as always feel free to hang around afterwards.
+
+01:58:23.000 --> 01:58:40.000
+If you've got specific questions and we'll post the video and the automated transcript text to a git repository near you soon this afternoon.
+
+01:58:40.000 --> 01:58:51.000
+Very good. it's been my pleasure, thank you for your time and attention for participation, for taking pot shot guesses at stuff in service of all of our learning.
+
+01:58:51.000 --> 01:59:00.000
+And yeah, it's all very valuable Please take every opportunity to use your new vocabulary.
+
+01:59:00.000 --> 01:59:04.000
+Use it wisely. Use it often, and you will learn and learn quickly.
+
+01:59:04.000 --> 01:59:18.000
+Okay moving on. Then let's find python tutor bench and paste some code into it.
+
+01:59:18.000 --> 01:59:39.000
+Let's see Hold on here there we go Desktop 2 fine.
+
+01:59:39.000 --> 01:59:47.000
+He wants me to be over here actually you know what I'm gonna bust this out into its own thing.
+
+01:59:47.000 --> 01:59:55.000
+Make it guest. Grab the guests, put them on to desktop.
+
+01:59:55.000 --> 02:00:13.000
+2 go back there. Okay, python tutor stupid of visualizing, except we're going to use javascript.
+
+02:00:13.000 --> 02:00:28.000
+And the question was to do with const where were we this one wasn't it.
+
+02:00:28.000 --> 02:00:38.000
+We've got widget 2 as const or as let so we can start out with. Let, for example, still works.
+
+02:00:38.000 --> 02:00:45.000
+This is a demo of pass by reference. we're going to see pass by reference in action.
+
+02:00:45.000 --> 02:00:54.000
+So i'm going to copy all of this code bring it over to the visualizer in python tutor.
+
+02:00:54.000 --> 02:01:19.000
+Say, visualize the execution. Okay, we're going to step through this code line by line and watch how javascript makes spots in memory for each of the variables as we go so i'm going to click the next button and
+
+02:01:19.000 --> 02:01:24.000
+It's going to move this red arrow down through the code each time.
+
+02:01:24.000 --> 02:01:30.000
+So we click next. That makes the variable widget, too.
+
+02:01:30.000 --> 02:01:40.000
+Yeah widget 2 is because it's an object it's stored over here because it's a complex thing.
+
+02:01:40.000 --> 02:01:45.000
+It's so stored in an area of memory called the heap enough.
+
+02:01:45.000 --> 02:01:55.000
+Memory is. This is allocated where you've got property and value and property and value, and all these things would live out on the heap.
+
+02:01:55.000 --> 02:02:03.000
+Primitives would be stored in the global frame. We may need to modify our code to demonstrate that.
+
+02:02:03.000 --> 02:02:08.000
+But if I had defined a string variable, it would show up in this blue section here instead.
+
+02:02:08.000 --> 02:02:17.000
+In a way you can kind of see what the value of an object is it's actually a pointer to a place on the heap.
+
+02:02:17.000 --> 02:02:24.000
+It's a pointer to this section of memory out here but let's keep going.
+
+02:02:24.000 --> 02:02:30.000
+We're gonna console log from line 10 next and we'll see some output in the window up above.
+
+02:02:30.000 --> 02:02:41.000
+Right. That's where the trimuran got written the first time. Got a nice piece of output from contal Log Widget to before property driver.
+
+02:02:41.000 --> 02:02:51.000
+It. Okay, next up i'm going to click next again, and now we're going after modifier widget 2, and so I click next.
+
+02:02:51.000 --> 02:02:59.000
+It actually goes inside. This function makes a new stack frame here and again.
+
+02:02:59.000 --> 02:03:06.000
+If I had been making any primitives, those primitives would live inside the blue stack frame.
+
+02:03:06.000 --> 02:03:26.000
+Okay, But notice this line: object property. The thing about pass by reference is this object gets a reference to the original thing.
+
+02:03:26.000 --> 02:03:37.000
+It does not get a new copy of that thing so I'm going to step over that.
+
+02:03:37.000 --> 02:03:46.000
+It changed it to Kayak it's the original object that got changed click.
+
+02:03:46.000 --> 02:03:53.000
+Next again console log comes out with kayak in it, because, of course, it has kayak in it's going to console log.
+
+02:03:53.000 --> 02:03:59.000
+The thing right click Next, one more time it returns back to here.
+
+02:03:59.000 --> 02:04:07.000
+Now this stack frame has disappeared because this function is now out of scope.
+
+02:04:07.000 --> 02:04:11.000
+All of its stack frame got garbage, collected.
+
+02:04:11.000 --> 02:04:21.000
+One more line. Now console log widget 2 after of course, it's going to have the value Kayak, because the function modified the original.
+
+02:04:21.000 --> 02:04:37.000
+Next we get Kayak out like that Okay, now, let's do the same thing again, except this time.
+
+02:04:37.000 --> 02:04:45.000
+Oh, maybe it's clear if I change this to const now, right if I go back to my code.
+
+02:04:45.000 --> 02:04:52.000
+Edit the code edit. This code. change this to Const.
+
+02:04:52.000 --> 02:05:06.000
+No big deal right. The fact that I changed this to const i'm to step through each of these things again widget 2.
+
+02:05:06.000 --> 02:05:16.000
+Is a constant i'm never changing this reference sure I can change the stuff inside it.
+
+02:05:16.000 --> 02:05:27.000
+But the const was not violated because this didn't change next next next same output as before.
+
+02:05:27.000 --> 02:05:32.000
+We'll go back we'll edit the code except this time.
+
+02:05:32.000 --> 02:05:40.000
+We're gonna have this stuff instead, where we see how passed by value.
+
+02:05:40.000 --> 02:05:49.000
+Works instead copy. Now it's going to be very different.
+
+02:05:49.000 --> 02:06:02.000
+This is definitely a let and you'll see that yeah we could make it constant.
+
+02:06:02.000 --> 02:06:10.000
+Yeah, i'll leave that up to you we'll visualize this execution this time, right now.
+
+02:06:10.000 --> 02:06:19.000
+Watch the difference. Let mix Widget notice. Widget shows up as sailboat in the blue stack frame.
+
+02:06:19.000 --> 02:06:24.000
+It was not stored out on heap now it's in this blue section.
+
+02:06:24.000 --> 02:06:29.000
+Console log it fine. We get sailboat now let's run the function.
+
+02:06:29.000 --> 02:06:39.000
+We get a new stack frame inside the function. But notice the value of thing is a copy of sailboat.
+
+02:06:39.000 --> 02:06:46.000
+Now it was not passed by reference. It passed in the value of sailboat.
+
+02:06:46.000 --> 02:06:59.000
+The primitive. Next that's the version that got modified here click, next again console logs.
+
+02:06:59.000 --> 02:07:06.000
+It. There's no return value for this function and then when the function returns, it gets garbage collected.
+
+02:07:06.000 --> 02:07:12.000
+The sale of 44 is gone. the original is not changed, even though it was changeable.
+
+02:07:12.000 --> 02:07:18.000
+One more next, and it prints out sailboat after the fact.
+
+02:07:18.000 --> 02:07:24.000
+Those values were never out on the heap. they were in the side the stack frame all right.
+
+02:07:24.000 --> 02:07:32.000
+We'll leave it at that any questions before I kick you all out
+
+02:07:32.000 --> 02:07:45.000
+Lucas asked, When you change the parameter of a string, and modifies a copy of the stream.
+
+02:07:45.000 --> 02:07:52.000
+Correct; but if you modify an object, parameters property, it modifies the original.
+
+02:07:52.000 --> 02:08:00.000
+Yes, because the function received a reference to the original right objects are passed by reference.
+
+02:08:00.000 --> 02:08:21.000
+Can I explain this again. Sure let's have a look at the code here.
+
+02:08:21.000 --> 02:08:33.000
+So here I have a function definition: This function definition is on an object inside this function.
+
+02:08:33.000 --> 02:08:45.000
+Definition that's a new stack frame, just thinking about what we were just looking at in Python tutor, remember, when we entered into a new function.
+
+02:08:45.000 --> 02:08:51.000
+It made a new section of memory that was scoped particularly for this function.
+
+02:08:51.000 --> 02:09:11.000
+If I refer to this dot first name it's gonna go after the values of the object that this function is defined on It's a way to refer to these values in a way, you could think of it this way.
+
+02:09:11.000 --> 02:09:34.000
+These are properties of an object in order to get at them. I need an object upon which to call them from, and so I use the this token to always mean me that's right.
+
+02:09:34.000 --> 02:09:44.000
+This is the object that you're in right so you can write functions that have definitions and have references to the current object that i'm in.
+
+02:09:44.000 --> 02:09:53.000
+And That's the one that i'm going to grab a value from Grace? asks one more question.
+
+02:09:53.000 --> 02:09:56.000
+Could you go back to the question Chris Mina posted to?
+
+02:09:56.000 --> 02:10:07.000
+Can you declare a variable function named full name and call that function within the object? Yeah.
+
+02:10:07.000 --> 02:10:19.000
+So if I had another. I mean if you're trying to call a function within an object like maybe I have another function here like this.
+
+02:10:19.000 --> 02:10:29.000
+If I want to call name from within this function it's the same trick right?
+
+02:10:29.000 --> 02:10:53.000
+I'm gonna say this dot full name and call it like that Grace, I hope that's the same question. I'm triggering on your phrase that function within the object right?
+
+02:10:53.000 --> 02:11:10.000
+So here. I Yes, I am calling this function within this object and I'm, using this to achieve that yeah, i'm not sure what the Chris may have name originally. But i'm also curious consuming a variable function maybe
+
+02:11:10.000 --> 02:11:19.000
+she's also asking the way you declare it Okay, yeah So this here I'm: defining this another function as a property of an object.
+
+02:11:19.000 --> 02:11:29.000
+Right. It is possible to make functions as variable names you're gonna tackle this topic more later on during this week.
+
+02:11:29.000 --> 02:11:42.000
+But I can say, here is a function valued variable, like this, and I can set it equal to a function.
+
+02:11:42.000 --> 02:11:50.000
+Definition like this: name parameter semicolon.
+
+02:11:50.000 --> 02:12:04.000
+At the end. do stuff inside right this is a function definition let's play the what is this game? What is this?
+
+02:12:04.000 --> 02:12:15.000
+That's a function definition that can be a value in and of itself that I'm assigning to this variable, and I did so outside of the context of any object.
+
+02:12:15.000 --> 02:12:40.000
+Now, having declared this to get to Chris me this question, having declared this function outside the object, can I call that function from within the object?
+
+02:12:40.000 --> 02:13:00.000
+I think I think you can just by referring to this particular variable. I it might need to be before it, because it's not hoisted.
+
+02:13:00.000 --> 02:13:14.000
+But if I put this there, I think I can use this down here like, let's say that another function has a value I might do something like that right there.
+
+02:13:14.000 --> 02:13:28.000
+I've called this function down inside here, lucas originally asked. If you put this object outside of an object, can it still be used?
+
+02:13:28.000 --> 02:13:36.000
+No, because this is always talking about the object that i'm in you're not in an object out there.
+
+02:13:36.000 --> 02:13:41.000
+I mean, let's try that right here we are outside of any objects.
+
+02:13:41.000 --> 02:13:48.000
+Console log this. if this writes something i'm gonna be super interested in what it is.
+
+02:13:48.000 --> 02:13:55.000
+So let's just see what we get node hack the boat.
+
+02:13:55.000 --> 02:14:06.000
+Where is this? Oh, there is an object yeah I I suspect it's a global object.
+
+02:14:06.000 --> 02:14:13.000
+It's empty. Yeah, i'm not sure what this is in that context it's not the same object that we were looking at earlier.
+
+02:14:13.000 --> 02:14:20.000
+Obviously it's a mystery empty object is it the way It could possibly very well be.
+
+02:14:20.000 --> 02:14:26.000
+The it might be the document, because this is node and not on the front end.
+
+02:14:26.000 --> 02:14:33.000
+Bad day. you know i'm i'm i'm curious about that.
+
+02:14:33.000 --> 02:14:42.000
+Now, what is this defined? as, for example, if we define right out some others document?
+
+02:14:42.000 --> 02:15:12.000
+I don't think window, is defined and even documents not defined, save try again, nor his window, because this is back-end.
+
+02:15:17.000 --> 02:15:27.000
+We've got a this but we've got this that's defined the top level of a node file.
+
+02:15:27.000 --> 02:15:31.000
+Curious. we'll see what that object is at Some point i'm not sure what it is.
+
+02:15:31.000 --> 02:15:55.000
+All right. any question for I kick you all out that's it time is up.
+

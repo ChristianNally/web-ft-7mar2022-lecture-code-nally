@@ -1,0 +1,110 @@
+00:16:14	Nicole MacLean:	${}
+00:16:15	Matt Seligman:	${variable}
+00:21:03	Saida:	I couldn’t understand where we can use bigInt :(
+00:25:34	Eugene Helland:	Using semi-colons is good practice for using some other C-style languages?
+00:25:42	Eugene Helland:	Like Java or C#
+00:26:26	Saida:	Thank you :)
+00:26:39	Lucas:	does the n at the end of the big number define a BigInt variable?
+00:27:05	Lucas:	can it alsos just be a regular int without the n?
+00:28:38	Matt Seligman:	What does the \t do in your console log?
+00:28:46	Kevin Lee:	Tab space
+00:28:51	Matt Seligman:	Thanks Kevin :)
+00:30:56	Saida:	Why null is object?
+00:32:39	Kai Meikle:	Is undefined the only value that has the type undefined?
+00:34:22	Lucas:	how do you know when a value needs to be declared as bigInt or not as opposed to a non-bigInt value?
+00:34:54	Lucas:	I know you said it depends on the storage of memory, but how would you tell?
+00:38:06	Ricky W:	What are some examples of symbols we might be using?
+00:46:36	xin wang:	Is property a string?
+00:46:54	Grace Wang:	So what’s the difference between property and key?
+00:47:31	Dustin Grof:	FYI if you have a Logitech mouse, you can add application specific shortcuts to your mouse back and forward buttons. When you add zoom it auto configures the forward and back buttons as video on/off, and mute/unmute
+00:49:30	Eugene Helland:	Isn't a string essentially an array or chars?
+00:49:38	Eugene Helland:	*of
+01:03:21	Ricky W:	naan
+01:03:22	lucky kim:	nan
+01:03:22	Tony Yu:	Like naan bread?
+01:03:24	Bailey Dods:	naan
+01:03:24	Nicole MacLean:	Naan!!
+01:03:24	Alastair Gardiner:	naan
+01:03:25	Richard Zhen:	naan
+01:03:25	Kurt Maglalang:	naan
+01:03:25	Alvin Tolentino:	naan
+01:03:26	Kevin Lee:	Naan bread?
+01:03:28	Matt Seligman:	I've only seen coffee NAAN lol
+01:03:32	Tony Yu:	COFFEE
+01:03:34	Eugene Helland:	NaN Bred
+01:03:39	Dustin Grof:	COFFEE
+01:03:54	Kevin Lee:	Water
+01:06:40	Alvin Tolentino:	I could watch food cook all day
+01:13:13	Kevin Lee:	Finally the naan is cooked
+01:13:45	ralphunrau:	Made a smoothie
+01:21:49	Tony Yu:	Wooooaaaaah
+01:21:59	Grace Wang:	If using “.” means it’s an object, what about when we do string.length?
+01:23:30	Tony Yu:	That’s crazy
+01:36:23	Grace Wang:	Is there anything special about using “ii” for the index variable in this case instead of “i”?
+01:43:42	Matt Seligman:	sailboat44
+01:44:22	Kevin Lee:	^ same
+01:44:25	lucky kim:	sailboat44
+01:44:25	Shubham Patel:	sailboat44
+01:44:26	Nicole MacLean:	Sailboat44
+01:44:27	Ricky W:	same
+01:44:31	Richard Zhen:	monkeyfuzz sailboat44
+01:44:43	Eugene Helland:	It depends on whether or not thing is modified globally or locally within the function
+01:45:19	Eugene Helland:	^^
+01:45:22	Matt Seligman:	like Eugene said ^^
+01:46:29	lucky kim:	Return?
+01:51:42	Nicole MacLean:	kayak
+01:51:43	Shubham Patel:	kayak
+01:51:50	Eugene Helland:	kayek
+01:51:51	Alvin Tolentino:	kayak
+01:51:52	Iaan Johnston (he/him):	kayak
+01:51:58	Ricky W:	All in kayak
+01:51:58	Iaan Johnston (he/him):	or catamaran
+01:52:27	Nicole MacLean:	Can you append an object value?
+01:55:39	Iaan Johnston (he/him):	Awesome, thanks
+02:01:16	Krismina La:	can you declare a variable function named fullName and call that function within the object?
+02:01:52	Lekan Ogunremi:	Can we use the [ ] to call a function in an object?
+02:02:55	Grace Wang:	So what’s the difference between property and key?
+02:04:30	Iaan Johnston (he/him):	replace 2 with key
+02:04:31	Matt Seligman:	.key or ['key']
+02:04:35	Nicole MacLean:	.[key]
+02:04:35	Matt Seligman:	ahhh
+02:04:44	Nicole MacLean:	-.
+02:06:53	Ricky W:	Thanks Christian!
+02:07:00	ralphunrau:	Thanks!
+02:07:04	Lucas:	Can you talk about how we do pair programming on compass today?
+02:07:05	Alvin Tolentino:	Thank you!
+02:07:06	Alastair Gardiner:	Thank you!
+02:07:07	Matthew Lawson:	Thank you!
+02:07:09	Dustin Grof:	Thanks!
+02:07:21	Josh Sparkes:	Thank you!
+02:07:24	Shraddha Naidu (she/her):	Thanks!
+02:07:24	lucky kim:	Thank you!
+02:07:25	Lucas:	Thank you
+02:07:27	Bailey Dods:	Thank you!
+02:07:29	Dave McKinnon:	Thank you!
+02:07:33	Tony Yu:	Thank you Christian!!
+02:07:33	Eugene Helland:	Thanks Christian
+02:07:41	Aldino Muliawijaya:	Thank You!
+02:07:46	Kevin Lee:	Thank you!
+02:07:47	Matt Seligman:	Thanks for your time and mentorship!
+02:14:11	Lucas:	so when you change the parameter of a string it modifies a copy of the string, but if you modify an object parameter's property the nit does modify the original?
+02:16:06	Nicole MacLean:	Thank you, this was great!
+02:16:13	Iaan Johnston (he/him):	Thanks! Great explanation!
+02:16:37	Tony Yu:	Can you briefly explain ‘this’ again please?
+02:16:46	Lucas:	Thank you!
+02:17:18	Grace Wang:	Could you go back to the question Krismina posted too? “can you declare a variable function named fullName and call that function within the object?"
+02:18:05	Tony Yu:	This = the object basically?
+02:18:22	Kevin Lee:	Ya the one that ur in
+02:18:26	Tony Yu:	Crystal clear, thank you!
+02:18:32	Lucas:	if you put 'this' outside of a object can it still be used?
+02:19:36	Krismina La:	ah I meant can you declare the function from outside the object and call that function from within the object
+02:19:39	Saida:	Can we write that function as arrow function?
+02:19:46	Kevin Lee:	^ Lucas: no? Cause it would have to be inside it to use ‘this’?
+02:19:55	Tony Yu:	So you could essentially also use listOfVoters[2] to mean ‘this’ too right basically?
+02:20:42	Krismina La:	thank you!
+02:22:47	Ryan Kwok:	is it the window
+02:24:25	Tony Yu:	Thank you!
+02:24:25	Matthew Lawson:	Thank you
+02:24:28	Iaan Johnston (he/him):	Thank you!
+02:24:28	Krismina La:	thanks!
+02:24:29	Lucas:	Thank you!
