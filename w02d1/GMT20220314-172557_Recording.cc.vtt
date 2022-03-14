@@ -1,0 +1,2222 @@
+WEBVTT
+
+00:00:01.000 --> 00:00:15.000
+You got this? Yes, all right. I've been you know what we should get this lecture started welcome, Dave.
+
+00:00:15.000 --> 00:00:32.000
+One of week, 2 Today we're gonna do test driven development, and the goal for today is to establish some test code alongside.
+
+00:00:32.000 --> 00:00:50.000
+But independent of our main code right, we want to be able to write the main code to be independent right to be able to live without a bunch of test hooks built into it.
+
+00:00:50.000 --> 00:00:57.000
+Right should just be able to write code, to be code and then ship that code to the production environment without all the testing infrastructure.
+
+00:00:57.000 --> 00:01:14.000
+Right should be able to stand on. its own 2 feet as it were So we're going to start out by writing some super sophisticated Hello World code, And that'll be the code that we're gonna test for today.
+
+00:01:14.000 --> 00:01:33.000
+We're gonna build in some test network stuff into it and then, just to see how to testing can go without the help of a test driven development framework wrapped around it and then going to tease it apart and
+
+00:01:33.000 --> 00:01:41.000
+refactor it and pull the parts into 2 separate pieces and then you can see the testing section separate from the main code.
+
+00:01:41.000 --> 00:01:49.000
+Let's dive in step one implement a function called Say, hello!
+
+00:01:49.000 --> 00:01:53.000
+That takes the name of the saluted person and returns.
+
+00:01:53.000 --> 00:02:13.000
+What would be said. So let's take a name Then as an argument to say hello and let's return what would be said.
+
+00:02:13.000 --> 00:02:24.000
+Hello, Comma Name and let's be I don't know let's be enthusiastic about it with an exclamation point.
+
+00:02:24.000 --> 00:02:41.000
+Shall we cool That's our super sophisticated code that we're testing for the day. I hope you're all cool with that Next up.
+
+00:02:41.000 --> 00:02:51.000
+Let's test the code and here's how super old traditional methods of testing.
+
+00:02:51.000 --> 00:02:59.000
+Go. You write the code. you write some code that calls the code, and then you run it and see what happens. Right?
+
+00:02:59.000 --> 00:03:23.000
+So here we go. Say, hello, my little friend, like that. Okay, Anybody gets the movie reference, you know.
+
+00:03:23.000 --> 00:03:31.000
+Give us a thumbs up. Okay, about a third of you are all as old, nearly as old as I am.
+
+00:03:31.000 --> 00:03:38.000
+Not quite an old tonight. Okay, So let's run that thing is it?
+
+00:03:38.000 --> 00:03:56.000
+Hello, world, the name of the thing. Yeah, here we go Oh, right, It just it returns the value to the calling function right fine.
+
+00:03:56.000 --> 00:04:01.000
+Let's console log when it returns or we could grab the return value.
+
+00:04:01.000 --> 00:04:22.000
+Const return value equals like. So then console log return value return value like so. and let's run it again.
+
+00:04:22.000 --> 00:04:48.000
+Hello, my little friend, wicked the code works so let's say that my code had been buggy.
+
+00:04:48.000 --> 00:04:55.000
+I was testing it this way, and it gave an error.
+
+00:04:55.000 --> 00:05:20.000
+What i've just shown you here is the very first kind of development workflow that everybody lands in to start with who has been approaching their codeings so far in Boot camp in the following way: write some code run it see If
+
+00:05:20.000 --> 00:05:24.000
+it fails or not, write some more code, run it, see if it fails or not.
+
+00:05:24.000 --> 00:05:30.000
+Whenever it fails, fix the bug rinse, Repeat right.
+
+00:05:30.000 --> 00:05:35.000
+Does that feel like what you've been doing up to now give or take Very much.
+
+00:05:35.000 --> 00:05:39.000
+So yeah, okay, what would we call that bug-driven development?
+
+00:05:39.000 --> 00:05:45.000
+Right where you just write what you can and when you're right bugs, because we all do all the time.
+
+00:05:45.000 --> 00:05:57.000
+Then you just keep running it, and you get error messages back, and your life is like this ping-ponging back and forth between error messages and buggy code, and then fewer error messages and then buggy code and
+
+00:05:57.000 --> 00:06:02.000
+then you stop improving your code when it runs most of the time.
+
+00:06:02.000 --> 00:06:13.000
+Yeah, that approach going to fall down in production environments, right?
+
+00:06:13.000 --> 00:06:27.000
+If you stop improving your code when it runs most of the time, because that's all the time you had for testing, you know. that's not going to work out very well in the long run.
+
+00:06:27.000 --> 00:06:34.000
+You want to have coverage over all of your code for not just the stuff that you have time to test.
+
+00:06:34.000 --> 00:06:51.000
+But for all of the things that it's supposed to be able to do, that's the goal for today is to end up with a framework where we can end up with better developer workflow test driven development in fact, that way if you've
+
+00:06:51.000 --> 00:06:56.000
+got coverage across all the tests, and you run those tests to get your code.
+
+00:06:56.000 --> 00:07:05.000
+You have some confidence that your code is good even as you maintain it, and going forward introducing more bugs. you can rerun all the old tests.
+
+00:07:05.000 --> 00:07:15.000
+So that's where we're headed let me let me be rid of this bug begun your bug.
+
+00:07:15.000 --> 00:07:37.000
+There you go. Okay, Now, next up, we would like to test this code in a slightly different way.
+
+00:07:37.000 --> 00:07:52.000
+We want it to start using some language facilities some stuff that's built into the language, and how it works in order to be able to compare expected values from actual return values.
+
+00:07:52.000 --> 00:07:54.000
+Because that's the test Here is right here I have a function.
+
+00:07:54.000 --> 00:08:04.000
+I give that function certain inputs. it should come back with certain outputs, and that's the test a lot of testing.
+
+00:08:04.000 --> 00:08:12.000
+Looks exactly like that. in fact, just a little bit of an aside here.
+
+00:08:12.000 --> 00:08:28.000
+All of computing can be broken down into 3 components, inputs, out inputs, processing and outputs.
+
+00:08:28.000 --> 00:08:38.000
+You know, for the lectures that you have before i'll return to this concept over and over again.
+
+00:08:38.000 --> 00:08:49.000
+Inputs and processing and outputs. Oh, my right, These are the 3 things that all of computing boils down to right.
+
+00:08:49.000 --> 00:08:56.000
+If you think about your web browser, the inputs are like the Url bar that you put the top.
+
+00:08:56.000 --> 00:08:59.000
+The output is the rendered page that comes back at the end.
+
+00:08:59.000 --> 00:09:11.000
+If you're a web server the inputs are the request that comes to it, it does a bunch of processing build some html and the output of that program is the Html that gets sent back to the
+
+00:09:11.000 --> 00:09:20.000
+browser for all these tests and and things that you're running on your command line.
+
+00:09:20.000 --> 00:09:29.000
+You're running code. Maybe some of the inputs are actually stored at the beginning of the code.
+
+00:09:29.000 --> 00:09:35.000
+X equal 5. These sorts of tests right or the recursion which thing you're gonna start the recursion down.
+
+00:09:35.000 --> 00:09:49.000
+That's the input The processing is the stuff that the stuff does the that the parser does on route to producing outputs right a function.
+
+00:09:49.000 --> 00:10:01.000
+It turns out like the minimal I would is it minimal no, it's certainly, and amount of computation.
+
+00:10:01.000 --> 00:10:13.000
+Let's put it that way. it's a morsel of computation where it has inputs and processing and output.
+
+00:10:13.000 --> 00:10:24.000
+It has all 3 of those things, all in the one structure right So that's a kind of a big concept to carry around. right? What are my inputs?
+
+00:10:24.000 --> 00:10:28.000
+We are the processing that's happening and what are the outputs that are happening.
+
+00:10:28.000 --> 00:10:38.000
+Test-driven development is often about comparing the outputs of a given function with what you would expect.
+
+00:10:38.000 --> 00:11:08.000
+Given inputs. So Let's set it up exactly like that One tool that we can use in the process of this comparing inputs and outputs is a Javascript function called assert.
+
+00:11:11.000 --> 00:11:22.000
+So I'm gonna bring assert into this code a assert is built into Node.
+
+00:11:22.000 --> 00:11:38.000
+By the way, when I do this caused a certain equals require a stirt that brings the assert function into this code that i'm running have people used require at all in the boot camp.
+
+00:11:38.000 --> 00:11:47.000
+Up to now. Yeah, right? So what were some examples of things that you were requiring into your code?
+
+00:11:47.000 --> 00:12:01.000
+Just type them into the chat shy over the weekend cool.
+
+00:12:01.000 --> 00:12:13.000
+That's really good because you know we're we're running this inverted classroom thing where you've struggled a little bit with the material before you arrive at class right It makes the lectures like way more impactful
+
+00:12:13.000 --> 00:12:30.000
+right to have the experience of that kind of thing cool what i'm gonna draw your attention to here is that assert is actually built into node.
+
+00:12:30.000 --> 00:12:36.000
+So if I go back to here and I show you the content.
+
+00:12:36.000 --> 00:12:39.000
+This is the contents of Hello World Block. Js: right.
+
+00:12:39.000 --> 00:12:42.000
+Nothing up my sleeve. This is the same code, right?
+
+00:12:42.000 --> 00:12:55.000
+I have a package, Json file here and where it listsmoka and chai dependencies of what we're doing.
+
+00:12:55.000 --> 00:13:06.000
+But that code, that package, Json notice I don't have my Node Modules Directory yet move that package.
+
+00:13:06.000 --> 00:13:26.000
+Json file out of the way need this later, Jason there's no Npm install right we're gonna talk about Npm in more detail today.
+
+00:13:26.000 --> 00:13:39.000
+But right now, when we run this code it will run like this and it doesn't need any node modules to support it.
+
+00:13:39.000 --> 00:13:43.000
+Okay, again. we're going to talk a little bit more about that right?
+
+00:13:43.000 --> 00:13:48.000
+It runs. the require ran fine. Why? Because assert is built into node directly.
+
+00:13:48.000 --> 00:13:54.000
+So let's take a look at the nodejs documentation, just to show what i'm talking about. here.
+
+00:13:54.000 --> 00:14:17.000
+Here's the documentation pick any version because this is old stuff assertion, testing it's actually the first category. All these categories of things that are built into node.
+
+00:14:17.000 --> 00:14:25.000
+Now I'm looking at the node js documentation here, right. we've got console stuff crypto stuff debugger stuff.
+
+00:14:25.000 --> 00:14:28.000
+Dns stuff error-related things file system related things.
+
+00:14:28.000 --> 00:14:38.000
+Http related things tons of awesome stuff right available to you by bringing that code in via a require assertion.
+
+00:14:38.000 --> 00:14:46.000
+Testing and assert is one of those things right straight off the bat available to you.
+
+00:14:46.000 --> 00:15:02.000
+There, if we flip this over to the other style of importing, it shows how to bring stuff in cost, assert equals, and so and so like that.
+
+00:15:02.000 --> 00:15:12.000
+So we are able to do precisely that this way brings in an assert function.
+
+00:15:12.000 --> 00:15:20.000
+And so let's run this thing that console log will be there just to show the return value.
+
+00:15:20.000 --> 00:15:32.000
+But let's make this a little bit more automated test Mike by running, assert directly, and we're going to compare.
+
+00:15:32.000 --> 00:15:45.000
+There return value like that with what we think should come back.
+
+00:15:45.000 --> 00:15:58.000
+So. Hello, my little friend, let's put that up at first, right?
+
+00:15:58.000 --> 00:16:09.000
+You can see that there's this slight discrepancy between what we will get and what we expect right because of this exclamation point.
+
+00:16:09.000 --> 00:16:16.000
+Here, let's just see what happens when we run assert that way.
+
+00:16:16.000 --> 00:16:39.000
+So node. Hello, world, dot js what's going on There's something weird going on, or got the right stuff.
+
+00:16:39.000 --> 00:16:54.000
+There's the assert there's the return value Oh, Sorry What does the hold my beer and watch this right node.
+
+00:16:54.000 --> 00:16:59.000
+Hello, world. The return value hasn't exclamation point on it.
+
+00:16:59.000 --> 00:17:14.000
+The assert is running weird need 2 values for assert.
+
+00:17:14.000 --> 00:17:32.000
+Are we not passing into values for assert? Oh, very good.
+
+00:17:32.000 --> 00:17:40.000
+A certain what so good. right? So you could go back to the docs and see this.
+
+00:17:40.000 --> 00:17:51.000
+But nice catch. Assert what assert as a library of functions, and the way that we use it is to call for the functions that sit on that object.
+
+00:17:51.000 --> 00:17:56.000
+Right. Thank you for that one. All right, let's try this again, assert Equal?
+
+00:17:56.000 --> 00:18:07.000
+Right. Okay, here we go. Now notice the error message that comes back.
+
+00:18:07.000 --> 00:18:32.000
+Hello, my little friend, Equal. Hello, my little friend and they're not equal, because the exclamation point is here super interesting in that when that line of code runs the entirety of the program comes to a crashing halt right it
+
+00:18:32.000 --> 00:18:42.000
+comes back with this set of code out onto the standard output right?
+
+00:18:42.000 --> 00:18:50.000
+And this, by the way, is going to look a lot like a lot of the error messages that you've experienced up to.
+
+00:18:50.000 --> 00:18:59.000
+Now you get some message which is hopefully useful in showing you where the bug is.
+
+00:18:59.000 --> 00:19:07.000
+It also shows you a stack trace and a bit of data about that particular error.
+
+00:19:07.000 --> 00:19:15.000
+Right. So this structure of error message should look relatively familiar.
+
+00:19:15.000 --> 00:19:21.000
+So, you know, given your experience up to now, right? but it is just an assertion.
+
+00:19:21.000 --> 00:19:44.000
+Failure message that says this thing is not this thing, was expected to be equal to this, and it's not. And so we can go back in to our code and change this such that the return value and the expected value are in fact equal and
+
+00:19:44.000 --> 00:19:53.000
+then rerun this thing and see what happens there. The return value came back.
+
+00:19:53.000 --> 00:19:56.000
+We console, logged it, and then it proceeded.
+
+00:19:56.000 --> 00:20:09.000
+It ran the assert, which succeeded silently. In fact, we could get rid of this testing.
+
+00:20:09.000 --> 00:20:15.000
+You know where we were doing it before, by we calling the testing in a way that you know.
+
+00:20:15.000 --> 00:20:18.000
+Test your code, run it. It works test your code, run it.
+
+00:20:18.000 --> 00:20:26.000
+It fails. fix the bug right that's the the standard starter way of doing development, and your workflow.
+
+00:20:26.000 --> 00:20:31.000
+If I get rid of this, console log the and leave this this way.
+
+00:20:31.000 --> 00:20:40.000
+Then, in a manner of speaking, i've got some test code built into my file.
+
+00:20:40.000 --> 00:21:04.000
+Now, right. But the problem here is that if there's a mismatch between my actual results in my expected results that the thing barfs and has a fatal error and stops right decidedly, not good because if you have lots and lots
+
+00:21:04.000 --> 00:21:13.000
+of production code. With this style of testing in it you might set yourself up to run a bunch of tests.
+
+00:21:13.000 --> 00:21:16.000
+Go away, grab a coffee, and it turns out the first test failed.
+
+00:21:16.000 --> 00:21:30.000
+All of that testing time. was wasted because the thing stopped right So we're gonna try to set things up so that we don't have this kind of a system working.
+
+00:21:30.000 --> 00:21:34.000
+We want something a little bit better than this, a better better framework.
+
+00:21:34.000 --> 00:21:48.000
+And so to that end we're going to start factoring out the parts of this that are just pure production code.
+
+00:21:48.000 --> 00:22:00.000
+And then set the testing code aside into a separate file and the way that we're going to do that is in fact, to less.
+
+00:22:00.000 --> 00:22:26.000
+This require statement, make a require of our own where we write code into another file, and then within that file, require and pull in the production code into the testing side, so that you can run the testing stuff that production. code.
+
+00:22:26.000 --> 00:22:38.000
+But the production code does not need to be aware of the testing So let's add another file to this directory.
+
+00:22:38.000 --> 00:22:43.000
+There's a few ways to do this i'm a Fan of doing this on the command line, where I go like touch.
+
+00:22:43.000 --> 00:22:46.000
+Hello, world. but Js. except we'll add the word test on it.
+
+00:22:46.000 --> 00:22:57.000
+That would have been one way to add another file. Here, you guys might be more happy with clicking on the button here and writing, Hello!
+
+00:22:57.000 --> 00:23:09.000
+Hello! Hello! World test Js like So either way would have been fotted.
+
+00:23:09.000 --> 00:23:20.000
+And so now let's use the split screen this is good for keeping track of where things are in 2 files.
+
+00:23:20.000 --> 00:23:25.000
+Yeah, how many people have discovered split screen and are using it profitably.
+
+00:23:25.000 --> 00:23:31.000
+So far. Yeah, a few. it's kind of good when you've got multiple files on the go.
+
+00:23:31.000 --> 00:23:36.000
+This is going to be especially important when we're doing back-end and front end at the same time.
+
+00:23:36.000 --> 00:23:42.000
+It's good to put your back-end stuff in one file your friend and stuff in another file, and make sure that they match up.
+
+00:23:42.000 --> 00:24:03.000
+Yeah. Okay, this assertion library belongs in the testing suite like So the production code needn't be aware how the testing is working right?
+
+00:24:03.000 --> 00:24:21.000
+The testing stuff should live independently. Here is some code that is actually running the test right, including this comment.
+
+00:24:21.000 --> 00:24:36.000
+Even this code should be over here. Test the code and so Now we're I said before, factor it out there. we just factored it out.
+
+00:24:36.000 --> 00:25:02.000
+Now that leaves our production. code. it is silo by itself and that's a good thing. but we need to be able to call this function from this file over here.
+
+00:25:02.000 --> 00:25:10.000
+So let's proceed about how we go about doing something like that.
+
+00:25:10.000 --> 00:25:27.000
+There is a facility built into node that helps us with this it's the very same facility that You're. So, seeing in action, when you do this kind of a statement like require chai or require assert or require anything that facility
+
+00:25:27.000 --> 00:25:46.000
+is module to dot exports equals thing. In fact, what we wanted to export at first is, say, hello itself, remembering back to last week and function valued variables.
+
+00:25:46.000 --> 00:25:53.000
+This is just a variable say, hello, is a function value variable I'm.
+
+00:25:53.000 --> 00:25:59.000
+Choosing to set module exports equal to the value of that variable.
+
+00:25:59.000 --> 00:26:12.000
+It's a function whatever I put here going to be available to any file that requires this file.
+
+00:26:12.000 --> 00:26:26.000
+So if I slide over into the other file. Now, I say something like const greater function.
+
+00:26:26.000 --> 00:26:50.000
+Equals require spelled correctly. dot slash hello world Now I'm gonna have a variable that comes out of this file via module exports.
+
+00:26:50.000 --> 00:27:06.000
+I'll get to ralph's very good question in a moment that just came up in the chat.
+
+00:27:06.000 --> 00:27:25.000
+This greater function. variable is the local to this file variable that's getting populated by the stuff that comes in from require what stuff comes in from require whatever was on module exports on this side.
+
+00:27:25.000 --> 00:27:43.000
+So this file where I say return value equals say hello to my little friend, I'm gonna say instead greeter function because that's the name of the function over here.
+
+00:27:43.000 --> 00:27:55.000
+So with that done and Hello, World dash test built let's go ahead and run it.
+
+00:27:55.000 --> 00:28:03.000
+Hello to Sw. World. Best test. The assertion fails.
+
+00:28:03.000 --> 00:28:14.000
+It failed with, and mismatched expectation, because one of them has one exclamation point and the other one has 2 exclamation points. clearly an issue with our test code.
+
+00:28:14.000 --> 00:28:21.000
+Our expectations are not matching with the output let's go back here and be like, Oh, yeah, you know what I remember now.
+
+00:28:21.000 --> 00:28:30.000
+They're only so enthusiastic inside the greeder function, and they only get one exclamation point, so we'll run it again. there.
+
+00:28:30.000 --> 00:28:42.000
+It is so. Now we have test code that sits beside the production code.
+
+00:28:42.000 --> 00:29:03.000
+The only thing that we needed to be able to do to make our production code testable was to include this line which exports the functions that are defined in that file right which is a very small price to pay by having this in place here
+
+00:29:03.000 --> 00:29:16.000
+we set ourselves up for being able to build any kind of test, driven development, and the nature of that test-driven development is pushed off into another file entirely.
+
+00:29:16.000 --> 00:29:22.000
+Right this fire, This file would not need to be deployed to a production environment.
+
+00:29:22.000 --> 00:29:28.000
+If you were not going to run testing directly on that production environment, you could just leave it out.
+
+00:29:28.000 --> 00:29:36.000
+This code would run as is it would be present and available for the production code.
+
+00:29:36.000 --> 00:29:40.000
+What's nice about this is that it's very scalable right.
+
+00:29:40.000 --> 00:29:50.000
+We can have hundreds of files with hundreds of functions. Oh, testable by some testing framework that sits adjacent to them.
+
+00:29:50.000 --> 00:30:05.000
+Okay, let's get back to some of the the very good questions that have come up wires are there 3 dots in here, so let's hover over it. The file is A common Js module.
+
+00:30:05.000 --> 00:30:09.000
+It may be converted to an es module right.
+
+00:30:09.000 --> 00:30:20.000
+So this common Js module in es module is the difference between the syntaxes that we were seeing the Node Js documentation.
+
+00:30:20.000 --> 00:30:34.000
+Let's just bring that back and we can even go to the assert testing stuff and notice.
+
+00:30:34.000 --> 00:30:45.000
+We've got this 2 different ways of doing modules and it allowed me to pick between them like this this is one style of doing inserts.
+
+00:30:45.000 --> 00:30:56.000
+This is the other style of doing inserts we're actually going to be covering this other style of doing sorry not inserts, requires or imports.
+
+00:30:56.000 --> 00:31:02.000
+We're gonna be using this style of imports later on during react week.
+
+00:31:02.000 --> 00:31:09.000
+So, for now we're teaching both basically so that you get exposures to both ways of bringing code into your code.
+
+00:31:09.000 --> 00:31:22.000
+The 3 dots are here to remind you that that's a thing that that it could be converted to the other style of doing things.
+
+00:31:22.000 --> 00:31:29.000
+Say it asks, What if we want the whole file itself to be accessible from somewhere else?
+
+00:31:29.000 --> 00:31:39.000
+Not just the function inside that file. Then you Add more and more and so that's a really good question.
+
+00:31:39.000 --> 00:31:55.000
+One thing that I should mention happens when you run this line of code, when you run the require, it actually executes all of the code inside this file.
+
+00:31:55.000 --> 00:32:07.000
+That's a super interesting point. This this Line of code require Hello, World Here finds the file called Hello World Js.
+
+00:32:07.000 --> 00:32:16.000
+In the local directory and actually executes it. Excuse me, for example, if I dropped.
+
+00:32:16.000 --> 00:32:45.000
+You know my world famous monkey fuzz string in here right then, when we run this back here, monkey foes does show up right, it actually runs that console log in this file when we run that So in a manner.
+
+00:32:45.000 --> 00:32:55.000
+We, in a manner of speaking to to cite his question that this code is accessible.
+
+00:32:55.000 --> 00:33:06.000
+It is actually running. Now, when we include stuff in module out exports, it allows us to take number of functions.
+
+00:33:06.000 --> 00:33:14.000
+And have access to them to call them again and again it's a scope.
+
+00:33:14.000 --> 00:33:24.000
+It's a question of scope, right in order for the scope to survive from this function to this function it has to come to us through module exports.
+
+00:33:24.000 --> 00:33:54.000
+In fact, if I have another function over here, let's call it, say goodbye where it's you know slightly different, and I want to export both of these functions, Then, instead of just exporting say hello, I can export both inside
+
+00:33:54.000 --> 00:34:04.000
+a single object. Right And now, over here, I get an object instead.
+
+00:34:04.000 --> 00:34:14.000
+So let's name that function helper functions and now when I call it.
+
+00:34:14.000 --> 00:34:34.000
+I have to call helper function, Dot say, hello like, So so does that satisfy the question?
+
+00:34:34.000 --> 00:34:46.000
+Yeah. Okay, So Eugene comments with a question. If a file has multiple functions written in it, is there a way to export all the functions at once?
+
+00:34:46.000 --> 00:34:50.000
+There was the answer. Thank you, Jean, for that very timely question.
+
+00:34:50.000 --> 00:34:54.000
+Lucky asks, Do we have to export all the functions?
+
+00:34:54.000 --> 00:34:59.000
+No, right hopefully. you can see now from this answer that I could have dropped out.
+
+00:34:59.000 --> 00:35:06.000
+Say goodbye here, and it would not export that thing to this helper functions.
+
+00:35:06.000 --> 00:35:16.000
+Object. Bailey asks if caused greeter function.
+
+00:35:16.000 --> 00:35:20.000
+The test code was named. So it say hello like the production code.
+
+00:35:20.000 --> 00:35:29.000
+Would that still be considered good practice. I think so I think it's fine to have it have the same name right
+
+00:35:29.000 --> 00:35:34.000
+This was back when I didn't have this as an object before. Yeah, it's fine.
+
+00:35:34.000 --> 00:35:47.000
+The scopes are separate. I was just using the example of having it be a different name here to emphasize the fact that it was a different scope that that it was an arbitrary name.
+
+00:35:47.000 --> 00:35:53.000
+This in. In fact, even with this code as i've modified it. Now, helper functions that's my variable to name.
+
+00:35:53.000 --> 00:36:03.000
+It's not a magic word that comes from somewhere else by the way I've maybe i've you've heard me say this before.
+
+00:36:03.000 --> 00:36:07.000
+Renaming variables is one of my favorite sports. right?
+
+00:36:07.000 --> 00:36:19.000
+So you can like double click on this right-click rename, symbol, right, And I might call this helper funks right? What? up?
+
+00:36:19.000 --> 00:36:23.000
+Where to funk. Okay, help her funks, and it renamed both of them right?
+
+00:36:23.000 --> 00:36:30.000
+Because we need more funk in our life that so there you go, right.
+
+00:36:30.000 --> 00:36:46.000
+If you need to rename things, you know I definitely advocate refactoring toward making your code more and more readable with the judicious choice of excellent, variable names.
+
+00:36:46.000 --> 00:37:02.000
+Right. Usually the first stab at it doesn't work Go ahead, Lucas Grace, what you have a hand raised?
+
+00:37:02.000 --> 00:37:13.000
+Is that a question? Yes, so I actually tried the rename symbol earlier last week.
+
+00:37:13.000 --> 00:37:30.000
+So I noticed when I have the same symbol, variable name in 2 files, and if the files are in the same subdirectory, why, we label one. the other one will automatically get renamed.
+
+00:37:30.000 --> 00:37:37.000
+So how does it work like? How does Yes, code decide which file or what's the scope?
+
+00:37:37.000 --> 00:37:43.000
+I'm, hoping to rename it would have expected that rename symbol to only change in the one file.
+
+00:37:43.000 --> 00:37:47.000
+You're saying that it changed in both yeah it's like just like this.
+
+00:37:47.000 --> 00:37:51.000
+If i'm changing, if I have another help for helper funks.
+
+00:37:51.000 --> 00:37:56.000
+Hello, world, Dot Js: if I change it in Hello, World Dot. Hello! Word test.
+
+00:37:56.000 --> 00:38:01.000
+It also changes the one in Hello, world. Okay, let's do it here, for example.
+
+00:38:01.000 --> 00:38:09.000
+And this this would be true, because this word is actually specified over here as a property. right?
+
+00:38:09.000 --> 00:38:18.000
+So let's just see what happens let's say I Do that like this rename symbol, and we'll call this say hello like that, and see if it changes it in both files.
+
+00:38:18.000 --> 00:38:31.000
+What happened, Rename symbol Say Hello, so it's at it's refusing to do it.
+
+00:38:31.000 --> 00:38:39.000
+That's interesting. let's try out on this side say Hello, Rename symbol.
+
+00:38:39.000 --> 00:38:51.000
+Say, Hello! changed over there. it did it actually split out the property on this side super smart, right?
+
+00:38:51.000 --> 00:38:57.000
+So let's change the property from What I did yeah yeah there's a few different cases happening here. right?
+
+00:38:57.000 --> 00:39:03.000
+So that this this may be the case that you did if I change the property name so smart?
+
+00:39:03.000 --> 00:39:08.000
+Vs code. Yeah, let's try this again, if I change this property name.
+
+00:39:08.000 --> 00:39:16.000
+Now say hello and hit enter it changed it over here isn't that amazing right?
+
+00:39:16.000 --> 00:39:21.000
+It's because Vs code thank you for asking this question by the way, I have not seen this case before.
+
+00:39:21.000 --> 00:39:40.000
+I think it's awesome right vs code was smart enough to know that this file was getting its property names from this file, and if I change it over here it has to change over here as well to stay correct Okay, so go ahead so my
+
+00:39:40.000 --> 00:39:45.000
+question was kind of when I was doing this I didn't they are actually in variables.
+
+00:39:45.000 --> 00:39:52.000
+Happen to be the same name. I didn't want yes, code to change it in both files.
+
+00:39:52.000 --> 00:39:57.000
+Well, that you know what my guess given what we've just observed.
+
+00:39:57.000 --> 00:40:13.000
+Now is that they were. They were actually the same because of a module exports potentially right like if you exported a variable. I didn't export it at that time I didn't learn about export at that point at
+
+00:40:13.000 --> 00:40:18.000
+that point. Okay, then, I think what we should do is that you know, I should set up an assistance request, and you should show me the exact case.
+
+00:40:18.000 --> 00:40:26.000
+Okay, okay, make sense, because then there may be something super important to learn here about like a special case that's that's not handled.
+
+00:40:26.000 --> 00:40:31.000
+Well in Vs code. but you know given what we've observed just now I have my doubts.
+
+00:40:31.000 --> 00:40:34.000
+I'd love to dig into the details a bit more later on.
+
+00:40:34.000 --> 00:40:48.000
+Okay, yeah, good. Shiva, Go ahead. So here we are setting the value of mod module dot export to a function.
+
+00:40:48.000 --> 00:41:03.000
+So a module itself is an object, or is it a keyword. and if it's an object with other property, we can use module exports, is certainly an object, because you can see this dot here.
+
+00:41:03.000 --> 00:41:13.000
+Yeah, there's nothing stopping us from console logging it as an object. right? console log.
+
+00:41:13.000 --> 00:41:17.000
+Let's have a quick look I don't want to go too far down the rabbit hole.
+
+00:41:17.000 --> 00:41:22.000
+But it's a good question so let's just show how we would go about answering that question.
+
+00:41:22.000 --> 00:41:36.000
+Yeah, we're gonna look at module itself inside module we have the idea of the module the path of where it is.
+
+00:41:36.000 --> 00:41:42.000
+So this the idea is evidently just the path to the file There's the Directory that it lives in here's.
+
+00:41:42.000 --> 00:41:54.000
+The file name seems to be very similar. to this value it's false or true, based on whether it's loaded and then the the presence of it.
+
+00:41:54.000 --> 00:42:02.000
+So there you go. Exports has It has nothing on exports just yet, but it would soon have exports attached to it.
+
+00:42:02.000 --> 00:42:06.000
+When we set module dot exports soon thereafter.
+
+00:42:06.000 --> 00:42:12.000
+So there you go. Looks like it can be used for finding the paths of files.
+
+00:42:12.000 --> 00:42:35.000
+Among other things, Does that work? Okay So i'm pretty happy with where we've landed. we have code where and you know what i'd like to bring this back to be like say hello again.
+
+00:42:35.000 --> 00:42:48.000
+So let's rename our symbol, and this one as well rename symbol.
+
+00:42:48.000 --> 00:43:03.000
+Say, Hello, love, that that it changed it over there as well and We've got production code in one place, and we've got testing code in another place.
+
+00:43:03.000 --> 00:43:15.000
+The testing code refers to the production code via a require like this: We've seen how, when you run a require it actually executes all of the code inside the original module.
+
+00:43:15.000 --> 00:43:26.000
+But our testing code is able to sit off to the side where we could include or not include the testing stuff direct.
+
+00:43:26.000 --> 00:43:35.000
+I just want to make sure. I think maybe I missed one function.
+
+00:43:35.000 --> 00:43:40.000
+Bailey asked if Cost Grader function in the test code was named.
+
+00:43:40.000 --> 00:43:45.000
+Say hello, like the production code with that? Because okay, we did answer that one, after all,
+
+00:43:45.000 --> 00:43:52.000
+Should we make a habit, Matt asks of, including strict
+
+00:43:52.000 --> 00:44:03.000
+Yes, but we're going to get to the moca and shy way of doing things soon enough, which will include sort of similar kinds of things going on over there.
+
+00:44:03.000 --> 00:44:21.000
+Okay, Very good. So from here, then we would like to introduced to you an amazing resource called Npm.
+
+00:44:21.000 --> 00:44:27.000
+And so a quick show of hands who's you know somewhat familiar with Npm.
+
+00:44:27.000 --> 00:44:30.000
+Leading into this had a bit of experience with it. Yeah. Okay.
+
+00:44:30.000 --> 00:44:38.000
+So Npm is a package manager the largest collection of open source software available on the interwebs.
+
+00:44:38.000 --> 00:44:44.000
+It's just massive amounts of stuff that's available to you What does it stand for?
+
+00:44:44.000 --> 00:44:54.000
+Napoleonic political, magnificence. perhaps you know They're playing a game with us where originally Npm.
+
+00:44:54.000 --> 00:45:03.000
+Stand stood for Node package manager but then let's have a little fun by getting crowdsourced
+
+00:45:03.000 --> 00:45:11.000
+Other examples of things that it stands for regardless. I can type in whatever I want.
+
+00:45:11.000 --> 00:45:37.000
+Into this search and end up with lots of code packages that are available to me. Are all via a require require board game, dot I, O library for turn-based games, awesome turns out I happen to be writing a turn-based game.
+
+00:45:37.000 --> 00:45:44.000
+In my off time. and i'm going to look into this Npm, just to see what kind of awesomeness is buried within it.
+
+00:45:44.000 --> 00:45:50.000
+Yeah, there's a bund any like lots of stuff here?
+
+00:45:50.000 --> 00:45:55.000
+How many packages? 2,800 different packages, all associated with games? Right?
+
+00:45:55.000 --> 00:45:58.000
+This is a great way to go trolling for ideas for your finals project.
+
+00:45:58.000 --> 00:46:04.000
+By the way. Oh, hey! there's a cool package i'd like to try that out and make a finals project out of it.
+
+00:46:04.000 --> 00:46:11.000
+Physics right. The The most fun activity on the earth is to study physics.
+
+00:46:11.000 --> 00:46:27.000
+In my opinion. Phaser happens to be a thing for building games that includes some physics engines in it. so you can make, you know, Super Mario Ala Webb, with gravity.
+
+00:46:27.000 --> 00:46:49.000
+What else? Any things that people are interested in? crypto currency, icons, coinbase, crypto, wallet stuff, right?
+
+00:46:49.000 --> 00:46:59.000
+All here for you to look at. Moca Let's go for test driven development.
+
+00:46:59.000 --> 00:47:03.000
+Tdd. A Test Driven Development Framework for Javascript.
+
+00:47:03.000 --> 00:47:11.000
+Moca test driven development framework for Javascript that we will be using super test.
+
+00:47:11.000 --> 00:47:20.000
+Chi came up here, Jasmine, all sorts of stuff available under that tag.
+
+00:47:20.000 --> 00:47:44.000
+Yeah. So Npm is awesome. it allows us to do stuff like this, except that now the code is going to come from Npm instead of being built into node like the documentation that we were looking at before let's
+
+00:47:44.000 --> 00:48:05.000
+get to nicole's question next after tony's in the Chat, wrote: Given what we see now on modular exports, can we delete the value of sh in the property of sh maybe this was from before can we delete
+
+00:48:05.000 --> 00:48:11.000
+the property. Oh, see, right! I think this is a question about this.
+
+00:48:11.000 --> 00:48:20.000
+Given that these are the same, You can do this as a short hand.
+
+00:48:20.000 --> 00:48:31.000
+What this is saying is, make a property with the name, say hello, and have its value, be the value of the variable called Say hello!
+
+00:48:31.000 --> 00:48:33.000
+And this shorthand will do both of those things at the same time.
+
+00:48:33.000 --> 00:48:42.000
+Right. I actually prefer the this way at first especially so then so that we're just being explicit about what's happening right?
+
+00:48:42.000 --> 00:48:47.000
+You saw how that was important when we were doing the rename symbol thing.
+
+00:48:47.000 --> 00:48:51.000
+Vs code was so smart about it, it actually inserted a property name into this code.
+
+00:48:51.000 --> 00:48:55.000
+As we were renaming symbols. But yes, you can do that.
+
+00:48:55.000 --> 00:49:06.000
+It is more concise. Yeah, absolutely there's always a trade-off between concise syntax and readable syntax right where you can read in and understand what's going on in detail.
+
+00:49:06.000 --> 00:49:12.000
+Right. There's a tension between those 2 if you like shorter stuff, you know, that's great.
+
+00:49:12.000 --> 00:49:16.000
+Okay, Glad we got back to that question, Nicole. Go ahead.
+
+00:49:16.000 --> 00:49:22.000
+Strange question about How do you know you can trust something and Npm?
+
+00:49:22.000 --> 00:49:26.000
+If it's in here you know you can trust to put it on your computer.
+
+00:49:26.000 --> 00:49:31.000
+Yes, of trust from a variety of perspectives, I suppose.
+
+00:49:31.000 --> 00:49:46.000
+Well, you know you can't that's that's the that's the short answer, and I think with security.
+
+00:49:46.000 --> 00:49:51.000
+You know It's nice to have a baltan suspenders approach to this right?
+
+00:49:51.000 --> 00:50:08.000
+What What I mean is to have layers all security questions come down to networks of trust in the end, whether you've got just a simple password system on your web app or is it hidden entirely on an encrypted, network
+
+00:50:08.000 --> 00:50:16.000
+unavailable via any dns calls right you're adding more layers of security.
+
+00:50:16.000 --> 00:50:26.000
+More security means often means more difficult access and you're always in a trade-off, right.
+
+00:50:26.000 --> 00:50:35.000
+Some packages are clearly more trustworthy than others, because they've had more eyeballs put on them.
+
+00:50:35.000 --> 00:50:40.000
+So, for example, if I go into Moca, here we are on the Npm.
+
+00:50:40.000 --> 00:50:46.000
+Checking out the detail page for the Moca. package!
+
+00:50:46.000 --> 00:51:00.000
+It has 6,000,000 weekly. downloads that's a lot of people, some of which we hope are doing security assessments on code from time to time. Right?
+
+00:51:00.000 --> 00:51:08.000
+I think it would be big news if Moca was compromised in some way.
+
+00:51:08.000 --> 00:51:27.000
+Other packages not so much, and so if it's a concern you've always got the code that you can read through right to do your own security audit, and by the way that's a thing right that's a job
+
+00:51:27.000 --> 00:51:31.000
+description and don't worry you know by the end of boot camp.
+
+00:51:31.000 --> 00:51:36.000
+You're gonna be in a better position to be like Yeah, I can see what it would be like to be doing security audits on code right.
+
+00:51:36.000 --> 00:51:40.000
+It's more of a intermediate senior kind of an activity.
+
+00:51:40.000 --> 00:51:55.000
+But there are going to be things that you learn about in the middle of your boot camp here, where you're expressly being taught how to write code.
+
+00:51:55.000 --> 00:52:00.000
+That is more secure, right? and so as you come to understand that you'll start to recognize.
+
+00:52:00.000 --> 00:52:06.000
+Oh, it would be pretty easy for Code to be leaky, vulnerable, right?
+
+00:52:06.000 --> 00:52:10.000
+And so yeah, don't worry it's a long road to start on.
+
+00:52:10.000 --> 00:52:18.000
+But you're. gonna start on it in the next 12 weeks How to write cleaner more secure code it's it's a part of it.
+
+00:52:18.000 --> 00:52:25.000
+What is the license for there's a variety of licenses that you can release packages under the mit license is a popular one.
+
+00:52:25.000 --> 00:52:30.000
+It's very permissive for for reuse of code.
+
+00:52:30.000 --> 00:52:39.000
+I believe that it allows commercial reuse of code without attribution, but that the copyright must stay with the code.
+
+00:52:39.000 --> 00:52:45.000
+I think That's what that one is there's a variety of licenses to choose from when it comes to releasing Code Gpl.
+
+00:52:45.000 --> 00:52:56.000
+Is another one. Creative Commons, another one. Bailey, go ahead still.
+
+00:52:56.000 --> 00:53:01.000
+Muted. Sorry, I just have a quick question back to the production code and the the test code.
+
+00:53:01.000 --> 00:53:05.000
+There. my question is just I see that when you're exporting it.
+
+00:53:05.000 --> 00:53:16.000
+You're putting it into an object which would make sense I mean if you're sending multiple functions within the one right? If you're just sending the one would you include those curly races.
+
+00:53:16.000 --> 00:53:20.000
+Still Nope. Okay, you would just send it as itself right that's right?
+
+00:53:20.000 --> 00:53:34.000
+Yeah, and in fact, you raise a good point because when you run require, and you bring a thing in over here.
+
+00:53:34.000 --> 00:53:40.000
+Now i've changed it so that this exports just say hello, This is not a thing anymore.
+
+00:53:40.000 --> 00:54:02.000
+So howper functions should now go away here's the thing Notice: In one case we brought in an object in another case we brought in a function whenever you run, require, you have to figure that out. what is the kind of thing that is being
+
+00:54:02.000 --> 00:54:09.000
+exported from this particular module it So how do you figure that out?
+
+00:54:09.000 --> 00:54:16.000
+Well through documentation. or if you happen to have the source code kicking around, you can look at the source code and say, Oh, look at that!
+
+00:54:16.000 --> 00:54:22.000
+The exports. Modul lot exports is itself just a function value variable.
+
+00:54:22.000 --> 00:54:31.000
+Okay, That's a function whatever I name this to has to match the type, you know the expectation of what it is, and then go from there.
+
+00:54:31.000 --> 00:54:41.000
+It's not like other languages where include you know that would be something that you'd say in C say, and it's actually going to include code.
+
+00:54:41.000 --> 00:54:48.000
+And it's always the same here. you have the option I could return an integer right.
+
+00:54:48.000 --> 00:54:53.000
+But i'd have to know that about the particular module that I was going for.
+
+00:54:53.000 --> 00:55:03.000
+And then, if you send, let's say say hillary and say goodbye when you are doing your required, If you put Constant say goodbye. would it?
+
+00:55:03.000 --> 00:55:09.000
+Then send this the function. No, because that's that requires sending that whole object. Yeah, that you know what that's okay, let's do both.
+
+00:55:09.000 --> 00:55:16.000
+So we've Got right the thing like this right i've got say, hello as a separate property, and a function here.
+
+00:55:16.000 --> 00:55:25.000
+I'm going to add another property. say goodbye to be equal to say goodbye.
+
+00:55:25.000 --> 00:55:35.000
+Okay, Now i'm back to the mode where I had a helper function object and say, hello is this way.
+
+00:55:35.000 --> 00:55:48.000
+So I could then access. Oh, I see. Say goodbye directly on that object like, Okay, thank you.
+
+00:55:48.000 --> 00:55:58.000
+Sure great that this is good nicole. i've presumed that hand is from before the Yeah, this is great because right?
+
+00:55:58.000 --> 00:56:04.000
+You've got experience now with how to how to work require into your code?
+
+00:56:04.000 --> 00:56:19.000
+How did export more than one thing right how to access it because it's an object on this side, Say right in fact, lots of packages on Npm are built up to export an object of this type, and you'll see in
+
+00:56:19.000 --> 00:56:23.000
+the documentation for how to use that particular package that that's the way that it's to be used.
+
+00:56:23.000 --> 00:56:28.000
+Yeah. Saita, go ahead couple more minutes before break here.
+
+00:56:28.000 --> 00:56:37.000
+Hi! I have a question, but I don't know if my English will be enough for It's worth a shot for sure.
+
+00:56:37.000 --> 00:56:45.000
+Yeah, thank you for the question. I want it's about our lootide project.
+
+00:56:45.000 --> 00:56:51.000
+So maybe you can understand what I want to ask. What if I want to to call helper function?
+
+00:56:51.000 --> 00:56:57.000
+Say, hello, insight, helper functions. Say goodbye from A.
+
+00:56:57.000 --> 00:57:06.000
+I want to call one function inside another function. This code can I use like A.
+
+00:57:06.000 --> 00:57:12.000
+So here I have 2 functions. Say goodbye and say, hello right!
+
+00:57:12.000 --> 00:57:18.000
+Say hello should be available to us here, I should be able to call, say, hello.
+
+00:57:18.000 --> 00:57:38.000
+By the rules of scoping from here right so if I did that. Now, every time I run, say Goodbye, it's gonna call Say, hello, right! I should be able to do that from here without ever touching Say, hello on this side when I
+
+00:57:38.000 --> 00:57:44.000
+run. say goodbye. it's gonna go here and then it's gonna call this function like this now is your question.
+
+00:57:44.000 --> 00:57:49.000
+Do I need to export? Say, hello, No. My question is about.
+
+00:57:49.000 --> 00:58:02.000
+If we export both of them, can I use like helper functions that say goodbye, and then brackets and helper functions?
+
+00:58:02.000 --> 00:58:13.000
+Dot. Say, hello, my little friend Helper Funks is defined on this side.
+
+00:58:13.000 --> 00:58:20.000
+I can put it anywhere I want. Okay, Yeah, if I wanted to do that like that.
+
+00:58:20.000 --> 00:58:26.000
+I could do it because it's because it's defined inside helper folks.
+
+00:58:26.000 --> 00:58:32.000
+I'm allowed to use it like this. Say, Okay, Yep. Okay, yeah.
+
+00:58:32.000 --> 00:58:39.000
+Okay, Yeah, your English is fine, and your code's getting better yeah,
+
+00:58:39.000 --> 00:58:48.000
+Very good tell you what we've arrived at the time of break We've had our introduction to npm and require and all that good stuff.
+
+00:58:48.000 --> 00:58:58.000
+And so after break we are going to bring in moca, and we're going to start using it as a testing framework.
+
+00:58:58.000 --> 00:59:08.000
+We're going to convert this from from our core node based style of testing to Moca, which is way better.
+
+00:59:08.000 --> 00:59:23.000
+Yeah, okay. I feel like Excuse me, I feel like this is a coffee thing.
+
+00:59:23.000 --> 00:59:36.000
+I feel like today's a coffee day right sometimes this is a democracy where you know, i'll ask and i'll go with go with the flow of what's available what's desired in the crowd but i'm
+
+00:59:36.000 --> 00:59:40.000
+just gonna predict that we want coffee on a Monday.
+
+00:59:40.000 --> 01:00:10.000
+And so after the 10 min is up we'll return and we'll do Moka all right welcome back everyone.
+
+01:09:42.000 --> 01:09:50.000
+We're gonna get into Moca directly hopefully. you had a good break.
+
+01:09:50.000 --> 01:10:03.000
+Come back afresh, ready to go. So the task at hand at the moment is then, is to take this testing system.
+
+01:10:03.000 --> 01:10:16.000
+This testing file and convert it over to moca from what we've done here, and in doing that we're going to see some of the advantages of of Moca over the stuff that's built into node directly
+
+01:10:16.000 --> 01:10:27.000
+moca is obviously a very well used package of code, with its 6 and a half, nearly weekly downloads.
+
+01:10:27.000 --> 01:10:38.000
+And in using it we're going to leverage all of the good work that's gone into building and testing that package over the years.
+
+01:10:38.000 --> 01:10:54.000
+So to do that, the first thing we're gonna want he is the ability to bring it in in the first place, and this touches back on the package.
+
+01:10:54.000 --> 01:11:05.000
+Json file that we had from before so I'm going to move the need this later back into package Json again, like so and so.
+
+01:11:05.000 --> 01:11:20.000
+Now with this package, Json file this file created through a process of in fact, let's recreate it from scratch.
+
+01:11:20.000 --> 01:11:25.000
+Actually. So we've got moca and chai as the dependencies that we're headed for.
+
+01:11:25.000 --> 01:11:33.000
+I can just remove that package, Json, instead. start from scratch.
+
+01:11:33.000 --> 01:11:43.000
+Npm in it what I'm. doing is i'm turning this directory into an Npm. package.
+
+01:11:43.000 --> 01:12:00.000
+So i'll run that the package name week 2 day one works for me version one often you'll take the defaults as you're going through this process description would be test driven development sample code for layout
+
+01:12:00.000 --> 01:12:07.000
+slabs reasonable entry point the test command we'll get to that later.
+
+01:12:07.000 --> 01:12:10.000
+There's no git repository associated with it for the moment.
+
+01:12:10.000 --> 01:12:23.000
+That's fine. github sorry keywords test driven development, lighthouse labs, moca chai just arbitrary words.
+
+01:12:23.000 --> 01:12:28.000
+Author is me. The license Isc could put. Gpl.
+
+01:12:28.000 --> 01:12:41.000
+Could put mit like we saw. So is this fine? Yes. So now we have a package.
+
+01:12:41.000 --> 01:12:50.000
+Json file, and this package dot json file which does not include Moka and Chai as dependencies.
+
+01:12:50.000 --> 01:13:10.000
+Yet. So let's show how that step is done npm install Mocha and i'm going to put double dash save on this like so hit enter Npm Install goes out to the npm network pulls
+
+01:13:10.000 --> 01:13:18.000
+in the code required for Moca, and puts it into a subdirectory called node underscore modules.
+
+01:13:18.000 --> 01:13:26.000
+So Now, having done that, there'll be 2 important changes one is I can do an Ls.
+
+01:13:26.000 --> 01:13:30.000
+And it'll show that I have a node modules directory.
+
+01:13:30.000 --> 01:13:37.000
+Now that appeared, thanks to that Npm. install, I list the Node Modules Directory.
+
+01:13:37.000 --> 01:13:43.000
+Now there's quite a few modules in here all together.
+
+01:13:43.000 --> 01:13:50.000
+This says it brought in 81 packages, right? All because I installed Moca. Why?
+
+01:13:50.000 --> 01:13:54.000
+Because moca requires other packages, and those other packages require other packages.
+
+01:13:54.000 --> 01:14:04.000
+And so it did, all of the work of dependency, tracking and loaded in all the code that we needed in order to be able to run.
+
+01:14:04.000 --> 01:14:06.000
+Moca turned out to be quite a bit of it.
+
+01:14:06.000 --> 01:14:16.000
+Actually good. So now we have that in place. The other change that was made when I did the Npm.
+
+01:14:16.000 --> 01:14:28.000
+Install moca double dash, save is that if you look at the package, Json file now, it includes Moca as a dependency within this, and Pm.
+
+01:14:28.000 --> 01:14:41.000
+File within package, Json, and so in the future if I distribute this code, and I don't have the node Modules folder here, there.
+
+01:14:41.000 --> 01:14:44.000
+I just blew it away, deleted it right.
+
+01:14:44.000 --> 01:14:50.000
+I could remove package off, lock Dashlock Json as well.
+
+01:14:50.000 --> 01:14:58.000
+Right. if I just distributed the code like this all I would need to do is Npm install.
+
+01:14:58.000 --> 01:15:01.000
+That's what an Npm. install command does it goes to people packaged.
+
+01:15:01.000 --> 01:15:09.000
+Json. It looks for all the dependencies that are needed, and it goes, and it downloads them from Npm.
+
+01:15:09.000 --> 01:15:16.000
+For you, priestly Ricky. Go ahead hi, Katie!
+
+01:15:16.000 --> 01:15:22.000
+Yep. So I was just wondering if you have the don't module files assume.
+
+01:15:22.000 --> 01:15:28.000
+Now when you get the click when you did push, everything does that added.
+
+01:15:28.000 --> 01:15:33.000
+All 2 Github, as well or is that incorrectly so.
+
+01:15:33.000 --> 01:15:42.000
+No, it's it's only its own going to Npm.
+
+01:15:42.000 --> 01:15:47.000
+When you do Npm install it goes to the Npm website and brings them all in.
+
+01:15:47.000 --> 01:15:56.000
+When you do Npm and knit it makes a package that Json locally, but it doesn't do anything automated with Github at all.
+
+01:15:56.000 --> 01:16:06.000
+Oh, okay, okay, to do github stuff it'll be like get ad blah blah blah in fact, get in.
+
+01:16:06.000 --> 01:16:11.000
+It would create a repository locally. Yeah, get an Npm or separate things.
+
+01:16:11.000 --> 01:16:21.000
+They do know about each other somewhat. but you actually have to actively make steps to make them work together.
+
+01:16:21.000 --> 01:16:29.000
+Oh, okay, okay, Thanks. Good. And I notice. Kevin asked a question a while back in the chat forgot to ask earlier.
+
+01:16:29.000 --> 01:16:36.000
+But does it matter if we make a subdirectory to have the test file in as long as you run?
+
+01:16:36.000 --> 01:16:41.000
+Nit in the same directory as the code file. Yeah.
+
+01:16:41.000 --> 01:16:49.000
+So, and Npm and Knit is gonna be saying, This is where I would like the top of my Npm package to be.
+
+01:16:49.000 --> 01:16:57.000
+There can be subdirectories within that folder that contain all manner of things, some of which may be tests, and so on.
+
+01:16:57.000 --> 01:17:02.000
+But it depends on how your testing framework works we'll see how subdirectories are implicated.
+
+01:17:02.000 --> 01:17:12.000
+Soon right, but the package on Json file is for the package that you just created will be at the top level where you ran Npm.
+
+01:17:12.000 --> 01:17:19.000
+In it. I hope that that helps good so that's pretty fancy right.
+
+01:17:19.000 --> 01:17:27.000
+We just got a package. Json: that we allowed us to reproduce the node underscore Modules directory just by doing Npm install.
+
+01:17:27.000 --> 01:17:45.000
+That's what Npm install does for you and Now we have Moca, among other things, as part of our deployment Here's Moca here in that list of stuff available in node modules so with
+
+01:17:45.000 --> 01:17:59.000
+moca in place that sets us up to be able to change the file that we have our testing in, and so i'm going to go back to that file.
+
+01:17:59.000 --> 01:18:08.000
+Here is the side-by-side right here's the production code on the left, and the testing file on the right.
+
+01:18:08.000 --> 01:18:22.000
+And so now we get to run this test in a slightly different way.
+
+01:18:22.000 --> 01:18:32.000
+The way we want to run this now is the test.
+
+01:18:32.000 --> 01:18:38.000
+Code itself is going to look a little different once we've mocaized it.
+
+01:18:38.000 --> 01:18:52.000
+If you will. and the way that this works is, there are 2 functions of interest when it comes to using Moca.
+
+01:18:52.000 --> 01:18:59.000
+One function that we'll look at. soon is describe and here I am calling it with no parameters yet.
+
+01:18:59.000 --> 01:19:04.000
+That's one function that i'm interested in telling you about the other one.
+
+01:19:04.000 --> 01:19:19.000
+Is it that's the other function call that we can make when we're using moca based stuff now describe is, in fact, optional.
+
+01:19:19.000 --> 01:19:40.000
+So i'm gonna talk about it second let's talk about it. First, it the function that we're calling when it comes to running moca tests, and the way that the it function works is the following it takes it takes 2
+
+01:19:40.000 --> 01:19:49.000
+parameters. One is string which describes the test that you're that you're doing.
+
+01:19:49.000 --> 01:20:05.000
+And so it produces the expected output let's call it the say Hello, output.
+
+01:20:05.000 --> 01:20:10.000
+This is not the best description of a test for reasons that i'll get to in a minute.
+
+01:20:10.000 --> 01:20:17.000
+But it's a little bit too generic but we're dealing with some pretty generic production. code.
+
+01:20:17.000 --> 01:20:27.000
+I'm sure you'll agree produces the expected Say, Hello, output that's going to be the description string of our particular test.
+
+01:20:27.000 --> 01:20:36.000
+The second parameter for the it function call a callback.
+
+01:20:36.000 --> 01:20:48.000
+So this is going to hearken back to the tail end of last week, where we burned a lot of brain cells, learning about how callbacks work. right?
+
+01:20:48.000 --> 01:21:00.000
+So here we go. Here comes a callback going. to put a call back in as the second parameter to this function call simply by writing out an empty function definition to start.
+
+01:21:00.000 --> 01:21:07.000
+That's usually how I start writing my callbacks right as I write out the full complete blank function definition.
+
+01:21:07.000 --> 01:21:25.000
+Then I go in and I hit Enter between the curly braces. and I start writing some arbitrary code with the understanding that this code will get executed whenever this callback is called fine.
+
+01:21:25.000 --> 01:21:34.000
+Let's make this B the code that runs inside this callback.
+
+01:21:34.000 --> 01:21:47.000
+Remember this was the code that we had. This was the code that actually executes the test Right?
+
+01:21:47.000 --> 01:21:54.000
+It calls the function in question. it does the assert equal thing.
+
+01:21:54.000 --> 01:22:04.000
+And you know we saw how for this particular kind of assert if all's well and good.
+
+01:22:04.000 --> 01:22:10.000
+Then there'll be no error inside this callback fair enough.
+
+01:22:10.000 --> 01:22:25.000
+Okay, that's it that's all there is to it out of minimum to make your code work well with Moca.
+
+01:22:25.000 --> 01:22:40.000
+So Let's demo it now. if I go back to my command line moca, because it's been installed by an Npm.
+
+01:22:40.000 --> 01:23:01.000
+Becomes available to us as as a as an executable on the command line, and that file is going to be something that Moca runs.
+
+01:23:01.000 --> 01:23:15.000
+Now this is interesting. This is the difference between a library and a framework. Have people heard that both of those words thrown around?
+
+01:23:15.000 --> 01:23:22.000
+Yeah, maybe a little bit of an introduction to that right you're gonna be using Npm often to bring in libraries that you can use.
+
+01:23:22.000 --> 01:23:26.000
+But you can also find frameworks on Npm.
+
+01:23:26.000 --> 01:23:28.000
+Moca happens to be an example of a framework.
+
+01:23:28.000 --> 01:23:37.000
+So with a framework that brings in a new executable you run that executable.
+
+01:23:37.000 --> 01:23:44.000
+It's the executable that goes and looks for files and runs your files on your behalf.
+
+01:23:44.000 --> 01:23:51.000
+Basically, you have to write your files to be called by the framework.
+
+01:23:51.000 --> 01:24:01.000
+Now we do need to make this file. the Hello World dash test visible to Moca.
+
+01:24:01.000 --> 01:24:10.000
+And so what we do for that we make a directory called tests.
+
+01:24:10.000 --> 01:24:16.000
+Let me just look at the solution here briefly. Test. Sorry.
+
+01:24:16.000 --> 01:24:23.000
+So if I list the test directory at the moment i've got this file in there, let me clear that out test.
+
+01:24:23.000 --> 01:24:30.000
+That's gone. If I had started from scratch we would have no test directory.
+
+01:24:30.000 --> 01:24:41.000
+Okay, here is our Hello Dashworld test. Js: file right with our new Moca eyes function.
+
+01:24:41.000 --> 01:24:54.000
+Call in it. Right need to make a directory called test and I need to move that file into the test directory.
+
+01:24:54.000 --> 01:25:12.000
+That's where moca's going to look for it When I did that move of that file into that test directory, the editor is not happy because I moved the file out from under the editor. Right?
+
+01:25:12.000 --> 01:25:27.000
+Okay, let's close this version of it let's open up the the version that's inside test like So one more thing.
+
+01:25:27.000 --> 01:25:34.000
+Now the require for Hello, world! not in the current directory it's up one.
+
+01:25:34.000 --> 01:25:42.000
+So I have to change that. So that it's referring to the correct file.
+
+01:25:42.000 --> 01:26:10.000
+Okay, So there's that Change and now. it should be a simple matter across my fingers of running the moca executable, which lives down inside the Node Modules directory at the following location node modules slash dot
+
+01:26:10.000 --> 01:26:26.000
+bin moca so I can run that like this it'll run the code, and we're getting some interesting looking output.
+
+01:26:26.000 --> 01:26:40.000
+So let's check into why we're getting this particular issue but this might start to look a little bit familiar.
+
+01:26:40.000 --> 01:26:43.000
+Actually I don't know I don't know if you've seen this before.
+
+01:26:43.000 --> 01:26:57.000
+Maybe in the test Last week, for example, turns out in the test code in the test, the mock test that you did last week.
+
+01:26:57.000 --> 01:27:15.000
+You are actually doing test-driven development. You were actually having Moca run on your behalf and show you the output of what had been going on. So that practice of doing those tests that way was your first step into the
+
+01:27:15.000 --> 01:27:22.000
+world of test-driven development today. we're peeling back the curtain to see what's going on behind the scenes.
+
+01:27:22.000 --> 01:27:30.000
+So we have some hopeful stuff here. One is we that we recognize.
+
+01:27:30.000 --> 01:27:36.000
+This phrase produces the expected say, Hello, output right.
+
+01:27:36.000 --> 01:27:44.000
+So Moca is aware of the test that we're making we're getting a specific error return value is not defined.
+
+01:27:44.000 --> 01:27:47.000
+There must be something about how the refactoring went that caused this to be the case.
+
+01:27:47.000 --> 01:27:56.000
+So let's go in and take a look we'll Go back to power code and look for return value is not defined.
+
+01:27:56.000 --> 01:28:06.000
+Oh, I commented out one, and use the other one so let's bring this one back in I don't think we need to test.
+
+01:28:06.000 --> 01:28:15.000
+Say goodbye just now, so that should fix that up so let's go back and run Moca again.
+
+01:28:15.000 --> 01:28:29.000
+Produces the expected output with a beautiful green checkmark and a summary that says, one test is passing, and it takes 19 ms for that to happen.
+
+01:28:29.000 --> 01:28:38.000
+This is way better than what we had before, which was the assert function, was silently succeeding, and then proceeding on.
+
+01:28:38.000 --> 01:28:55.000
+Furthermore, here's another really cool feature of moca if I go back here and I have let's say 2 tests.
+
+01:28:55.000 --> 01:29:09.000
+The second one's gonna have return value to and the first test fails.
+
+01:29:09.000 --> 01:29:25.000
+The second test will still be run. we may need to build a separate test on this.
+
+01:29:25.000 --> 01:29:40.000
+Actually hold my beer and watch this here's a second test This is the second test.
+
+01:29:40.000 --> 01:29:52.000
+Again. It takes a callback like so right drop this code in here There's the second test.
+
+01:29:52.000 --> 01:30:13.000
+Let's go back and run it test one failed but test 2 ran and succeeded.
+
+01:30:13.000 --> 01:30:31.000
+This is super useful and good because if you're running a set of stuff you've got dozens if not hundreds of tests for your at scale production code.
+
+01:30:31.000 --> 01:30:55.000
+It might take test Number 1, 32, ms to run, say, or test 2 or something raft upon raft of many dozens of many tests can take hours depending on the kind of code that you're testing when you run
+
+01:30:55.000 --> 01:31:06.000
+all of that automated testing, you don't want the first error to cause the whole thing to come to a crashing halt. right?
+
+01:31:06.000 --> 01:31:17.000
+You'd prefer that it run the test, Oh, there was an error there of some form fatal error, whatever the framework should be able to stay on its feet and then move on and run.
+
+01:31:17.000 --> 01:31:41.000
+The next thing, and that is achieved by this testing framework where the actual tests themselves are down inside callbacks that are being run asynchronously sorry they're callbacks that are going to get run independently.
+
+01:31:41.000 --> 01:31:45.000
+Right. we're gonna get into asynchronous code throughout the week.
+
+01:31:45.000 --> 01:31:52.000
+And so that's part of what what It is to I just I use the word asynchronously.
+
+01:31:52.000 --> 01:31:56.000
+The put a pin in that we're going to come back to that topic.
+
+01:31:56.000 --> 01:32:08.000
+But you know this is cool, right? It means that we can run all these tests and get data back from each one of them.
+
+01:32:08.000 --> 01:32:15.000
+Okay, So that's Moca and that's Moca working?
+
+01:32:15.000 --> 01:32:22.000
+What about this describe? Well, I described it as optional describe is optional.
+
+01:32:22.000 --> 01:32:34.000
+Turns out, describe is what you use when you have a group of tests that you want to assess how that group of tests is going.
+
+01:32:34.000 --> 01:32:41.000
+And so in a very similar way, it takes a straight and a callback.
+
+01:32:41.000 --> 01:32:54.000
+There's our callback this one is going to be the say group of tests, you know.
+
+01:32:54.000 --> 01:33:12.000
+We'll test, say goodbye in here as Well, for example, the callback simply going to be the function calls to the it function that are within that group.
+
+01:33:12.000 --> 01:33:37.000
+Okay. And so now, if I go back and run this set of tests, I get the say group of tests as a label on these 2 tests, and it's telling me that one is passing and one is failing and So this means that
+
+01:33:37.000 --> 01:33:51.000
+when i'm writing test framework, related kinds of files that I can put my tests in groups that I can keep working on my tests and working on my code.
+
+01:33:51.000 --> 01:34:11.000
+Such that I end up in a place where my tests pass so we'll save that we'll go back here rerun it. Still failing.
+
+01:34:11.000 --> 01:34:15.000
+This one is saying that. Hello, my little friend, double exclamation.
+
+01:34:15.000 --> 01:34:18.000
+Mark does not match the one with one exclamation. Mark!
+
+01:34:18.000 --> 01:34:31.000
+Why is that i should be calling this with no exclamation points and it'll add the one let's try that again.
+
+01:34:31.000 --> 01:34:38.000
+So you're you're watching test driven development in action right now, right there.
+
+01:34:38.000 --> 01:34:52.000
+So now I can write a bunch of tests what's really nice about this is that I can write the tests without having any production code to match it.
+
+01:34:52.000 --> 01:35:04.000
+And the testing framework will still stand up. So, for example, I could go back here, and I could put in as a prior test.
+
+01:35:04.000 --> 01:35:21.000
+Not if it right, It takes a label and a callback like so. and i'm going to test my say goodbye like this.
+
+01:35:21.000 --> 01:35:30.000
+And inside here, inside this callback, i'm going to run something very similar to this code.
+
+01:35:30.000 --> 01:35:49.000
+So i'll copy, and paste it to start with help her folks say goodbye, and this return value is going to be actually it's fine if it's the same name, because the scopes different inside this callback now I can even leave it as the
+
+01:35:49.000 --> 01:36:01.000
+name return value here's my test of say goodbye let's run this.
+
+01:36:01.000 --> 01:36:08.000
+It should fail it right. But actually the point that I really wanted to make was, what if I had not even written?
+
+01:36:08.000 --> 01:36:20.000
+Say goodbye yet like so here's my test framework the very first test i'm running is on the say goodbye test.
+
+01:36:20.000 --> 01:36:34.000
+Then say hello twice after that let's go back and run moca. All my tests run, but I don't even have say goodbye written yet.
+
+01:36:34.000 --> 01:36:50.000
+So This means that a person who's getting the code started who's doing, planning you can write all the tests first for all the functions.
+
+01:36:50.000 --> 01:37:00.000
+None of those functions need yet have been written and yet. the testing framework will still tell you whether or not your tests have passed, and course they're not passing.
+
+01:37:00.000 --> 01:37:18.000
+The function's not yet been written right but by writing out these tests in a way that's a way of storing what your expectations for the production code is This truly is test driven development. right?
+
+01:37:18.000 --> 01:37:31.000
+We can write all the tests first and then go back in and then write the functions that correspond to the tests and include them in our code.
+
+01:37:31.000 --> 01:37:38.000
+Let's just say goodbye here, and see if we can get it to pass.
+
+01:37:38.000 --> 01:37:46.000
+Save. Go back to Moca rerun and now we've got 3 passing tests right.
+
+01:37:46.000 --> 01:37:49.000
+You get that little adrenaline hit, little dok mean hit of yay.
+
+01:37:49.000 --> 01:37:59.000
+I passed all my tests Right? that is test-driven development. Good!
+
+01:37:59.000 --> 01:38:01.000
+I see a few questions have been asked in the chat.
+
+01:38:01.000 --> 01:38:24.000
+Actually assert looks good enough. So Why, do we use chai it's It's good enough Sorta Chai is better, and i'll show you why in a second each test having individual descriptions.
+
+01:38:24.000 --> 01:38:29.000
+Yes, absolutely a good thing to do. I think of the following exercise.
+
+01:38:29.000 --> 01:38:35.000
+Getting these right is kind of like my favorite sport of renaming variables. Right?
+
+01:38:35.000 --> 01:38:57.000
+This is obviously a bad description of a test right so it should produce a valid idea. Oh, boy, there you go. That's gonna be my my test description for the day.
+
+01:38:57.000 --> 01:39:03.000
+It's better than what I had before a valid way of saying goodbye.
+
+01:39:03.000 --> 01:39:08.000
+How about that? There, that's a much better test description for that particular test?
+
+01:39:08.000 --> 01:39:15.000
+This is the second test, obviously not a good test description we're going to migrate this towards something better.
+
+01:39:15.000 --> 01:39:31.000
+Produces different set of expected again a little generic but i'm happier with those test descriptions back to run moca groups.
+
+01:39:31.000 --> 01:39:38.000
+The say, group of tests should produce a valid way of saying goodbye produces the expected say, Hello!
+
+01:39:38.000 --> 01:39:42.000
+Output produces a different set of expected output fine that's a little bit better for test descriptions.
+
+01:39:42.000 --> 01:39:48.000
+Yeah, Calvin asks for every project we need to install.
+
+01:39:48.000 --> 01:39:51.000
+Moka chai in the Root directory of the project.
+
+01:39:51.000 --> 01:40:06.000
+Yes, instead of having it in the root directory of your system I guess what you're asking is whether or not you can install moca globally to all of your projects.
+
+01:40:06.000 --> 01:40:16.000
+And I suppose that you could do that install it globally, and then Mocha is available everywhere.
+
+01:40:16.000 --> 01:40:29.000
+But that sort of denies your ability to to publish and transfer test code with your package.
+
+01:40:29.000 --> 01:40:33.000
+So you send out a package of code to a teammate.
+
+01:40:33.000 --> 01:40:40.000
+They bring that package in they run npm install and it doesn't work because they don't have moca installed globally right.
+
+01:40:40.000 --> 01:40:47.000
+If it truly is a dependency of the code that You're putting out, it makes sense to to include it in package.
+
+01:40:47.000 --> 01:40:53.000
+Json directly. Hope that that helped with that okay let's look at Chai.
+
+01:40:53.000 --> 01:40:59.000
+Let's get back to the question that was asked about Chai, Why are we using it at lighthouse labs?
+
+01:40:59.000 --> 01:41:10.000
+Let's go and take a look at the Chai documentation on Npm.
+
+01:41:10.000 --> 01:41:20.000
+And look at how glorious and wonderful chai is so it's an assertion.
+
+01:41:20.000 --> 01:41:37.000
+Library right for node It's going to replace the assertion Library that's built into node, and if we look at the full api documentation, we we have a few styles of assertion that can be
+
+01:41:37.000 --> 01:41:43.000
+made, but have a look at all of the things that we have available to us now.
+
+01:41:43.000 --> 01:41:55.000
+Assert is okay, is not okay equal, assert equal that's the one that we've been using that's the one that's available in core to node.
+
+01:41:55.000 --> 01:42:03.000
+But we also have not equal, strict, equal, not strict, equal, deep, equal, deep, equal for objects.
+
+01:42:03.000 --> 01:42:14.000
+Right like. Is this object equal to that other object it's going to traverse recursively down through the tree to check all the values of the object?
+
+01:42:14.000 --> 01:42:22.000
+Right. This is obviously a much more precise description of the kind of test that you're trying to achieve.
+
+01:42:22.000 --> 01:42:27.000
+Yeah, not deep equal is above is at least is below etc.
+
+01:42:27.000 --> 01:42:34.000
+Etc. Look, I've only scrolled down a tenth of the things that are available to us right is not a number right?
+
+01:42:34.000 --> 01:42:51.000
+Sometimes you want functions to produce, not a number. when you produce input into them of a certain type, right checking for like division by zeros or whatever you need your code to produce, the right thing is the result not a number or not I
+
+01:42:51.000 --> 01:42:58.000
+could go on is a function, is not a function, is an object, is not an object. So I did that right?
+
+01:42:58.000 --> 01:43:06.000
+Do you get to have all of this stuff in your assertion library if you're using chai, and so we prefer it.
+
+01:43:06.000 --> 01:43:15.000
+Look at even more awesomeness. right? so much awesome in one place, hard to believe.
+
+01:43:15.000 --> 01:43:23.000
+So back at the introduction. actually let's go back to the guide.
+
+01:43:23.000 --> 01:43:29.000
+The documentation is excellent. How to install it. Npm.
+
+01:43:29.000 --> 01:43:48.000
+Install chai look familiar. so let's do that i'm gonna do that here with this some versions of of Npm. you don't need to include this it'll do it automatically npm installed
+
+01:43:48.000 --> 01:43:58.000
+Chai save it's going to modify the package Json file to include it in our dependencies. All right.
+
+01:43:58.000 --> 01:44:01.000
+So now we have Moca and chai's dependencies for this package.
+
+01:44:01.000 --> 01:44:28.000
+If in the future somebody runs Npm install It's going to also bring Giant Cool and having brought Chi into your code to then go ahead and use it.
+
+01:44:28.000 --> 01:44:48.000
+You're going to replace the assertion library require in your own code.
+
+01:44:48.000 --> 01:45:09.000
+So let's go back. to That code here. here is everything that you need to do in order to use Chai instead of node for the assertion library.
+
+01:45:09.000 --> 01:45:26.000
+That's it. So now we're gonna do it that way instead require chai dot assert, so require chai runs that returns an object object.
+
+01:45:26.000 --> 01:45:31.000
+Dot assert that's what we're going to set our assert to be equal to.
+
+01:45:31.000 --> 01:45:41.000
+So i'll go ahead and save that and let's just rerun the moca like that still runs.
+
+01:45:41.000 --> 01:45:46.000
+Now it's just using the chive version of assert not equal instead.
+
+01:45:46.000 --> 01:45:56.000
+But down inside each of my tests. Now I could run any one of those things that we just saw inside the Chai assertion Library not equal deep equal.
+
+01:45:56.000 --> 01:46:06.000
+All that stuff. I get all those things available to me now hanging off this assert object. I see some questions.
+
+01:46:06.000 --> 01:46:13.000
+Hands are raised. Bailey first, hey? So I hope this makes sense.
+
+01:46:13.000 --> 01:46:24.000
+I just want to kind of clarify this so when we're running node assert equals built into it, and then, when we have moca, it is now using a certain equal right like as in you know, a certain equal down here,
+
+01:46:24.000 --> 01:46:34.000
+it's like leveraging that and then it's producing you know, when we have a positive thing Now it's gonna tell us it's it's correct instead of being invisible, and then when you get chai
+
+01:46:34.000 --> 01:46:46.000
+is it using mocha? Then to look so is it like leveraging, I guess, like, is moca leveraging chai or like, is it? . it's try and moca Yeah, that's right?
+
+01:46:46.000 --> 01:46:57.000
+So what? Yeah, that's a really good question. moca is the part that calls the described function that sets up these callbacks to be run for each of the tests.
+
+01:46:57.000 --> 01:47:00.000
+So Moca is the one that calls the it function.
+
+01:47:00.000 --> 01:47:07.000
+Once the it function has been called, and this callback has been scheduled to run.
+
+01:47:07.000 --> 01:47:23.000
+When this test runs, then this test code calls assert right before I was using the assert that was built into Node by requiring it from Node directly up here, right?
+
+01:47:23.000 --> 01:47:28.000
+Right. But now we're going to choose to use the chive version of assert.
+
+01:47:28.000 --> 01:47:33.000
+Instead, we have all of those things we can ask it like Okay, I see.
+
+01:47:33.000 --> 01:47:36.000
+Okay, so it'll make my life a lot easier yeah bit more.
+
+01:47:36.000 --> 01:47:43.000
+Well, maybe not easier because there's more of it that you it's like adding tools to your Swiss army knife.
+
+01:47:43.000 --> 01:47:46.000
+Right for testing. Yeah, Thank you. Yep, good, Nicole.
+
+01:47:46.000 --> 01:47:51.000
+Go ahead. So I guess this is another kind of security question.
+
+01:47:51.000 --> 01:47:58.000
+Okay, what I see a future for you. By the way, in the security you have potentially.
+
+01:47:58.000 --> 01:48:14.000
+So when you when you have someone sings you a fail to check, and it's got a json package in it, whatever it says in that section dependencies once you press npm install it's going to install all those
+
+01:48:14.000 --> 01:48:18.000
+dependencies. So is someone put something in there that you don't like the it would automatically install.
+
+01:48:18.000 --> 01:48:23.000
+So that's something you should check someone you don't know send you a package.
+
+01:48:23.000 --> 01:48:35.000
+Yeah, that's true and that's true of every piece of code you ever download from the Internet to right I think honestly, I think it's just a price I paid for this macbook i'm very scared of something no there's no question that whenever
+
+01:48:35.000 --> 01:48:49.000
+you're running code I mean the first question you should ask is what's the worst thing that could happen now Now that I think of it. Many bad things could happen right running code from somewhere else.
+
+01:48:49.000 --> 01:48:58.000
+It's like It could go searching through your file system to look for all your passwords that have been stored in weird ways right like It's true that you want to be working with code.
+
+01:48:58.000 --> 01:49:25.000
+That's trustworthy right and so to that end I would encourage you to look at first at the detail page here for the particular package that you're using here's Chai, for example, 5,000,000 weekly downloads
+
+01:49:25.000 --> 01:49:30.000
+their are a lot of eyes on this package. Go ahead, Nicole.
+
+01:49:30.000 --> 01:49:43.000
+I see you wanting to say something sorry so let's see, let's see somebody from the group sent me a a fail to look at the but the dependencies were mocha chai and something else Yeah, that would
+
+01:49:43.000 --> 01:49:52.000
+automatically. don't. But I think that's the only question Yeah, they would just go and do this on that specific thing that they've sent to you. Yeah, that's right to learn about it.
+
+01:49:52.000 --> 01:49:56.000
+See what it's gonna do right you do the npm install.
+
+01:49:56.000 --> 01:50:07.000
+It's going to show the thing Yeah, yeah I mean it sounds to me like you're gonna feel more comfortable working with very, very, very popular packages to start with.
+
+01:50:07.000 --> 01:50:19.000
+Right. But yeah, you know if somebody sends you code maybe it's not even an npm package they're like, Hey, here's some awesome code run this first of all it's if it's a question of security it's a question
+
+01:50:19.000 --> 01:50:29.000
+of network of trust. Do you trust the person sending it to you to not have sent you stuff that they downloaded off of Fourchan, or something stupid like that right?
+
+01:50:29.000 --> 01:50:51.000
+Yes, indeed. Okay, Nope, that's great we have 7 min left.
+
+01:50:51.000 --> 01:50:59.000
+I want to go back and look at those questions that I sent out before the before the lecture started.
+
+01:50:59.000 --> 01:51:07.000
+Right. I would like to look at each of those questions in turn and just review.
+
+01:51:07.000 --> 01:51:13.000
+You know what we've covered in class and to see how comfortable people are with the different things.
+
+01:51:13.000 --> 01:51:18.000
+If any questions come up as a result of our review please interrupt and we'll, we'll have a look at some of the details.
+
+01:51:18.000 --> 01:51:23.000
+How do you export things from any given javascript file? right?
+
+01:51:23.000 --> 01:51:35.000
+We've got module exports on the right hand side of that thing you're gonna add in stuff into module exports module of exports.
+
+01:51:35.000 --> 01:51:41.000
+It's often an object that contains multiple things that you're exporting.
+
+01:51:41.000 --> 01:51:57.000
+If, then, later on that file required into some other file, then this file will get executed, and the return value from the require will be set to whatever module exports was set to.
+
+01:51:57.000 --> 01:52:06.000
+So, for example, on the next question, how do you bring in things that are exported from another Javascript file?
+
+01:52:06.000 --> 01:52:15.000
+Well, you do that like this with this require right require and inside that there's a path to the file that you're requiring.
+
+01:52:15.000 --> 01:52:33.000
+And then this ding is going to be set to whatever module that exports was set to from that other file by the way, instead of having just a path here, you could just put a package name for Npm and it's going to
+
+01:52:33.000 --> 01:52:40.000
+attempt to find that inside your Node Modules Directory you will have first have to have run Npm.
+
+01:52:40.000 --> 01:52:44.000
+Install, in order to bring all those packages in but once that's done.
+
+01:52:44.000 --> 01:52:48.000
+Then this require nose to go looking for them in the Node Modules directory.
+
+01:52:48.000 --> 01:52:55.000
+Next up what is test-driven development right it's kind of like.
+
+01:52:55.000 --> 01:53:01.000
+The next step up from bug-driven development right which we've been doing so far.
+
+01:53:01.000 --> 01:53:12.000
+It's tests are written before you even start coding the tests. make the expectations of the code explicit.
+
+01:53:12.000 --> 01:53:16.000
+You might hear the phrase, red, Green Refractor. Right?
+
+01:53:16.000 --> 01:53:21.000
+So these are the phases of test-driven development Red.
+
+01:53:21.000 --> 01:53:29.000
+When Moca returns to us some problem, because the code, the test fails at the beginning.
+
+01:53:29.000 --> 01:53:32.000
+Your tests are failing because the code's not even written yet.
+
+01:53:32.000 --> 01:53:45.000
+That's the red phase the green phase is that you've made your code pass all the tests that's step 2 in test-driven development.
+
+01:53:45.000 --> 01:53:52.000
+Then finally, refactor is, you go back into your code after the fact.
+
+01:53:52.000 --> 01:54:03.000
+And you say, Okay, how can I improve this code? But keep my tests passing, renaming variables factoring out parts of it?
+
+01:54:03.000 --> 01:54:19.000
+If there's bits of code in common things like that your code works, but you're still able to improve it, and you've got the test framework that available to you to constantly be running to make sure you have an added any new
+
+01:54:19.000 --> 01:54:27.000
+bugs that's Test-driven development in summary next up.
+
+01:54:27.000 --> 01:54:32.000
+What is Npm, and what does it stand for so Npm was originally node package manager.
+
+01:54:32.000 --> 01:54:38.000
+Now it's stands for all sorts of fun. things. but it is the largest collection of open source.
+
+01:54:38.000 --> 01:54:48.000
+Available and you use it using Npm. install for your own package of code locally.
+
+01:54:48.000 --> 01:54:54.000
+But then you can do Npm things like Npm install phaser.
+
+01:54:54.000 --> 01:55:00.000
+If I wanted to start writing a game, leveraging that library, and so on.
+
+01:55:00.000 --> 01:55:15.000
+See here, what is the main disadvantage of using the assert function that's built into node.
+
+01:55:15.000 --> 01:55:40.000
+So we saw that disadvantage in the way that things were demoed in; that if you're using the original version of assert that without using something like Moca as part of it, then the assert itself, will cause your
+
+01:55:40.000 --> 01:55:49.000
+program to fail utterly. It also has a disadvantage that when you run it, it doesn't output anything.
+
+01:55:49.000 --> 01:56:06.000
+If the assert is true that's not so useful right we'd like to see some feedback So the solution to both of those problems is actually to start running with moca to run the tests you're running with
+
+01:56:06.000 --> 01:56:14.000
+moca that sets aside those disadvantages of the assert.
+
+01:56:14.000 --> 01:56:20.000
+It's built into node so moca is really the strong point here.
+
+01:56:20.000 --> 01:56:28.000
+Once Moca is in place. What is Moka?
+
+01:56:28.000 --> 01:56:35.000
+Moka is a testing framework. looks for test files to run inside the dot test folder.
+
+01:56:35.000 --> 01:56:42.000
+So we did that here, right we built a subdirectory called Test.
+
+01:56:42.000 --> 01:56:53.000
+If I list that file it shows my hello World test. I can include as many files in there as I want, and Moka will find them and run them looking for the describe and the it calls it within them.
+
+01:56:53.000 --> 01:57:05.000
+Okay, what is Chai Chi? An assertion library?
+
+01:57:05.000 --> 01:57:15.000
+It defines a very large number of useful assertion functions for all manner of of interesting tests that you can do.
+
+01:57:15.000 --> 01:57:25.000
+And then finally, how do you prevent files from being stored in your git?
+
+01:57:25.000 --> 01:57:41.000
+Repository. so we would like to say, distribute code that does not include a given file.
+
+01:57:41.000 --> 01:57:54.000
+For example, package lock. Json. Have people seen this file coming up into their directories?
+
+01:57:54.000 --> 01:58:03.000
+Do people know what is for? Okay, what package, Doc Dash lock is 4, Is it?
+
+01:58:03.000 --> 01:58:13.000
+Shows all of the versions of all of the code that were installed right.
+
+01:58:13.000 --> 01:58:19.000
+Chalk. choke it art 3, 3, 5, 3 for that version dependencies.
+
+01:58:19.000 --> 01:58:24.000
+Look at all the different versions of all these things. these are dependencies of some other package.
+
+01:58:24.000 --> 01:58:30.000
+Ci Ui command line, user interface version, 704, etc.
+
+01:58:30.000 --> 01:58:40.000
+Etc. etc. Right you. These are the particular versions of all of the sub packages, and those packages have subpackages, and so on.
+
+01:58:40.000 --> 01:58:46.000
+Right. So the package lock file specifies the exact versions of all those things.
+
+01:58:46.000 --> 01:58:51.000
+We, when you run a set of tests and they all pass.
+
+01:58:51.000 --> 01:59:12.000
+It could be that when you distribute that code to somebody else, and they run it that the test failed because they don't happen to be using the same values, the same versions of say some package, maybe there's some change to try
+
+01:59:12.000 --> 01:59:18.000
+or some change to some other package that causes your own code to start to fail.
+
+01:59:18.000 --> 01:59:39.000
+Such a case you would want to choose to distribute this lock file, so that the same exact versions, those packages would also be included in your file would also be included in your Node modules directory.
+
+01:59:39.000 --> 01:59:42.000
+When you do Npm. install it's an instruction to Npm.
+
+01:59:42.000 --> 02:00:00.000
+Install to bring in all of those versions exactly those versions, or you may prefer to allow those packages that, and the next person's going to install to always get the latest and greatest versions.
+
+02:00:00.000 --> 02:00:07.000
+So that you have bug fixes to all of those packages, and you're always working with the latest and greatest.
+
+02:00:07.000 --> 02:00:10.000
+It's actually a choice that you that you end up needing to make.
+
+02:00:10.000 --> 02:00:20.000
+Should I just distribute this with particular versions, or should I allow my code to get better and better over time by calling better and better versions of the libraries?
+
+02:00:20.000 --> 02:00:29.000
+It's really going to depend on the particular set of packages that you use with your software.
+
+02:00:29.000 --> 02:00:40.000
+How stable are they? What would changes do in terms of breaking or setting your code to rights before I answer Matt's question from the Channel?
+
+02:00:40.000 --> 02:00:50.000
+I want to show to prevent package lock Json from showing up in a git repository right now.
+
+02:00:50.000 --> 02:00:57.000
+If I do get status. It shows me bunch of files in here that are.
+
+02:00:57.000 --> 02:01:11.000
+Say contract package lock json. remains untracked i'd like to push this into the repository, but I don't let's say I don't want to include that one file in my get
+
+02:01:11.000 --> 02:01:23.000
+repository. I am going to create and use a file called dot Git ignore.
+
+02:01:23.000 --> 02:01:32.000
+Now it turns out that my git repository is one level up from this, because this is the one where you get all your sample code for all the things.
+
+02:01:32.000 --> 02:01:40.000
+If I just show you what's inside the dot get ignore file that's associated with my repository here.
+
+02:01:40.000 --> 02:01:52.000
+This is an editor that shows me those files. Now I can put into this file into my dot. Get ignore file package lock.
+
+02:01:52.000 --> 02:02:00.000
+Jason put that file name in here and now when I type get status.
+
+02:02:00.000 --> 02:02:06.000
+Now it doesn't even look for package. lockdown Json as an untracked file.
+
+02:02:06.000 --> 02:02:13.000
+If I did get add Dot, it would not add that in to my list of things to be pushed in here.
+
+02:02:13.000 --> 02:02:19.000
+So there you go. This is how you prevent a file from showing up inside your git.
+
+02:02:19.000 --> 02:02:28.000
+Repository that's the kind of thing that you would want to do for node modules.
+
+02:02:28.000 --> 02:02:39.000
+For example, if I go back in here and let's look for it, Node modules node modules has been included in notice.
+
+02:02:39.000 --> 02:02:51.000
+The trailing slash here, so that you don't Put your node modules directory into your git repositories right?
+
+02:02:51.000 --> 02:03:01.000
+You're gonna want to have node underscore modules your dot git ignore file that way.
+
+02:03:01.000 --> 02:03:11.000
+When you do something like, get, add dot it doesn't like put node modules into your repository, and this is kind of a general rule.
+
+02:03:11.000 --> 02:03:21.000
+If a file is automatically generated by code you shouldn't put it into the repository.
+
+02:03:21.000 --> 02:03:27.000
+You don't need to keep version control over those automatically generated files.
+
+02:03:27.000 --> 02:03:30.000
+In fact, it's your code that's producing those files.
+
+02:03:30.000 --> 02:03:36.000
+Your code is the code that should go in the repository not everything that's inside node modules.
+
+02:03:36.000 --> 02:03:44.000
+Okay, Matt, go ahead. you've got a question yeah I was curious regarding the moca test.
+
+02:03:44.000 --> 02:03:55.000
+I read that we weren't supposed to edit our packages, Json, but in one of the notes it said that we could switch it to scripts and put test moca for the command.
+
+02:03:55.000 --> 02:04:01.000
+Yeah, I think he didn't do that like safe absolutely yeah I think it's fair to go ahead and and modify package.
+
+02:04:01.000 --> 02:04:08.000
+Json. if you know what you're doing right and so now you do that That won't break the package locked, though right?
+
+02:04:08.000 --> 02:04:20.000
+That won't influence it in any way. well it depends on what you're doing, and whether it changes the versions of things package that lock sorry package Lock Json is really about specifying particular versions of modules
+
+02:04:20.000 --> 02:04:28.000
+right, and so like I will often delete the package lock, dot, Json, file, and reinstall to regenerate it.
+
+02:04:28.000 --> 02:04:37.000
+If I'm getting new versions of things but to the point about testing, Remember when we were running Npm.
+
+02:04:37.000 --> 02:04:46.000
+When we were running Moca. We were doing so with this command here, right because that's where the moca executable showed up.
+
+02:04:46.000 --> 02:04:51.000
+If I go back into my package, Dot Json file.
+
+02:04:51.000 --> 02:04:58.000
+Now I go under scripts and tests here it's, saying echo no test specified.
+
+02:04:58.000 --> 02:05:08.000
+I can replace this with that that's just the particulars of how to run the testing framework.
+
+02:05:08.000 --> 02:05:13.000
+So with this done this way. and now I have a script called Test, which runs this line.
+
+02:05:13.000 --> 02:05:19.000
+Now I can go back to the terminal and go and Pm.
+
+02:05:19.000 --> 02:05:28.000
+Now not node Npm Run test. it goes in, finds the script, and runs moca per that line.
+
+02:05:28.000 --> 02:05:36.000
+Now I think that should look a bit familiar. I did that a little bit more step, though.
+
+02:05:36.000 --> 02:05:41.000
+I actually just put test moca, and then I just typed Npm Moca.
+
+02:05:41.000 --> 02:05:45.000
+And then the file name. Is that not pulling it from the node modules?
+
+02:05:45.000 --> 02:05:49.000
+Or is that still working properly? So I believe that we can do this Npm test?
+
+02:05:49.000 --> 02:05:56.000
+I'm naming the script now, directly. so it sounds to me like your script was called Moca.
+
+02:05:56.000 --> 02:06:03.000
+Yes, yes, okay, that's Why? I wasn't sure about the the hierarchy with the url there. I didn't know the if the difference made a difference when I submitted.
+
+02:06:03.000 --> 02:06:08.000
+It. Yeah, Okay, no, I think we're good you can omit the word run basically.
+
+02:06:08.000 --> 02:06:17.000
+And it'll look for that as a command but that's not not necessarily ideal, because what if you've got like, I mean you wouldn't make a script called install, because then it's gonna run your script instead of that well maybe
+
+02:06:17.000 --> 02:06:20.000
+you would. but you'd have to really know what you were doing right?
+
+02:06:20.000 --> 02:06:30.000
+Okay, that's good i'm I do want to be cognizant that we're running a little bit over.
+
+02:06:30.000 --> 02:06:47.000
+Feel free to hang around to ask more detailed questions. I will go through the questions that we're seeing in Chat. And with that I believe we have covered our last question for the day. If you've got any questions about these questions feel free to hit
+
+02:06:47.000 --> 02:06:58.000
+me up in slack at any point to talk about the lecture material and click like, and subscribe hold my beer and watch this.
+
+02:06:58.000 --> 02:07:03.000
+We'll see you sometime if not this week then sometimes sooner thereafter.
+
+02:07:03.000 --> 02:07:15.000
+Cheers. All right. So back to the questions in the chat there's questions about Moca, and where it finds its tests.
+
+02:07:15.000 --> 02:07:21.000
+If you name the folder differently moka won't be able to find it.
+
+02:07:21.000 --> 02:07:27.000
+I believe that you can specify on the command line which Directory to look in.
+
+02:07:27.000 --> 02:07:37.000
+So, for example, man Moca no manual entry let's try help market commands not even bad course.
+
+02:07:37.000 --> 02:07:42.000
+Let's try no adm Modules Not Bin slashmoka W.
+
+02:07:42.000 --> 02:07:57.000
+Help. Aha. Okay, So in here there's going to be some option which would specify where the test directory is where to look for tests.
+
+02:07:57.000 --> 02:08:13.000
+Hmm. it's in here somewhere, maybe it's the way that we use config paths is a config file no slightly different.
+
+02:08:13.000 --> 02:08:18.000
+Oh, look for tests and subdirectories recursive.
+
+02:08:18.000 --> 02:08:22.000
+You could use double dash recursive, it would look through all of the files.
+
+02:08:22.000 --> 02:08:31.000
+It might take a little bit longer. You get the idea,
+
+02:08:31.000 --> 02:08:35.000
+Ricky asks if node module is pushed.
+
+02:08:35.000 --> 02:08:38.000
+How How do I fix this i'm not sure what you mean by that?
+
+02:08:38.000 --> 02:08:42.000
+In detail i'll have to come back to you one on one after the fact.
+
+02:08:42.000 --> 02:08:58.000
+Saba asks. Do we include our test folder in the final production code push to get I would say Yes, because you're gonna be distributing your packages to other people who might like to run the test framework right?
+
+02:08:58.000 --> 02:09:02.000
+But you can see that in a production environment this might be an open question.
+
+02:09:02.000 --> 02:09:16.000
+You might have 2 different types of deployment, right, one deploying to a testing environment, one deploying to a production environment which is meant to be as light as possible, and you may exclude the testing the deployment.
+
+02:09:16.000 --> 02:09:24.000
+You may exclude the testing code from such a deployment often you've got Script setup to actually execute those deployments.
+
+02:09:24.000 --> 02:09:28.000
+That's a big topic for devops further down the line.
+
+02:09:28.000 --> 02:09:35.000
+Usually those types of questions are handled by, you know, intermediate senior developers say to go ahead.
+
+02:09:35.000 --> 02:09:56.000
+Actually I have a question about git. ignore if I I couldn't understand why shouldn't I want some of my father files to be pushed to get. Usually it's because those files are being automatically generated because if you push
+
+02:09:56.000 --> 02:10:11.000
+them into. get what you're saying is that you're trying to do version control over those things right, and so now, if it's in your git repository, you might go in and edit those files and so you would have
+
+02:10:11.000 --> 02:10:21.000
+been maintaining another version of those files and get thanks to the fact that it's been version control and you change the files.
+
+02:10:21.000 --> 02:10:32.000
+But then, because those files are automatically generated, your changes would get overwritten by the fact that they were run and generate it again.
+
+02:10:32.000 --> 02:10:37.000
+And you wouldn't know why would your why would your files not be updated right?
+
+02:10:37.000 --> 02:10:46.000
+Oh, thank you. yeah, and all. Another Another reason is, node modules itself is massive, Right?
+
+02:10:46.000 --> 02:10:49.000
+I mean, actually, let me just show you find node modules.
+
+02:10:49.000 --> 02:10:54.000
+This is going to show you all the files that down inside there, right? This is ridiculous.
+
+02:10:54.000 --> 02:10:58.000
+How many files are down inside this You don't want all these things in your repository?
+
+02:10:58.000 --> 02:11:02.000
+Right. You want your repository to be just your code.
+
+02:11:02.000 --> 02:11:08.000
+Thank you. Yep. You're welcome? Good Yeah, good question for sure
+
+02:11:08.000 --> 02:11:29.000
+Shall we leave it at that. we'll let people go we run a little bit over.
+

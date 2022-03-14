@@ -1,0 +1,61 @@
+00:06:53	Saida:	The hardest part is using M1 which gives an error every time
+00:11:47	Eugene Helland:	!00%
+00:12:23	meganhutt:	Yes hahaha
+00:17:56	Tony Yu:	Yessir
+00:18:06	Bailey Dods:	Other functions
+00:18:06	Nicole MacLean:	chai
+00:18:08	Tony Yu:	Other modules
+00:18:11	Alastair Gardiner:	chai
+00:18:14	Matt Seligman:	chai over weekend
+00:23:24	Ryan Kwok:	need 2 values for assert
+00:23:41	Shubham Patel:	assert.equal?
+00:33:07	ralphunrau:	why are there always 3 dots under the line of when you access other modules?
+00:34:46	Saida:	What if we want the whole file itself to be accessible from somewhere else, not just the function inside that file?
+00:36:08	Eugene Helland:	If a file has multiple functions written within it is there a way to export all of the functions at once?
+00:37:03	lucky kim:	Do we have to export all the functions in the js file?
+00:37:31	Bailey Dods:	If const greeterFunction in the test code was named sayHello like the production code would that still be considered good practice?
+00:37:32	Saida:	Eugene, we can export all of them inside the object defined to module.exports
+00:37:35	Matt Seligman:	should we make habit of including .strict ?
+00:40:55	Saida:	Thank you 🙂
+00:40:58	Eugene Helland:	Saida, you were right :)
+00:45:36	Tony Yu:	woah
+00:46:50	Kevin Lee:	Maybe it was “change all occurrences”??
+00:47:01	Tony Yu:	Given what we see now on module.exports, can we delete the value of sH in the property of sH?
+00:54:29	Tony Yu:	So now can e deleted sayHello
+00:54:57	Tony Yu:	Is it just more concise
+00:55:25	Tony Yu:	That makes sense, thank you! 🙂
+00:56:26	Matt Seligman:	is there a vulnerability scanner for npm packages similar to virustotal.com ?
+00:57:56	lucky kim:	What is license for??
+01:18:50	Kevin Lee:	I forgot to ask earlier but does it matter if we make a sub dir to have the test file in? As long as we run nom init in the same dir as the code file?
+01:38:22	Saida:	actually assert looks good enough, so why do we use chai in LHL?
+01:40:09	Nicole MacLean:	I’ve been describing each individually…😵‍💫
+01:41:53	Saida:	I'm sure all the tests were happy to have a special label Nicole :))
+01:42:11	Nicole MacLean:	😄
+01:45:54	calvin:	For every project we need to install mocha/chai in the root directory of that project correct? Instead of just having it in the root directory of your system?
+01:47:02	calvin:	I see… makes sense. Thanks!
+01:47:05	Kai Meikle:	When doing tdd, I found I still needed to use console.log to fix my code because the tests don’t show the output of my code, only if it passes or not
+01:53:56	Tony Yu:	That’s pretty darn cool
+01:56:36	Matt Seligman:	During the break I found this too:https://docs.npmjs.com/cli/v8/commands/npm-audit/We can apparent audit rpm packages.
+01:56:45	Matt Seligman:	apparently**
+01:56:53	Nicole MacLean:	Thanks Matt!!
+01:57:50	Bailey Dods:	Is there a difference between —save and —save-dev.
+02:01:17	Bailey Dods:	& instead of calling mocha/node_modules/.bin/mocha (hope this is correct) how do we set it up again to call npm test instead?
+02:03:12	Grace:	if we name the folder differently mocha won’t be able to find it?
+02:03:16	Lekan Ogunremi:	Can u please briefly talk about ES6 Import & Export:?
+02:03:41	Grace:	Or there’s a way to change the default folder name it looks for?
+02:09:44	Ricky W:	If node module is pushed, how do I fix this?
+02:10:04	Matt Seligman:	"scripts": {    "test": "mocha"  },
+02:13:25	Matthew Lawson:	Thank you!
+02:13:28	Matt Seligman:	Thanks for all the helpful info again :D!
+02:14:25	Shubham Patel:	Do we include our test folder in final production code push to git?
+02:16:27	Bailey Dods:	Thanks again Nally! Have a good Monday!
+02:17:29	Alastair Gardiner:	Thank you!
+02:17:34	Alvin Tolentino:	Thank you!
+02:17:34	Iaan Johnston (he/him):	Thanks!
+02:17:35	Aldino Muliawijaya:	Thank you!
+02:17:35	Shraddha Naidu (she/her):	Thanks!
+02:17:36	Saida:	Thank you!
+02:17:36	Dave McKinnon:	Thank you!
+02:17:37	Josh Sparkes:	Thanks!
+02:17:38	Kurt Maglalang:	Thanks
+02:17:39	Tony Yu:	Thank you!
