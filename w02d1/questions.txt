@@ -1,0 +1,9 @@
+ How do you export things from any given Javascript file?
+ How do you bring in things that are exported from another Javascript file?
+ What is Test Driven Development?
+ What is NPM and what does it stand for?
+ What is the main disadvantage of using the assert function built into node?
+ What is Mocha?
+ What is Chai?
+ How do you prevent files from being stored in your git repository?
+
