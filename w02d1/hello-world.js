@@ -5,9 +5,17 @@
 // STEP 1) implement a function called sayHello that takes the name of 
 // the saluted person and returns what would be said.
 
-const sayHello = () => {
+const sayHello = (name) => {
+  return `Hello, ${name}!`;
 };
 
+const sayGoodbye = (name) => {
+  sayHello(name);
+  return `Goodbye, ${name}!`;
+};
 
-// test the code, here at first, and then factor it out to be separate
-// by making the functions exportable
+module.exports = { 
+  sayHello: sayHello,
+  sayGoodbye: sayGoodbye
+};
+

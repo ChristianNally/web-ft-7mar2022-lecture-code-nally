@@ -1,23 +1,24 @@
 {
   "name": "w02d1",
   "version": "1.0.0",
-  "description": "code that exemplifies testing, assertions and test driven development",
-  "main": "hello-world.js",
+  "description": "TDD sample code for LHL",
+  "main": "hello-world-test.js",
+  "directories": {
+    "test": "test"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/.bin/mocha"
   },
   "keywords": [
     "TDD",
-    "testing",
-    "mocha",
-    "chai",
     "LHL",
-    "Bootcamp"
+    "Mocha",
+    "Chai"
   ],
-  "author": "me",
+  "author": "CWN",
   "license": "ISC",
   "dependencies": {
-    "chai": "^4.3.4",
-    "mocha": "^8.3.2"
+    "chai": "^4.3.6",
+    "mocha": "^9.2.2"
   }
 }
