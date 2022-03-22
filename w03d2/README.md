@@ -1,6 +1,8 @@
 # CRUD with Express
 
 [] Set up the basics of an express server, including a simple response
+[] Middleware
+[] Routes
 [] EJS templates. Why? Because...
 * separation of business logic from the presentation layer
 * we would like to include simple display logic (JS) within the presentation layer

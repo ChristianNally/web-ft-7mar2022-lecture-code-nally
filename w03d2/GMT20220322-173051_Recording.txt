@@ -1,0 +1,62 @@
+00:14:10	Alvin Tolentino:	Shouldn’t this diagram have a branch that responds to errors?
+00:29:26	Nicole MacLean:	Bread types
+00:29:59	Iaan Johnston (he/him):	pumpernickle
+00:30:13	Tony Yu:	Sourdough
+00:30:18	Tony Yu:	Bagel
+00:30:20	lucky:	Whole grain
+00:30:22	Tony Yu:	Dinner rolls
+00:44:12	Matt Seligman:	maybe the file isn't saved after removing the extra directory
+00:44:19	Bailey Dods:	Not sure if we reset since we changed the two ids
+00:44:37	Matt Seligman:	oh reset server
+00:57:15	Matt Seligman:	would "this.id" work for the type index as well?
+00:59:30	Matt Seligman:	that would make sense
+00:59:56	Eugene Helland:	The object would not be instantiated yet
+01:01:51	Tony Yu:	HAHAHAHA
+01:01:54	Eugene Helland:	LOL
+01:24:17	Eugene Helland:	would you remove calls to packages like morgan in the production version of your software?
+01:31:24	Iaan Johnston (he/him):	I misspelled before, it's pumpernickel
+01:31:32	Tony Yu:	^^
+01:39:43	Lucas Tan:	should it have submit?
+01:43:41	Lucas Tan:	so when the server is closed does the pumpernickel goes away from the breadtypes array?
+01:45:02	Tony Yu:	Yikes
+01:46:20	Bailey Dods:	params
+01:46:21	Ryan Kwok:	params
+01:46:21	Matt Seligman:	params.id
+01:46:22	Nicole MacLean:	Req.params
+01:46:22	Tony Yu:	PARAMS
+01:46:22	Alvin Tolentino:	Params.id
+01:52:30	Dustin Grof:	edit: bannock!
+01:56:48	Lucas Tan:	if you use app.post for edit, does that mean you can no longer have an app.post for create to add breadtypes?
+01:57:42	Saida:	We have app.post for /new
+01:58:03	Saida:	Where we still can add new types
+02:01:40	Alvin Tolentino:	Is there a difference between <%- … %> and <%=  … %>?
+02:02:15	Matt Seligman:	- is include
+02:02:16	Tony Yu:	woah
+02:02:25	Matt Seligman:	so you can include files with -
+02:03:17	Alvin Tolentino:	tyty
+02:03:32	Grace:	Do you always omit semicolon for the js part in a pjs file?
+02:04:08	Grace:	ejs**
+02:06:47	Richard:	Why do you need a pair of alligator clips after the curly brace
+02:07:05	Tony Yu:	HHAHAAH
+02:08:13	Lucas Tan:	does the order of create, update, delete, etc. matter in the code?
+02:08:40	Matt Seligman:	splice(id,1)
+02:09:12	Matt Seligman:	*learnt about "delete" * just now :O
+02:11:56	Shraddha Naidu (she/her):	Thanks Nally!
+02:11:58	Saida:	Thank you!
+02:11:59	Ricky W:	Thanks nally!
+02:12:00	Dustin Grof:	Thanks!
+02:12:01	Bailey Dods:	Thanks!
+02:12:01	Dave McKinnon:	Thank you!
+02:12:04	Matt Seligman:	Thanks for all these great tips! (This answered some questions I had about some steps I got stuck yesterday) 😁!
+02:12:06	Alvin Tolentino:	Thank you!
+02:12:07	Aldino Muliawijaya:	Thank you!
+02:12:08	Iaan Johnston (he/him):	Thanks Nally!
+02:12:12	Tony Yu:	Thanks Nally!!
+02:12:12	Lucas Tan:	Thank you
+02:12:12	lucky:	Thank you!
+02:12:13	Calvin Chung:	Thanks!
+02:12:13	ralphunrau:	Thanks you!
+02:12:15	Nicole MacLean:	Thank ypou
+02:12:15	Josh Sparkes:	Thank you!
+02:12:17	Matthew Lawson:	Thank you!
+02:12:17	Nathan Tsang:	thanks for the lecture!
