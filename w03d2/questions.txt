@@ -1,0 +1,9 @@
+ What do the CRUD and BREAD acronyms stand for?
+ How, in NodeJS, do you write a route that accepts a dynamic value as part of the URL??
+ In the context of web programming, what is a template?
+ What is the main reason to use a templating system?
+ How, in NodeJS, do you write a route that accepts dynamic values from an HTML <form>?
+ How often do you need to restart your web server?
+ Does the order that your routes appear in your source code matter?
+ How do you code EJS templates?
+
