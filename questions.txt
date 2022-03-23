@@ -1,0 +1,7 @@
+Prep Questions
+-------------------------------------------------------------------------------------
+ What does it mean to say that HTTP is 'stateless'?
+ What is a web cookie?
+ How does a web cookie's value transmit from one computer to another?
+ How do you set a cookie value from within a NodeJS app?
+ How do you read a cookie value that arrives at a NodeJS program in the web request?
