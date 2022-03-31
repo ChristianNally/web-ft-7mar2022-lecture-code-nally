@@ -1,0 +1,13 @@
+                                 question                                  
+---------------------------------------------------------------------------
+ What is responsive web design?
+ What is the advantage of mobile first design?
+ How should we set the web browser's viewport?
+ How do you set a minimum width on HTML elements?
+ How do you set a maximum width on HTML elements?
+ What are the absolute length units available in CSS?
+ What are the relative length units available in CSS?
+ How do you define variables in SASS?
+ How do you create a CSS rule that will only be applied for small screens?
+ What are some standard media query widths to try?
+
