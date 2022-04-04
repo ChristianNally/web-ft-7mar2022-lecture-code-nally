@@ -115,4 +115,4 @@ JOIN days ON objectives.day_id = days.id;
 SELECT count(day_id) 
 FROM objectives 
 GROUP BY day_id 
-HAVING count(day_id) > 3;
+HAVING count(day_id) > 5;
