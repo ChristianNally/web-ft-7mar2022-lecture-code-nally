@@ -1,90 +1,92 @@
-const express = require("express");
-const PORT = 8082;
+const PORT = 8989;
+const express = require('express');
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 
+// CONFIG
 const app = express();
+app.set('view engine','ejs');
 
-app.set("view engine","ejs");
+// DATABASE
+const users = {
+  'test@example.com': {email: 'test@example.com', password: 'test'},
+  'test2@example.com': {email: 'test2@example.com', password: 'test2'},
+};
 
-
-//
-// Users Data
-//
-
-const users = {'nally': "qwerty"};
-
-//
-// Middleware
-//
-
-app.use(bodyParser.urlencoded({ extended: false}));
+// MIDDLEWARE
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-//
-// Routes
-//
-
-app.get('/',(req,res)=>{
-  res.render('homepage');
+// ROUTES
+// registration
+app.get('/register', (req,res) => {
+  res.render('register');
 });
 
-// Login Routes
-
-app.get('/login',(req,res)=>{
-  res.render("login");
+app.post('/register', (req,res) => {
+  console.log('req.body',req.body); // this is where FORM values arrive (via middleware)
+  users[req.body.email] = {email: req.body.email, password: req.body.password};
+  res.redirect('/');
 });
 
-// login submit handler
-app.post("/login",(req,res)=>{
-  console.log("login req.body:",req.body);
-  const testName = req.body.username;
-  const testPassword = req.body.password;
-  if (users[testName] && users[testName] === testPassword){ // the user is authentic
-    res.cookie("user",testName);
-    res.redirect("/profile");
-    // res.end();
-  } else {
-    res.redirect("/login");
+// login
+app.get('/login', (req,res) => {
+  res.render('login');
+});
+
+app.post('/login', (req,res) => {
+  console.log('req.body',req.body); // this is where FORM values arrive (via middleware)
+
+  const candidateEmailAddress = req.body.email;
+  const candidatePassword = req.body.password;
+
+  if (!users[candidateEmailAddress]) {
+    res.redirect('/');
+    return;
   }
-});
 
-// Registration Routes
-
-app.get('/register',(req,res)=>{
-  res.render("register");
-});
-
-// registeration submit handler
-app.post("/register",(req,res)=>{
-  console.log("register req.body:",req.body);
-  const newName = req.body.username;
-  const newPassword = req.body.password;
-
-  users[newName] = newPassword;
-  res.cookie("user",newName);
-
-  res.redirect("/profile");
-});
-
-
-// Profile Page
-app.get('/profile',(req,res)=>{
-  console.log("req.cookies:",req.cookies);
-  if (users[req.cookies.user]){
-    const templateVars = { password: users[req.cookies.user] };
-    res.render('profile', templateVars);
-  } else {
-    res.redirect('/login');
+  if ( candidatePassword === users[candidateEmailAddress].password ){
+    res.cookie("user", candidateEmailAddress);
+    res.redirect('/profile');
+    return;
   }
+
+  res.redirect('/');
+  return;
 });
 
-// Logout Route
-app.get("/logout",(req,res)=>{
-  res.clearCookie("user");
-  res.redirect("/");
+// home
+app.get('/', (req,res) => {
+  console.log('users',users);
+  res.render('home');
 });
 
-app.listen(PORT,"localhost", ()=>{
-  console.log(`Server is listening on port ${PORT}`);
+// profile
+app.get('/profile', (req,res) => {
+  console.log(`req.cookies`,req.cookies);
+  const cookieBasedUser = req.cookies.user;
+  if (!users[cookieBasedUser]){
+    res.redirect('/');
+    return;
+  }
+  const templateVars = {
+    password: users[cookieBasedUser].password
+  };
+  res.render('profile', templateVars);
+});
+
+// logout
+app.get('/logout', (req,res) => {
+  res.clearCookie('user');
+  res.redirect('/');
+});
+
+
+// 404 page not found
+app.get('*', (req,res) => {
+  res.render('404');
+});
+
+app.listen(PORT, () => {
+  console.log(`Server is listening to PORT ${PORT}`);
 });

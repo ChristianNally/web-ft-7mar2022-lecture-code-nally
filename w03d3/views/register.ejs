@@ -1,15 +1,24 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <title>Authentication Server</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register</title>
 </head>
 <body>
 
+  <h1>This is the registration page.</h1>
+
   <form action="/register" method="POST">
-    <label for="username">Username</label>
-    <input id="username" type="text" name="username">
-    <label for="password">Password</label>
-    <input id="password" type="password" name="password">
-    <input type="submit" value="Register">
+
+    <label for="email">Email:</label>
+    <input id="email" name="email" type="text" />
+
+    <label for="password">Password:</label>
+    <input id="password" name="password" type="password" />
+
+    <input type="submit" name="register" value="Register" />
   </form>
 
 </body>
