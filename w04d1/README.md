@@ -10,8 +10,44 @@
 <header></header>
 <main>
   <article></article>
+  <div class="paragraph1" id="first">Monkey</div>
+  <div class="paragraph2" id="second">Fuzz</div>
+  <a class="paragraph2" href="http://lighthouselabs.ca">LHL</a>
+  <span><a class="paragraph2" href="http://lighthouselabs.ca">LHL</a></span>
 </main>
+<a class="paragraph2" href="http://lighthouselabs.ca">LHL</a>
 <footer></footer>
+
+div {
+  display: none;
+  background-color: black;
+}
+
+#first {
+  display: none;
+  background-color: black;
+}
+
+.paragraph2 {
+  display: none;
+  background-color: black;
+}
+
+div.paragraph2 {
+  display: none;
+}
+
+main .paragraph2 {
+  background-color: pink;
+}
+
+main > .paragraph2 {
+  background-color: red;
+}
+
+
+
+
 
 # Box Model
 
